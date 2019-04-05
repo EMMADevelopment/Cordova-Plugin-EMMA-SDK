@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-emma-sdk" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>EMMA</name>
+    <description>Cordova Plugin for EMMA</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,mobile marketing,emma</keywords>
+    <!--<repo>https://github.com/AppsFlyerSDK/cordova-plugin-appsflyer-sdk.git</repo>-->
+    <engines>
+        <engine name="cordova" version=">=4.3.0"/>
+    </engines>
+
+    <js-module name="emma" src="www/emma.js">
+        <clobbers target="window.plugins.EMMA"/>
+    </js-module>
+
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="EMMAPlugin">
+                <param name="android-package" value="io.emma.cordova.plugin.EMMAPlugin"/>
+            </feature>
+        </config-file>
+        <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest" mode="merge">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.VIBRATE"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        </config-file>
+
+        <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest/application" mode="merge">
+            <activity
+                android:name=".activities.EMMAWebViewActivity"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Holo.Light.NoActionBar"/>
+
+            <activity
+                android:launchMode="singleTask"
+                android:name=".activities.EMMAInternalPushActivity"
+                android:theme="@android:style/Theme.NoDisplay"/>
+        </config-file>
+        
+        <source-file src="src/android/io/emma/cordova/plugin/EMMAPluginConstants.java" target-dir="src/io/emma/cordova/plugin" />
+        <source-file src="src/android/io/emma/cordova/plugin/EMMAPlugin.java" target-dir="src/io/emma/cordova/plugin"/>
+
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+    </platform>
+
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="EMMAPlugin">
+                <param name="ios-package" value="EMMAPlugin"/>
+            </feature>
+        </config-file>
+        <source-file src="src/ios/EMMAPlugin.m"/>
+    </platform>
+    
+</plugin>

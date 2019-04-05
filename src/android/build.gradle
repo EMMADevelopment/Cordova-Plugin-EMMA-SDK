@@ -1,0 +1,23 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenLocal()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.google.gms:google-services:4.2.0'
+    }
+}
+
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+    maven { url 'https://repo.emma.io/emma' }
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-messaging:17.5.0'
+    implementation 'io.emma:eMMaSDK:4.5.0'
+}

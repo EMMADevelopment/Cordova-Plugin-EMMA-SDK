@@ -1,0 +1,33 @@
+{
+    "author": {
+      "name": "Adrián Carrera"
+    },
+    "license": "MIT",
+    "name": "cordova-plugin-emma-sdk",
+    "version": "1.0.0",
+    "description": "Cordova plugin for EMMA SDK",
+    "cordova": {
+      "id": "cordova-plugin-emma-sdk",
+      "platforms": [
+        "android",
+        "ios"
+        ]
+    },
+    "keywords": [
+      "ecosystem:cordova",
+      "cordova-android",
+      "cordova-ios",
+      "EMMA SDK",
+      "EMMA",
+      "notifications",
+      "push",
+      "marketing automation"
+    ],
+    "engines": [
+      {
+        "name": "cordova",
+        "version": ">=4.3.0"
+      }
+    ],
+    "homepage": "https://github.com/AppsFlyerSDK/cordova-plugin-appsflyer-sdk#readme"  
+  }
