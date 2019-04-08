@@ -2,6 +2,22 @@ package io.emma.cordova.plugin;
 
 public class EMMAPluginConstants {
 
+    enum ActionTypes {
+        REGISTER,
+        LOGIN
+    }
+
+    /* ERROR MESSAGES */
+    static final String INVALID_METHOD_OR_ARGUMENTS =
+            "Check if method exists or arguments are correct";
+    static final String PUSH_CLASS_MANDATORY = "Cannot init push. Class to open not exists";
+    static final String PUSH_NOTIFICATION_DRAWABLE_MANDATORY = "Not found notification icon drawable";
+    static final String PUSH_NOTIFICATION_COLOR_MANDATORY = "Introduced color for push notification not valid";
+    static final String MANDATORY_NOT_EMPTY = " can not be empty";
+    static final String MANDATORY_NOT_ZERO = " can not be zero";
+    static final String KEY_VALUE_MAPPING_ERROR = " key-value attributes invalid";
+    static final String MAPPING_VALUE_ERROR = "only allowed property value in string type";
+
     /* START SESSION */
     static final String SESSION_KEY = "sessionKey";
     static final String DEBUG = "debug";
@@ -18,5 +34,28 @@ public class EMMAPluginConstants {
     static final String PUSH_NOTIFICATION_COLOR = "notificationColor";
     static final String PUSH_NOTIFICATION_CHANNEL_NAME= "notificationChannelName";
     static final String PUSH_NOTIFICATION_CHANNEL_ID= "notificationChannelId";
+
+    /* EVENT */
+    static final String EVENT_TOKEN = "token";
+    static final String EVENT_ATTRIBUTES = "attributes";
+
+    /* GLOBAL */
+    static final String EXTRAS = "extras";
+
+    /* LOGIN - REGISTER */
+    static final String USER_ID = "userId";
+    static final String EMAIL = "email";
+
+    /* ORDER */
+    static final String ORDER_ID = "orderId";
+    static final String ORDER_TOTAL_PRICE = "totalPrice";
+    static final String ORDER_CUSTOMER_ID = "customerId";
+    static final String ORDER_CURRENCY_CODE = "currencyCode";
+    static final String ORDER_COUPON = "coupon";
+
+    static final String ORDER_PRODUCT_PRICE = "price";
+    static final String ORDER_PRODUCT_ID = "productId";
+    static final String ORDER_PRODUCT_NAME = "productName";
+    static final String ORDER_PRODUCT_QUANTITY = "quantity";
 
 }

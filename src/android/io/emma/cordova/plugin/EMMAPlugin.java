@@ -16,12 +16,18 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-import android.util.Log; 
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import io.emma.android.EMMA;
+import io.emma.android.interfaces.EMMASessionStartListener;
+import io.emma.android.model.EMMAEventRequest;
 import io.emma.android.model.EMMAPushOptions;
 import io.emma.android.utils.EMMALog;
 import io.emma.android.utils.ManifestInfo;
@@ -53,19 +59,46 @@ public class EMMAPlugin extends CordovaPlugin {
         Log.d("EMMA", args.getJSONObject(0).toString());
 
         if (action.equals("startSession")) {
-
             if (args.length() == 1) {
                 return startSession(args.getJSONObject(0), callbackContext);
             }
-
         } else if (action.equals("startPush")) {
-
             if (args.length() == 1) {
                 return startPush(args.getJSONObject(0), callbackContext);
             }
+        } else if (action.equals("trackEvent")) {
+            if (args.length() == 1) {
+                return trackEvent(args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("trackUserExtras")) {
+            if (args.length() == 1) {
+                return trackUserExtras(args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("loginUser")) {
+            if (args.length() == 1) {
+                return loginUser(args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("registerUser")) {
+            if (args.length() == 1) {
+                return registerUser(args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("startOrder")) {
+            if (args.length() == 1) {
+                return startOrder(args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("addProduct")) {
+            if (args.length() == 1) {
+                return addProduct(args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("trackOrder")) {
+            return trackOrder(callbackContext);
+        } else if (action.equals("cancelOrder")) {
+            return cancelOrder(args, callbackContext);
+        } else if (action.equals("checkForRichPush")) {
+            return checkForRichPush(callbackContext);
         }
 
-        EMMALog.d("Check if method exists or arguments are correct");
+        EMMALog.w(INVALID_METHOD_OR_ARGUMENTS);
 
         return false;
     }
@@ -79,7 +112,7 @@ public class EMMAPlugin extends CordovaPlugin {
         boolean validSessionKey = !sessionKey.isEmpty() && !sessionKey.trim().equals("");
 
         if (!validSessionKey && !sessionKeyInMetadata(applicationContext)) {
-            String msg = "Session key cannot be empty";
+            String msg = "";
             EMMALog.e(msg);
             callbackContext.error(msg);
             return false;
@@ -123,8 +156,12 @@ public class EMMAPlugin extends CordovaPlugin {
 
         configuration.trackScreenEvents(args.optBoolean(TRACK_SCREEN_EVENTS, true));
 
-        EMMA.getInstance().startSession(configuration.build());
-        callbackContext.success();
+        EMMA.getInstance().startSession(configuration.build(), new EMMASessionStartListener() {
+            @Override
+            public void onSessionStarted() {
+                callbackContext.success();
+            }
+        });
 
         return true;
     }
@@ -136,7 +173,8 @@ public class EMMAPlugin extends CordovaPlugin {
         try {
             clazz = Class.forName(args.optString(PUSH_CLASS_TO_OPEN));
         } catch (ClassNotFoundException ex) {
-            callbackContext.error("Cannot init push. Class to open not exists");
+            EMMALog.e(PUSH_CLASS_MANDATORY);
+            callbackContext.error(PUSH_CLASS_MANDATORY);
             return false;
         }
 
@@ -146,8 +184,11 @@ public class EMMAPlugin extends CordovaPlugin {
             notificationIcon = getNotificationIcon(context, notificationIconName);
         }
 
+        EMMALog.d("Notification icon" + notificationIcon);
+
         if (notificationIcon == 0) {
-            callbackContext.error("Not found notification icon drawable");
+            EMMALog.e(PUSH_NOTIFICATION_DRAWABLE_MANDATORY);
+            callbackContext.error(PUSH_NOTIFICATION_DRAWABLE_MANDATORY);
             return false;
         }
 
@@ -159,7 +200,7 @@ public class EMMAPlugin extends CordovaPlugin {
                 int colorInt = getNotificationColor(hexaColor);
                 pushOptions.setNotificationColor(colorInt);
             } catch (IllegalArgumentException ex) {
-                EMMALog.e("Introduced color for push notification not valid");
+                EMMALog.e(PUSH_NOTIFICATION_COLOR_MANDATORY);
             }
         }
 
@@ -179,6 +220,254 @@ public class EMMAPlugin extends CordovaPlugin {
 
         callbackContext.success();
         return true;
+    }
+
+    private boolean trackEvent(JSONObject args, final CallbackContext callbackContext) {
+
+        String token = args.optString(EVENT_TOKEN);
+        JSONObject attributes = args.optJSONObject(EVENT_ATTRIBUTES);
+
+        if (token.trim().equals("")) {
+            String msg = SESSION_KEY + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        EMMAEventRequest request = new EMMAEventRequest(token);
+
+        if (attributes != null) {
+            try {
+                Map<String, String> keyValueAttr = objectToMap(attributes);
+                request.setAttributes(Collections.unmodifiableMap(keyValueAttr));
+            } catch (JSONException ex) {
+                EMMALog.e(KEY_VALUE_MAPPING_ERROR);
+            } catch (IllegalArgumentException ex) {
+                EMMALog.e(ex.getMessage());
+            }
+        }
+
+        EMMA.getInstance().trackEvent(request);
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean trackUserExtras(JSONObject object, CallbackContext callbackContext) {
+        try {
+            Map<String,String> userTags = objectToMap(object);
+            EMMA.getInstance().trackExtraUserInfo(userTags);
+            callbackContext.success();
+            return true;
+        } catch (JSONException ex) {
+            String msg = KEY_VALUE_MAPPING_ERROR;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        } catch (IllegalArgumentException ex) {
+            EMMALog.e(ex.getMessage());
+            callbackContext.error(ex.getMessage());
+            return false;
+        }
+    }
+
+    private boolean loginUser(JSONObject args, CallbackContext callbackContext) {
+        return loginRegisterUser(args, ActionTypes.LOGIN, callbackContext);
+    }
+
+    private boolean registerUser(JSONObject args, CallbackContext callbackContext) {
+        return loginRegisterUser(args, ActionTypes.REGISTER, callbackContext);
+    }
+
+    private boolean loginRegisterUser(JSONObject args, ActionTypes type, CallbackContext callbackContext) {
+        String userId = args.optString(USER_ID);
+        String email = args.optString(EMAIL);
+        JSONObject extras = args.optJSONObject(EXTRAS);
+
+        if (userId == null) {
+            String msg = USER_ID + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        if (extras != null) {
+            try {
+                Map<String, String> extrasMap = objectToMap(extras);
+                if (type == ActionTypes.LOGIN) {
+                    EMMA.getInstance().loginUser(userId, email, extrasMap);
+                } else {
+                    EMMA.getInstance().registerUser(userId, email, extrasMap);
+                }
+                callbackContext.success();
+                return true;
+            } catch (JSONException e) {
+                EMMALog.e(KEY_VALUE_MAPPING_ERROR);
+            } catch (IllegalArgumentException ex) {
+                EMMALog.e(ex.getMessage());
+            }
+        }
+
+        if (type == ActionTypes.LOGIN) {
+            EMMA.getInstance().loginUser(userId, email);
+        } else {
+            EMMA.getInstance().registerUser(userId, email);
+        }
+
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean startOrder(JSONObject args, CallbackContext callbackContext) {
+        String orderId = args.optString(ORDER_ID);
+        if (orderId.trim().equals("")) {
+            String msg = ORDER_ID + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        float totalPrice;
+        try {
+            totalPrice = (float) args.getDouble(ORDER_TOTAL_PRICE);
+        } catch (JSONException e) {
+            String msg = ORDER_TOTAL_PRICE + MANDATORY_NOT_ZERO;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        String customerId;
+        try {
+            customerId = args.getString(ORDER_CUSTOMER_ID);
+        } catch (JSONException e) {
+            customerId = null;
+        }
+
+        String currencyCode;
+        try {
+            currencyCode = args.getString(ORDER_CURRENCY_CODE);
+        } catch (JSONException e) {
+            currencyCode = null;
+        }
+
+        String coupon;
+        try {
+            coupon = args.getString(ORDER_COUPON);
+        } catch (JSONException e) {
+            coupon = null;
+        }
+
+        JSONObject extras = args.optJSONObject(EXTRAS);
+        Map<String, String> extrasMap = null;
+        if (extras != null) {
+            try {
+                extrasMap = objectToMap(extras);
+            } catch (JSONException e) {
+                EMMALog.e(KEY_VALUE_MAPPING_ERROR);
+            } catch (IllegalArgumentException ex) {
+                EMMALog.e(ex.getMessage());
+            }
+        }
+
+        EMMA.getInstance().startOrder(orderId,
+                customerId, totalPrice, currencyCode, coupon, extrasMap);
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean addProduct(JSONObject args, CallbackContext callbackContext) {
+        String productId = args.optString(ORDER_PRODUCT_ID);
+        if (productId.trim().equals("")) {
+            String msg = ORDER_PRODUCT_ID + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        String productName = args.optString(ORDER_PRODUCT_NAME);
+        if (productName.trim().equals("")) {
+            String msg = ORDER_PRODUCT_NAME + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        int quantity = args.optInt(ORDER_PRODUCT_QUANTITY, 0);
+        if (quantity == 0) {
+            String msg = ORDER_PRODUCT_QUANTITY + MANDATORY_NOT_ZERO;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        double price = args.optDouble(ORDER_PRODUCT_PRICE, 0);
+        if (price == 0) {
+            String msg = ORDER_PRODUCT_PRICE + MANDATORY_NOT_ZERO;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+
+        JSONObject extras = args.optJSONObject(EXTRAS);
+        Map<String, String> extrasMap = null;
+        if (extras != null) {
+            try {
+                extrasMap = objectToMap(extras);
+            } catch (JSONException e) {
+                EMMALog.e(KEY_VALUE_MAPPING_ERROR);
+            } catch (IllegalArgumentException ex) {
+                EMMALog.e(ex.getMessage());
+            }
+        }
+
+        EMMA.getInstance().addProduct(productId, productName, quantity, (float) price, extrasMap);
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean trackOrder(CallbackContext callbackContext) {
+        EMMA.getInstance().trackOrder();
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean cancelOrder(JSONArray array, CallbackContext callbackContext) {
+        String orderId = array.optString(0);
+        if (orderId.trim().equals("")) {
+            String msg = ORDER_ID + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        EMMA.getInstance().cancelOrder(orderId);
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean checkForRichPush(CallbackContext callbackContext) {
+        EMMA.getInstance().checkForRichPushUrl();
+        callbackContext.success();
+        return true;
+    }
+
+    private Map<String, String> objectToMap(JSONObject object)
+            throws JSONException, IllegalArgumentException {
+        Map<String, String> result = new HashMap<>();
+        Iterator<String> keysItr = object.keys();
+        while(keysItr.hasNext()) {
+            String key = keysItr.next();
+            Object value = object.get(key);
+
+            if ((value instanceof JSONObject) || (value instanceof JSONArray)) {
+                throw new IllegalArgumentException(MAPPING_VALUE_ERROR);
+            }
+
+            result.put(key, String.valueOf(value));
+        }
+
+        return result;
     }
 
     private List<String> arrayToStringList(String errorName, JSONArray array) {
@@ -212,5 +501,4 @@ public class EMMAPlugin extends CordovaPlugin {
     int getNotificationColor(String hexColor) {
         return Color.parseColor(hexColor);
     }
-
 }
