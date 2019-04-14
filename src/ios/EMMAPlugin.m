@@ -3,8 +3,20 @@
 #import <EMMA_iOS/EMMA_iOS.h>
 #import "AppDelegate.h"
 
+@interface EMMAPlugin()
+@property (nonatomic, strong) NSDictionary* inAppTypes;
+@end
 
 @implementation EMMAPlugin
+
+- (void)pluginInitialize {
+    self.inAppTypes = @{
+                       inAppStartview: @(Startview),
+                       inAppAdball: @(Adball),
+                       inAppStrip: @(Strip),
+                       inAppBanner: @(Banner)
+                       };
+}
 
 - (void) startSession:(CDVInvokedUrlCommand *)command {
     NSDictionary* configurationArgs = [command argumentAtIndex:0 withDefault: nil];
@@ -19,7 +31,7 @@
     NSString *sessionKey = [configurationArgs objectForKey:sessionKeyArg];
     if (!sessionKey || [sessionKey isEqualToString:@""]) {
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                                    messageAsString: mandatoryNotEmpty];
+                                                    messageAsString: CONCAT(sessionKeyArg, mandatoryNotEmpty)];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         return;
     }
@@ -57,10 +69,29 @@
 #endif
     
     [EMMA startPushSystem];
-    
-    id<UNUserNotificationCenterDelegate> delegado = [[UNUserNotificationCenter currentNotificationCenter] delegate];
-    NSLog(@"Delegadp %@", delegado);
 }
 
-
+-(void)inAppMessage: (CDVInvokedUrlCommand*)command {
+    NSDictionary * message = [command argumentAtIndex:0 withDefault:nil];
+    
+    if (!message) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: invalidMethodArguments];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    NSString * type = [message objectForKey:inAppTypeArg];
+    if (!type || [type isEqualToString:@""]) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(inAppTypeArg, mandatoryNotEmpty)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    NSNumber *requestType = [self.inAppTypes objectForKey: type];
+    
+    EMMAInAppRequest *request = [[EMMAInAppRequest alloc] initWithType: [requestType integerValue]];
+    [EMMA inAppMessage:request];
+}
 @end

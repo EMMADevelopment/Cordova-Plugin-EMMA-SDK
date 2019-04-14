@@ -1,14 +1,5 @@
 package io.emma.cordova.plugin;
 
-import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.CordovaInterface;
-import org.apache.cordova.CordovaWebView;
-import org.apache.cordova.CallbackContext;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -18,6 +9,15 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.util.Log;
 
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.PluginResult;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,22 +26,30 @@ import java.util.List;
 import java.util.Map;
 
 import io.emma.android.EMMA;
+import io.emma.android.interfaces.EMMABatchNativeAdInterface;
+import io.emma.android.interfaces.EMMANativeAdInterface;
 import io.emma.android.interfaces.EMMASessionStartListener;
+import io.emma.android.model.EMMACampaign;
 import io.emma.android.model.EMMAEventRequest;
+import io.emma.android.model.EMMAInAppRequest;
+import io.emma.android.model.EMMANativeAd;
+import io.emma.android.model.EMMANativeAdField;
+import io.emma.android.model.EMMANativeAdRequest;
 import io.emma.android.model.EMMAPushOptions;
 import io.emma.android.utils.EMMALog;
 import io.emma.android.utils.ManifestInfo;
-
 
 import static io.emma.cordova.plugin.EMMAPluginConstants.*;
 
 public class EMMAPlugin extends CordovaPlugin {
 
     private boolean pushInitialized = false;
+    private Map<String, EMMACampaign.Type> inAppTypesMap;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
+        initInAppTypes();
     }
 
     @Override
@@ -96,6 +104,10 @@ public class EMMAPlugin extends CordovaPlugin {
             return cancelOrder(args, callbackContext);
         } else if (action.equals("checkForRichPush")) {
             return checkForRichPush(callbackContext);
+        } else if (action.equals("inAppMessage")) {
+            if (args.length() == 1) {
+                return inAppMessage(args.getJSONObject(0), callbackContext);
+            }
         }
 
         EMMALog.w(INVALID_METHOD_OR_ARGUMENTS);
@@ -108,7 +120,7 @@ public class EMMAPlugin extends CordovaPlugin {
 
         String sessionKey = args.optString(SESSION_KEY);
         boolean debug = args.optBoolean(DEBUG);
-        EMMALog.setLevel(debug? EMMALog.VERBOSE : EMMALog.NONE);
+        EMMALog.setLevel(debug ? EMMALog.VERBOSE : EMMALog.NONE);
         boolean validSessionKey = !sessionKey.isEmpty() && !sessionKey.trim().equals("");
 
         if (!validSessionKey && !sessionKeyInMetadata(applicationContext)) {
@@ -254,7 +266,7 @@ public class EMMAPlugin extends CordovaPlugin {
 
     private boolean trackUserExtras(JSONObject object, CallbackContext callbackContext) {
         try {
-            Map<String,String> userTags = objectToMap(object);
+            Map<String, String> userTags = objectToMap(object);
             EMMA.getInstance().trackExtraUserInfo(userTags);
             callbackContext.success();
             return true;
@@ -452,11 +464,132 @@ public class EMMAPlugin extends CordovaPlugin {
         return true;
     }
 
+
+    private boolean inAppMessage(JSONObject args, CallbackContext callbackContext) {
+
+        String inAppType = args.optString(INAPP_TYPE);
+        if (inAppType.trim().equals("")) {
+            String msg = INAPP_TYPE + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        EMMACampaign.Type type = inAppTypeFromString(inAppType);
+
+        if (type == null) {
+            String msg = INAPP_TYPE + INAPP_TYPE_INVALID;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        if (type == EMMACampaign.Type.NATIVEAD) {
+            String templateId = args.optString(INAPP_TEMPLATE_ID);
+            if (templateId.trim().equals("")) {
+                String msg = "For nativeAd " + INAPP_TEMPLATE_ID + MANDATORY_NOT_EMPTY;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            processNativeAd(templateId, args.optBoolean(INAPP_BATCH), callbackContext);
+        } else {
+            EMMA.getInstance().setCurrentActivity(cordova.getActivity());
+
+            EMMAInAppRequest request = new EMMAInAppRequest(type);
+            EMMA.getInstance().getInAppMessage(request);
+
+            callbackContext.success();
+        }
+
+        return true;
+    }
+
+    private void processNativeAd(String templateId, boolean batch, CallbackContext callbackContext) {
+        if (batch) {
+            processBatchNativeAd(templateId, callbackContext);
+        } else {
+            processSimpleNativeAd(templateId, callbackContext);
+        }
+    }
+
+    private void processSimpleNativeAd(String templateId, final CallbackContext callbackContext) {
+        EMMANativeAdRequest request = new EMMANativeAdRequest();
+        request.setTemplateId(templateId);
+
+        EMMA.getInstance().getInAppMessage(request, new EMMANativeAdInterface() {
+            @Override
+            public void onReceived(EMMANativeAd nativeAd) {
+                processNativeAdResponse(Collections.singletonList(nativeAd), callbackContext);
+            }
+
+            @Override
+            public void onShown(EMMACampaign emmaCampaign) {
+
+            }
+
+            @Override
+            public void onHide(EMMACampaign emmaCampaign) {
+
+            }
+
+            @Override
+            public void onClose(EMMACampaign emmaCampaign) {
+
+            }
+        });
+    }
+
+    private void processBatchNativeAd(String templateId, final CallbackContext callbackContext) {
+        EMMANativeAdRequest request = new EMMANativeAdRequest();
+        request.setTemplateId(templateId);
+        request.setBatch(true);
+
+        EMMA.getInstance().getInAppMessage(request, new EMMABatchNativeAdInterface() {
+            @Override
+            public void onBatchReceived(List<EMMANativeAd> list) {
+                processNativeAdResponse(list, callbackContext);
+            }
+
+            @Override
+            public void onShown(EMMACampaign emmaCampaign) {
+
+            }
+
+            @Override
+            public void onHide(EMMACampaign emmaCampaign) {
+
+            }
+
+            @Override
+            public void onClose(EMMACampaign emmaCampaign) {
+
+            }
+        });
+    }
+
+    private void processNativeAdResponse(List<EMMANativeAd> list,
+                                         CallbackContext callbackContext) {
+        JSONArray result = nativeAdsToJSON(list);
+
+        PluginResult pluginResult =
+                new PluginResult(PluginResult.Status.OK, result);
+
+        pluginResult.setKeepCallback(true);
+
+        callbackContext.sendPluginResult(pluginResult);
+    }
+
+    private EMMACampaign.Type inAppTypeFromString(String type) {
+        return inAppTypesMap.get(type);
+    }
+
     private Map<String, String> objectToMap(JSONObject object)
             throws JSONException, IllegalArgumentException {
         Map<String, String> result = new HashMap<>();
         Iterator<String> keysItr = object.keys();
-        while(keysItr.hasNext()) {
+        while (keysItr.hasNext()) {
             String key = keysItr.next();
             Object value = object.get(key);
 
@@ -500,5 +633,62 @@ public class EMMAPlugin extends CordovaPlugin {
     private @ColorInt
     int getNotificationColor(String hexColor) {
         return Color.parseColor(hexColor);
+    }
+
+    private void initInAppTypes() {
+        inAppTypesMap = new HashMap<>();
+        inAppTypesMap.put(INAPP_STARTVIEW, EMMACampaign.Type.STARTVIEW);
+        inAppTypesMap.put(INAPP_ADBALL, EMMACampaign.Type.ADBALL);
+        inAppTypesMap.put(INAPP_BANNER, EMMACampaign.Type.BANNER);
+        inAppTypesMap.put(INAPP_STRIP, EMMACampaign.Type.STRIP);
+        inAppTypesMap.put(INAPP_NATIVEAD, EMMACampaign.Type.NATIVEAD);
+    }
+
+    private JSONArray nativeAdsToJSON(List<EMMANativeAd> nativeAds) {
+        JSONArray array = new JSONArray();
+
+        for (EMMANativeAd nativeAd : nativeAds) {
+            JSONObject object = nativeAdToJSON(nativeAd);
+            if (object != null) {
+                array.put(object);
+            }
+        }
+
+        return array;
+    }
+
+    private JSONObject nativeAdToJSON(EMMANativeAd nativeAd) {
+        JSONObject object = new JSONObject();
+
+        try {
+            object.put("id", nativeAd.getCampaignID().intValue());
+            object.put("templateId", nativeAd.getTemplateId());
+            object.put("times", nativeAd.getTimes().intValue());
+            object.put("tag", nativeAd.getTag());
+            object.put("showOn", nativeAd.showOnWebView() ? "inapp" : "browser");
+            object.put("fields", processNativeAdFields(nativeAd.getNativeAdContent()));
+        } catch (JSONException e) {
+            EMMALog.e("Error parsing native ad", e);
+            return null;
+        }
+
+        return object;
+    }
+
+
+    private JSONArray processNativeAdFields(Map<String, EMMANativeAdField> fields) throws JSONException {
+        JSONArray result = new JSONArray();
+
+        for (Map.Entry<String, EMMANativeAdField> entry : fields.entrySet()) {
+            JSONObject object = new JSONObject();
+            object.put("name", entry.getValue().getFieldName());
+            object.put("type", entry.getValue().getFieldType());
+            object.put("subtype", entry.getValue().getFieldSubType());
+            object.put("value", entry.getValue().getFieldValue());
+
+            result.put(object);
+        }
+
+        return result;
     }
 }

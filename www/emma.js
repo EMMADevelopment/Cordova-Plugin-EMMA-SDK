@@ -1,17 +1,13 @@
 var exec = require('cordova/exec'),
     argscheck = require('cordova/argscheck');
 
-let errors = Object.freeze({
-    INVALID_ARGUMENT: "Invalid arguments"
+exports.inAppTypes = Object.freeze({
+    STARTVIEW: 'startview',
+    ADBALL: 'adball',
+    STRIP: 'strip',
+    BANNER: 'banner', //only Android
+    NATIVEAD: 'nativeAd'
 });
-
-let printError = function(message) {
-    console.error(message);
-};
-
-let print = function(message) {
-    console.debug(message);
-};
 
 exports.startSession = function(configuration) {
     argscheck.checkArgs('O', 'EMMAPlugin.startSession', arguments);
@@ -64,4 +60,8 @@ exports.cancelOrder = function(orderId) {
 
 exports.checkForRichPush = function() {
     exec(null, null, 'EMMAPlugin', 'checkForRichPush', []);
+}
+
+exports.inAppMessage = function(message) {
+    exec(message.inAppResponse, null, 'EMMAPlugin', 'inAppMessage', [message]);
 }

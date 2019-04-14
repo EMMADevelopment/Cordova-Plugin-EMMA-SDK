@@ -21,7 +21,6 @@
 /* PUSH */
 #define EMMAPushKey @"eMMa"
 
-
 /* EVENT */
 #define eventTokenArg @"token"
 #define eventAttributesArg @"attributes"
@@ -44,6 +43,18 @@
 #define orderProductIdArg @"productId"
 #define orderProductNameArg @"productName"
 #define orderProductQuantityArg @"quantity"
+
+/* INAPP */
+#define inAppTypeArg @"type"
+#define inAppStartview @"startview"
+#define inAppBanner @"banner"
+#define inAppStrip @"strip"
+#define inAppAdball @"adball"
+
+#define CONCAT(a, b) \
+    [NSString stringWithFormat:@"%@%@", a, b]
+
+
 
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 @import UserNotifications;

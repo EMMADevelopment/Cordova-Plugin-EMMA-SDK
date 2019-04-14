@@ -16,7 +16,8 @@ public class EMMAPluginConstants {
     static final String MANDATORY_NOT_EMPTY = " can not be empty";
     static final String MANDATORY_NOT_ZERO = " can not be zero";
     static final String KEY_VALUE_MAPPING_ERROR = " key-value attributes invalid";
-    static final String MAPPING_VALUE_ERROR = "only allowed property value in string type";
+    static final String MAPPING_VALUE_ERROR = "Only allowed property value in string type";
+    static final String INAPP_TYPE_INVALID = "Invalid in-app type. Types are referred in JS class InAppTypes";
 
     /* START SESSION */
     static final String SESSION_KEY = "sessionKey";
@@ -58,4 +59,14 @@ public class EMMAPluginConstants {
     static final String ORDER_PRODUCT_NAME = "productName";
     static final String ORDER_PRODUCT_QUANTITY = "quantity";
 
+    /* INAPP */
+    static final String INAPP_TYPE = "type";
+    static final String INAPP_TEMPLATE_ID = "templateId";
+    static final String INAPP_BATCH = "batch";
+
+    static final String INAPP_STARTVIEW = "startview";
+    static final String INAPP_BANNER = "banner";
+    static final String INAPP_STRIP = "strip";
+    static final String INAPP_ADBALL = "adball";
+    static final String INAPP_NATIVEAD = "nativeAd";
 }
