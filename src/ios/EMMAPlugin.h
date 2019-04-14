@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <Cordova/CDVPlugin.h>
+#import <EMMA_iOS/EMMA_iOS.h>
+
 
 /* ERROR MESSAGES */
 #define invalidMethodArguments @"Check if method exists or arguments are correct"
@@ -46,24 +48,28 @@
 
 /* INAPP */
 #define inAppTypeArg @"type"
+#define inAppTemplateIdArg @"templateId"
+#define inAppBatchArg @"batch"
+
 #define inAppStartview @"startview"
 #define inAppBanner @"banner"
 #define inAppStrip @"strip"
 #define inAppAdball @"adball"
+#define inAppNativeAd @"nativeAd"
 
 #define CONCAT(a, b) \
     [NSString stringWithFormat:@"%@%@", a, b]
-
 
 
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 @import UserNotifications;
 #endif
 
-@interface EMMAPlugin : CDVPlugin
+@interface EMMAPlugin : CDVPlugin<EMMAInAppMessageDelegate>
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 @property (nonatomic, strong) id<UNUserNotificationCenterDelegate> pushDelegate;
 #endif
 - (void)startSession:(CDVInvokedUrlCommand*)command;
 - (void)startPush:(CDVInvokedUrlCommand *)command;
+- (void)inAppMessage:(CDVInvokedUrlCommand *)command;
 @end
