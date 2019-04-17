@@ -36,7 +36,7 @@
 
 /* ORDER */
 #define orderIdArg @"orderId"
-#define orderTotalPriceArg "totalPrice"
+#define orderTotalPriceArg @"totalPrice"
 #define orderCustomerIdArg @"customerId"
 #define orderCurrencyCodeArg @"currencyCode"
 #define orderCouponArg @"coupon"
@@ -71,5 +71,16 @@
 #endif
 - (void)startSession:(CDVInvokedUrlCommand*)command;
 - (void)startPush:(CDVInvokedUrlCommand *)command;
+- (void)trackEvent:(CDVInvokedUrlCommand *)command;
+- (void)trackUserExtras:(CDVInvokedUrlCommand *)command;
+- (void)loginUser:(CDVInvokedUrlCommand *)command;
+- (void)registerUser:(CDVInvokedUrlCommand *)command;
+- (void)startOrder:(CDVInvokedUrlCommand *)command;
+- (void)addProduct:(CDVInvokedUrlCommand *)command;
+- (void)trackOrder:(CDVInvokedUrlCommand *)command;
+- (void)cancelOrder:(CDVInvokedUrlCommand *)command;
+- (void)enableUserTracking:(CDVInvokedUrlCommand *)command;
+- (void)disableUserTracking:(CDVInvokedUrlCommand *)command;
+- (void)isUserTrackingEnabled:(CDVInvokedUrlCommand *)command;
 - (void)inAppMessage:(CDVInvokedUrlCommand *)command;
 @end
