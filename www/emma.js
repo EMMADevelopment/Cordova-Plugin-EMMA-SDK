@@ -65,3 +65,15 @@ exports.checkForRichPush = function() {
 exports.inAppMessage = function(message) {
     exec(message.inAppResponse, null, 'EMMAPlugin', 'inAppMessage', [message]);
 }
+
+exports.enableUserTracking = function() {
+    exec(null, null, 'EMMAPlugin', 'enableUserTracking', []);
+}
+
+exports.disableUserTracking = function(deleteUser) {
+    exec(null, null, 'EMMAPlugin', 'disableUserTracking', [deleteUser]);
+}
+
+exports.isUserTrackingEnabled = function(cb) {
+    exec(cb, null, 'EMMAPlugin', 'isUserTrackingEnabled', [])
+}

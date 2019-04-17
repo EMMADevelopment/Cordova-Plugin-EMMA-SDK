@@ -108,6 +108,14 @@ public class EMMAPlugin extends CordovaPlugin {
             if (args.length() == 1) {
                 return inAppMessage(args.getJSONObject(0), callbackContext);
             }
+        } else if (action.equals("enableUserTracking")) {
+           return enableUserTracking(callbackContext);
+        } else if (action.equals("disableUserTracking")) {
+            if (args.length() == 1) {
+                return disableUserTracking(args.optBoolean(0), callbackContext);
+            }
+        } else if (action.equals("isUserTrackingEnabled")) {
+            return isUserTrackingEnabled(callbackContext);
         }
 
         EMMALog.w(INVALID_METHOD_OR_ARGUMENTS);
@@ -690,5 +698,24 @@ public class EMMAPlugin extends CordovaPlugin {
         }
 
         return result;
+    }
+
+    private boolean enableUserTracking(CallbackContext callbackContext) {
+        EMMA.getInstance().enableUserTracking();
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean disableUserTracking(boolean deleteUser, CallbackContext callbackContext) {
+        EMMA.getInstance().disableUserTracking(deleteUser);
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean isUserTrackingEnabled(CallbackContext callbackContext) {
+        PluginResult pluginResult =
+                new PluginResult(PluginResult.Status.OK, EMMA.getInstance().isUserTrackingEnabled());
+        callbackContext.sendPluginResult(pluginResult);
+        return true;
     }
 }
