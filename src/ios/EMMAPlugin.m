@@ -80,7 +80,7 @@ enum ActionTypes {
 
 -(void) trackEvent: (CDVInvokedUrlCommand*)command {
     NSDictionary* eventMessage = [command argumentAtIndex:0 withDefault: nil];
-
+    
     if (!eventMessage) {
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                                     messageAsString: invalidMethodArguments];
@@ -96,15 +96,17 @@ enum ActionTypes {
         return;
     }
     
-    NSDictionary *attributes = [eventMessage objectForKey:eventAttributesArg];
-    
-    EMMAEventRequest *request = [EMMAEventRequest new];
-    
-    if (attributes && [attributes count] > 0) {
-        [request setAttributes:attributes];
-    }
-    
-    [EMMA trackEvent:request];
+    [self.commandDelegate runInBackground:^{
+        NSDictionary *attributes = [eventMessage objectForKey:eventAttributesArg];
+        
+        EMMAEventRequest *request = [[EMMAEventRequest alloc] initWithToken:token];
+        
+        if (attributes && [attributes count] > 0) {
+            [request setAttributes:attributes];
+        }
+        
+        [EMMA trackEvent:request];
+    }];
 }
 
 -(void)trackUserExtraInfo:(CDVInvokedUrlCommand*)command {
@@ -124,7 +126,9 @@ enum ActionTypes {
         return;
     }
     
-    [EMMA trackExtraUserInfo:userExtrasMsg];
+    [self.commandDelegate runInBackground:^{
+        [EMMA trackExtraUserInfo:userExtrasMsg];
+    }];
 }
 
 - (void)loginUser:(CDVInvokedUrlCommand *)command {
@@ -190,7 +194,7 @@ enum ActionTypes {
         [EMMA setCurrencyCode:@"EUR"];
     }
     
-    NSString* coupon = [startOrderMsg objectForKey:orderTotalPriceArg];
+    NSString* coupon = [startOrderMsg objectForKey:orderCouponArg];
     NSString* customerId = [startOrderMsg objectForKey:orderCustomerIdArg];
     
     id _extras = [startOrderMsg objectForKey:extrasArg];
@@ -251,7 +255,9 @@ enum ActionTypes {
 }
 
 - (void)trackOrder:(CDVInvokedUrlCommand *)command {
-    [EMMA trackOrder];
+    [self.commandDelegate runInBackground:^{
+        [EMMA trackOrder];
+    }];
 }
 
 - (void)cancelOrder:(CDVInvokedUrlCommand *)command {
@@ -266,7 +272,7 @@ enum ActionTypes {
     [EMMA cancelOrder:orderId];
 }
 
-- (void) enableUserTracking {
+- (void) enableUserTracking: (CDVInvokedUrlCommand *)command {
     [EMMA enableUserTracking];
 }
 

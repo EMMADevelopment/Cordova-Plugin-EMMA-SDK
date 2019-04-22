@@ -459,11 +459,14 @@ public class EMMAPlugin extends CordovaPlugin {
     }
 
     private boolean trackOrder(CallbackContext callbackContext) {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().trackOrder();
+                callbackContext.success();
+            }
+        });
 
-        Log.d("EMMA", "Entro en track ORDER");
-        EMMALog.d("Track order");
-        EMMA.getInstance().trackOrder();
-        callbackContext.success();
         return true;
     }
 
