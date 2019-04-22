@@ -72,7 +72,7 @@
 - (void)startSession:(CDVInvokedUrlCommand*)command;
 - (void)startPush:(CDVInvokedUrlCommand *)command;
 - (void)trackEvent:(CDVInvokedUrlCommand *)command;
-- (void)trackUserExtras:(CDVInvokedUrlCommand *)command;
+- (void)trackUserExtraInfo:(CDVInvokedUrlCommand *)command;
 - (void)loginUser:(CDVInvokedUrlCommand *)command;
 - (void)registerUser:(CDVInvokedUrlCommand *)command;
 - (void)startOrder:(CDVInvokedUrlCommand *)command;

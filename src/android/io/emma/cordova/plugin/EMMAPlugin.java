@@ -62,9 +62,7 @@ public class EMMAPlugin extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        EMMALog.d("Executed method: " + action);
-
-        Log.d("EMMA", args.getJSONObject(0).toString());
+        EMMALog.d("Executed method: " + action + " with arguments: " + args.toString());
 
         if (action.equals("startSession")) {
             if (args.length() == 1) {
@@ -78,7 +76,7 @@ public class EMMAPlugin extends CordovaPlugin {
             if (args.length() == 1) {
                 return trackEvent(args.getJSONObject(0), callbackContext);
             }
-        } else if (action.equals("trackUserExtras")) {
+        } else if (action.equals("trackUserExtraInfo")) {
             if (args.length() == 1) {
                 return trackUserExtras(args.getJSONObject(0), callbackContext);
             }
@@ -244,8 +242,8 @@ public class EMMAPlugin extends CordovaPlugin {
 
     private boolean trackEvent(JSONObject args, final CallbackContext callbackContext) {
 
-        String token = args.optString(EVENT_TOKEN);
-        JSONObject attributes = args.optJSONObject(EVENT_ATTRIBUTES);
+        final String token = args.optString(EVENT_TOKEN);
+        final JSONObject attributes = args.optJSONObject(EVENT_ATTRIBUTES);
 
         if (token.trim().equals("")) {
             String msg = SESSION_KEY + MANDATORY_NOT_EMPTY;
@@ -254,29 +252,43 @@ public class EMMAPlugin extends CordovaPlugin {
             return false;
         }
 
-        EMMAEventRequest request = new EMMAEventRequest(token);
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                EMMAEventRequest request = new EMMAEventRequest(token);
 
-        if (attributes != null) {
-            try {
-                Map<String, String> keyValueAttr = objectToMap(attributes);
-                request.setAttributes(Collections.unmodifiableMap(keyValueAttr));
-            } catch (JSONException ex) {
-                EMMALog.e(KEY_VALUE_MAPPING_ERROR);
-            } catch (IllegalArgumentException ex) {
-                EMMALog.e(ex.getMessage());
+                if (attributes != null) {
+                    try {
+                        Map<String, String> keyValueAttr = objectToMap(attributes);
+                        request.setAttributes(Collections.unmodifiableMap(keyValueAttr));
+                    } catch (JSONException ex) {
+                        EMMALog.e(KEY_VALUE_MAPPING_ERROR);
+                    } catch (IllegalArgumentException ex) {
+                        EMMALog.e(ex.getMessage());
+                    }
+                }
+
+                EMMA.getInstance().trackEvent(request);
+                callbackContext.success();
             }
-        }
+        });
 
-        EMMA.getInstance().trackEvent(request);
-        callbackContext.success();
         return true;
     }
 
     private boolean trackUserExtras(JSONObject object, CallbackContext callbackContext) {
         try {
-            Map<String, String> userTags = objectToMap(object);
-            EMMA.getInstance().trackExtraUserInfo(userTags);
-            callbackContext.success();
+
+            final Map<String, String> userTags = objectToMap(object);
+            if (userTags.size() > 0) {
+                cordova.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        EMMA.getInstance().trackExtraUserInfo(userTags);
+                        callbackContext.success();
+                    }
+                });
+            }
             return true;
         } catch (JSONException ex) {
             String msg = KEY_VALUE_MAPPING_ERROR;
@@ -447,6 +459,9 @@ public class EMMAPlugin extends CordovaPlugin {
     }
 
     private boolean trackOrder(CallbackContext callbackContext) {
+
+        Log.d("EMMA", "Entro en track ORDER");
+        EMMALog.d("Track order");
         EMMA.getInstance().trackOrder();
         callbackContext.success();
         return true;

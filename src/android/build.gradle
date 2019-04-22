@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.emma:eMMaSDK:4.5.1-RC2'
+    implementation 'io.emma:eMMaSDK:4.5.1-RC3'
     implementation 'com.google.firebase:firebase-messaging:17.5.0'
 }
 

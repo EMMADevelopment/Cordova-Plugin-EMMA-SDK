@@ -107,7 +107,7 @@ enum ActionTypes {
     [EMMA trackEvent:request];
 }
 
--(void)trackUserExtras:(CDVInvokedUrlCommand*)command {
+-(void)trackUserExtraInfo:(CDVInvokedUrlCommand*)command {
     NSDictionary* userExtrasMsg = [command argumentAtIndex:0 withDefault: nil];
     
     if (!userExtrasMsg) {
