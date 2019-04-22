@@ -29,13 +29,13 @@
 
         <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest/application" mode="merge">
             <activity
-                android:name=".activities.EMMAWebViewActivity"
+                android:name="io.emma.android.activities.EMMAWebViewActivity"
                 android:hardwareAccelerated="true"
                 android:theme="@android:style/Theme.Holo.Light.NoActionBar"/>
 
             <activity
                 android:launchMode="singleTask"
-                android:name=".activities.EMMAInternalPushActivity"
+                android:name="io.emma.android.activities.EMMAInternalPushActivity"
                 android:theme="@android:style/Theme.NoDisplay"/>
         </config-file>
         
