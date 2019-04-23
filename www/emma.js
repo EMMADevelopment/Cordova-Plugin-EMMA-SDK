@@ -1,6 +1,12 @@
 var exec = require('cordova/exec'),
     argscheck = require('cordova/argscheck');
 
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+    exec(null, null, 'EMMAPlugin', 'onDeviceReady', []); 
+}
+
 exports.inAppTypes = Object.freeze({
     STARTVIEW: 'startview',
     ADBALL: 'adball',
@@ -56,10 +62,6 @@ exports.trackOrder = function() {
 exports.cancelOrder = function(orderId) {
     argscheck.checkArgs('S', 'EMMAPlugin.cancelOrder', arguments);
     exec(null, null, 'EMMAPlugin', 'cancelOrder', [orderId]);
-}
-
-exports.checkForRichPush = function() {
-    exec(null, null, 'EMMAPlugin', 'checkForRichPush', []);
 }
 
 exports.inAppMessage = function(message) {

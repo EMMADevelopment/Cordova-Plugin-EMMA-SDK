@@ -15,6 +15,10 @@ enum ActionTypes {
     Login, Register
 };
 
++ (void) load {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLinkReceivedNotification:) name:EMMALinkNotification object:nil];
+}
+
 - (void)pluginInitialize {
     self.inAppTypes = @{
                        inAppStartview: @(Startview),
@@ -376,5 +380,17 @@ enum ActionTypes {
     [self.commandDelegate sendPluginResult:result callbackId:nativeAdCallbackId];
 }
 
+-(void)onDeviceReady:(CDVInvokedUrlCommand *)command {
+    // not implemented for iOS
+}
+
+-(void)onLinkReceivedNotification:(NSNotification *)notification {
+    NSURL * url = notification.object;
+    if (url) {
+        [EMMA handleLink:url];
+        NSString *js = [NSString stringWithFormat:@"cordova.fireDocumentEvent('onDeepLink', {'url':'%@'});", url.absoluteString];
+        [self.commandDelegate evalJs:js];
+    }
+}
 
 @end

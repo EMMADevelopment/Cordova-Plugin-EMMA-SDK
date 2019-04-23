@@ -61,6 +61,8 @@
     [NSString stringWithFormat:@"%@%@", a, b]
 
 
+#define EMMALinkNotification @"EMMALinkNotification"
+
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 @import UserNotifications;
 #endif
@@ -83,4 +85,5 @@
 - (void)disableUserTracking:(CDVInvokedUrlCommand *)command;
 - (void)isUserTrackingEnabled:(CDVInvokedUrlCommand *)command;
 - (void)inAppMessage:(CDVInvokedUrlCommand *)command;
+- (void)onDeviceReady:(CDVInvokedUrlCommand *)command;
 @end

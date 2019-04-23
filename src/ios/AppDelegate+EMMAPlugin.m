@@ -70,7 +70,6 @@
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     [[UIApplication sharedApplication] registerForRemoteNotifications];
-    NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -78,14 +77,32 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     if ([self isPushFromEMMA: userInfo]){
         [EMMA handlePush:userInfo];
     }
-    NSLog(@"%@", NSStringFromSelector(_cmd));
     completionHandler(UIBackgroundFetchResultNoData);
 }
 
 #endif
 
+- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation {
+    if (!url) {
+        return NO;
+    }
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:EMMALinkNotification object:url]];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
+    if (!url) {
+        return NO;
+    }
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:EMMALinkNotification object:url]];
+    return YES;
+}
+
+- (void)openURL:(NSURL*)url options:(NSDictionary<NSString *, id> *)options completionHandler:(void (^ __nullable)(BOOL success))completion {
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:EMMALinkNotification object:url]];
+}
+
 -(BOOL) isPushFromEMMA: (NSDictionary*) userInfo {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
     return [userInfo objectForKey:EMMAPushKey] != nil;
 }
 

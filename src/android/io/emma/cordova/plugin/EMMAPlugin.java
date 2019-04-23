@@ -2,12 +2,13 @@ package io.emma.cordova.plugin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -25,7 +26,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import io.emma.android.Constants;
 import io.emma.android.EMMA;
+import io.emma.android.activities.EMMAWebViewActivity;
+import io.emma.android.controllers.EMMASecurityController;
 import io.emma.android.interfaces.EMMABatchNativeAdInterface;
 import io.emma.android.interfaces.EMMANativeAdInterface;
 import io.emma.android.interfaces.EMMASessionStartListener;
@@ -35,8 +39,10 @@ import io.emma.android.model.EMMAInAppRequest;
 import io.emma.android.model.EMMANativeAd;
 import io.emma.android.model.EMMANativeAdField;
 import io.emma.android.model.EMMANativeAdRequest;
+import io.emma.android.model.EMMAPushCampaign;
 import io.emma.android.model.EMMAPushOptions;
 import io.emma.android.utils.EMMALog;
+import io.emma.android.utils.EMMAUrlUtils;
 import io.emma.android.utils.ManifestInfo;
 
 import static io.emma.cordova.plugin.EMMAPluginConstants.*;
@@ -58,6 +64,31 @@ public class EMMAPlugin extends CordovaPlugin {
         if (pushInitialized) {
             EMMA.getInstance().onNewNotification(intent, true);
         }
+    }
+
+    private void processIntentIfNeeded(Intent currentIntent) {
+        if (currentIntent != null) {
+            String action = currentIntent.getAction();
+            Bundle extras = currentIntent.getExtras();
+            if (action != null && action.equals("android.intent.action.VIEW") && extras != null) {
+                Uri data = currentIntent.getData();
+                if (data != null && extras.getBoolean("from_emma_sdk")) {
+                    fireDeepLinkEvent(data.toString());
+                    cordova.getActivity().setIntent(null);
+                }
+            }
+        }
+    }
+
+    private void fireDeepLinkEvent(String url) {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            String js = "javascript:cordova.fireDocumentEvent('onDeepLink'," +
+                    "{'url':'" + url + "'});";
+            @Override
+            public void run() {
+                webView.loadUrl(js);
+            }
+        });
     }
 
     @Override
@@ -100,8 +131,6 @@ public class EMMAPlugin extends CordovaPlugin {
             return trackOrder(callbackContext);
         } else if (action.equals("cancelOrder")) {
             return cancelOrder(args, callbackContext);
-        } else if (action.equals("checkForRichPush")) {
-            return checkForRichPush(callbackContext);
         } else if (action.equals("inAppMessage")) {
             if (args.length() == 1) {
                 return inAppMessage(args.getJSONObject(0), callbackContext);
@@ -114,6 +143,8 @@ public class EMMAPlugin extends CordovaPlugin {
             }
         } else if (action.equals("isUserTrackingEnabled")) {
             return isUserTrackingEnabled(callbackContext);
+        } else if (action.equals("onDeviceReady")) {
+            return onDeviceReady(callbackContext);
         }
 
         EMMALog.w(INVALID_METHOD_OR_ARGUMENTS);
@@ -484,13 +515,6 @@ public class EMMAPlugin extends CordovaPlugin {
         return true;
     }
 
-    private boolean checkForRichPush(CallbackContext callbackContext) {
-        EMMA.getInstance().checkForRichPushUrl();
-        callbackContext.success();
-        return true;
-    }
-
-
     private boolean inAppMessage(JSONObject args, CallbackContext callbackContext) {
 
         String inAppType = args.optString(INAPP_TYPE);
@@ -735,5 +759,68 @@ public class EMMAPlugin extends CordovaPlugin {
                 new PluginResult(PluginResult.Status.OK, EMMA.getInstance().isUserTrackingEnabled());
         callbackContext.sendPluginResult(pluginResult);
         return true;
+    }
+
+    private boolean onDeviceReady(CallbackContext callbackContext) {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                checkRichPush();
+                processIntentIfNeeded(cordova.getActivity().getIntent());
+                callbackContext.success();
+            }
+        });
+
+        return true;
+    }
+
+    private void checkRichPush() {
+        Context context = cordova.getContext();
+        SharedPreferences sp =
+                context.getSharedPreferences(Constants.kEMMAFilesName, Context.MODE_PRIVATE);
+        String url = sp.getString(Constants.kEMMANotificationUrl, "");
+        if (url != null && !url.equals("")) {
+            if (!EMMASecurityController.getInstance().urlInWhitelist(url)) {
+                EMMALog.d("URL in push is not whitelisted: " + url);
+            } else {
+                EMMAPushCampaign pushCampaign = createPushCampaign(sp);
+                if (pushCampaign != null) {
+                    pushCampaign.setRichPushURL(url);
+                    pushCampaign.setCanClose(true);
+                    processRichPushUrl(pushCampaign);
+                }
+            }
+
+            SharedPreferences.Editor editor = sp.edit();
+            editor.remove(Constants.kEMMANotificationUrl);
+            editor.apply();
+        }
+    }
+
+    private void processRichPushUrl(EMMAPushCampaign pushCampaign) {
+        if (!EMMAUrlUtils.isWebAddress(pushCampaign.getCampaignUrl())) {
+            fireDeepLinkEvent(pushCampaign.getCampaignUrl());
+        } else {
+            Context context = cordova.getActivity();
+            Intent intent = EMMAWebViewActivity.makeIntent(context,
+                    pushCampaign, true);
+            context.startActivity(intent);
+        }
+    }
+
+    private EMMAPushCampaign createPushCampaign(SharedPreferences sp) {
+        String message = sp.getString(Constants.kEMMANotificationMessage, "");
+        String productId = sp.getString(Constants.kEMMANotificationProductId, "");
+        String pushId = sp.getString(Constants.kEMMANotificationId, "");
+
+        if (pushId != null && !pushId.isEmpty() && Integer.parseInt(pushId) > 0) {
+            EMMAPushCampaign pushCampaign = new EMMAPushCampaign(Integer.parseInt(pushId));
+            pushCampaign.setMessage(message);
+            pushCampaign.setProductID(productId);
+
+            return pushCampaign;
+        }
+
+        return null;
     }
 }
