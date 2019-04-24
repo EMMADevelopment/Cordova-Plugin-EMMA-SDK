@@ -15,11 +15,10 @@ enum ActionTypes {
     Login, Register
 };
 
-+ (void) load {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLinkReceivedNotification:) name:EMMALinkNotification object:nil];
-}
 
 - (void)pluginInitialize {
+    [super pluginInitialize];
+    
     self.inAppTypes = @{
                        inAppStartview: @(Startview),
                        inAppAdball: @(Adball),
@@ -27,6 +26,8 @@ enum ActionTypes {
                        inAppBanner: @(Banner),
                        inAppNativeAd: @(NativeAd)
                        };
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLinkReceivedNotification:) name:EMMALinkNotification object:nil];
 }
 
 - (void) startSession:(CDVInvokedUrlCommand *)command {
@@ -80,6 +81,12 @@ enum ActionTypes {
 #endif
     
     [EMMA startPushSystem];
+    
+    NSDictionary *receivedRemoteNotification = [[self receivedRemoteNotification] copy];
+    if (receivedRemoteNotification) {
+        [self setReceivedRemoteNotification:nil];
+        [EMMA handlePush:receivedRemoteNotification];
+    }
 }
 
 -(void) trackEvent: (CDVInvokedUrlCommand*)command {
@@ -367,24 +374,24 @@ enum ActionTypes {
 - (void)onShown:(EMMACampaign *)campaign {
 }
 
--(void) onReceived:(EMMANativeAd*) nativeAd {
+- (void) onReceived:(EMMANativeAd*) nativeAd {
     NSArray *nativeAdArray = [NSArray arrayWithObject:nativeAd];
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                  messageAsArray:[self processNativeAd:nativeAdArray]];
     [self.commandDelegate sendPluginResult:result callbackId:nativeAdCallbackId];
 }
 
--(void) onBatchNativeAdReceived:(NSArray<EMMANativeAd*>*) nativeAds {
+- (void) onBatchNativeAdReceived:(NSArray<EMMANativeAd*>*) nativeAds {
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                  messageAsArray:[self processNativeAd:nativeAds]];
     [self.commandDelegate sendPluginResult:result callbackId:nativeAdCallbackId];
 }
 
--(void)onDeviceReady:(CDVInvokedUrlCommand *)command {
+- (void)onDeviceReady:(CDVInvokedUrlCommand *)command {
     // not implemented for iOS
 }
 
--(void)onLinkReceivedNotification:(NSNotification *)notification {
+- (void)onLinkReceivedNotification:(NSNotification *)notification {
     NSURL * url = notification.object;
     if (url) {
         [EMMA handleLink:url];
