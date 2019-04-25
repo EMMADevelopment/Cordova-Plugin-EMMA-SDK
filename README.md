@@ -2,6 +2,8 @@
 
 # Cordova EMMA plugin for Android and iOS
 
+[![npm version](https://badge.fury.io/js/cordova-plugin-emma-sdk.svg)](https://badge.fury.io/js/cordova-plugin-emma-sdk)
+
 For any question related to support, you can write to support@emma.io, we will answer as soon as possible.
 
 ## Table of content
@@ -103,4 +105,4 @@ this.platform.ready().then(() => {
 * To enable iOS notification and obtained the certificates or auth key follow this [guide](https://support.emma.io/hc/en-us/articles/360016440053-iOS-certificates-for-Push-Notifications).
 
 ## <a id="example"> 📱 Example
- View example project [here](https://github.com/EMMADevelopment/EMMAIonicExample/tree/master).
+ See example project [here](https://github.com/EMMADevelopment/EMMAIonicExample/tree/master).
