@@ -1,0 +1,6 @@
+.idea/
+.vscode/
+src/android/.gradle/
+src/android/.idea/
+src/android/.project
+src/android/.settings/org.eclipse.buildship.core.prefs
