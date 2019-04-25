@@ -102,7 +102,8 @@ this.platform.ready().then(() => {
 ```
 ### <a id="push"> Push
 * The file google-services.json is mandatory for android push notification configuration. To obtain the google-services.json file follow this [guide](https://support.emma.io/hc/en-us/articles/203196802).
-* To enable iOS notification and obtained the certificates or auth key follow this [guide](https://support.emma.io/hc/en-us/articles/360016440053-iOS-certificates-for-Push-Notifications).
+* To enable iOS notification and obtained the certificates or auth key follow this [guide](https://support.emma.io/hc/en-us/articles/360016440053-iOS-certificates-for-Push-Notifications). Note that is mandatory activate notification in capabilities with Xcode tool.
+
 
 ## <a id="example"> 📱 Example
  See example project [here](https://github.com/EMMADevelopment/EMMAIonicExample/tree/master).
