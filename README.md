@@ -6,11 +6,17 @@
 
 For any question related to support, you can write to support@emma.io, we will answer as soon as possible.
 
+EMMA website: https://emma.io <br/>
+Documentation: https://support.emma.io/hc/en-us <br/>
+
+❗️**Important** Native SDK documentation is conceptually equals to cordova plugin.
+
 ## Table of content
 
 - [Native SDK equivalences](#native-sdk-equivalences)
 - [Installation](#installation)
 - [Setup](#setup)
+- [Docs](#docs) 
 - [Example](#example)  
 
 ### <a id="native-sdk-equivalences"> Native SDK equivalences
@@ -28,6 +34,9 @@ $ cordova plugin add cordova-plugin-emma-sdk
 ## <a id="setup"> 🚀 Setup
 **❗️Important**
 This setup is focused on an Ionic app.
+	
+####  Session key.  
+> To obtain the key you have to create an EMMA account and create an app. In My account section you will find the key. For more information contact [support](support@emma.io).
 
 First, add to config.xml file:
 ```xml
@@ -103,7 +112,9 @@ this.platform.ready().then(() => {
 ### <a id="push"> Push
 * The file google-services.json is mandatory for android push notification configuration. To obtain the google-services.json file follow this [guide](https://support.emma.io/hc/en-us/articles/203196802).
 * To enable iOS notification and obtained the certificates or auth key follow this [guide](https://support.emma.io/hc/en-us/articles/360016440053-iOS-certificates-for-Push-Notifications). Note that is mandatory activate notification in capabilities with Xcode tool.
-
+ 
+## <a id="docs"> 📑 Docs
+ Building ... Coming soon.
 
 ## <a id="example"> 📱 Example
  See example project [here](https://github.com/EMMADevelopment/EMMAIonicExample/tree/master).
