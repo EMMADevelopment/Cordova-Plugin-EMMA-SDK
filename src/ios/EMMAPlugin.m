@@ -89,6 +89,10 @@ enum ActionTypes {
     }
 }
 
+- (void)trackLocation:(CDVInvokedUrlCommand *)command {
+    [EMMA trackLocation];
+}
+
 -(void) trackEvent: (CDVInvokedUrlCommand*)command {
     NSDictionary* eventMessage = [command argumentAtIndex:0 withDefault: nil];
     

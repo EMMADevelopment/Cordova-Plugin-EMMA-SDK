@@ -103,6 +103,8 @@ public class EMMAPlugin extends CordovaPlugin {
             if (args.length() == 1) {
                 return startPush(args.getJSONObject(0), callbackContext);
             }
+        } else if (action.equals("trackLocation")) {
+            return trackLocation(callbackContext);
         } else if (action.equals("trackEvent")) {
             if (args.length() == 1) {
                 return trackEvent(args.getJSONObject(0), callbackContext);
@@ -233,8 +235,6 @@ public class EMMAPlugin extends CordovaPlugin {
             notificationIcon = getNotificationIcon(context, notificationIconName);
         }
 
-        EMMALog.d("Notification icon" + notificationIcon);
-
         if (notificationIcon == 0) {
             EMMALog.e(PUSH_NOTIFICATION_DRAWABLE_MANDATORY);
             callbackContext.error(PUSH_NOTIFICATION_DRAWABLE_MANDATORY);
@@ -268,6 +268,19 @@ public class EMMAPlugin extends CordovaPlugin {
         pushInitialized = true;
 
         callbackContext.success();
+        return true;
+    }
+
+    private boolean trackLocation(final CallbackContext callbackContext) {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().setCurrentActivity(cordova.getActivity());
+                EMMA.getInstance().startTrackingLocation();
+                callbackContext.success();
+            }
+        });
+
         return true;
     }
 

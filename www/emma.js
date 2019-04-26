@@ -25,6 +25,10 @@ exports.startPush = function(options) {
     exec(null, null, 'EMMAPlugin', 'startPush', [options]);
 }
 
+exports.trackLocation = function() {
+    exec(null, null, 'EMMAPlugin', 'trackLocation', []);
+}
+
 exports.trackEvent = function(eventRequest) {
     argscheck.checkArgs('O', 'EMMAPlugin.trackEvent', arguments);
     exec(null, null, 'EMMAPlugin', 'trackEvent', [eventRequest]);

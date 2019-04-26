@@ -48,6 +48,12 @@ First, add to config.xml file:
 	<resource-file src="resources/android/notification/drawable-xxxhdpi-notification.png" target="app/src/main/res/drawable-xxxhdpi/notification.png" />
 
 	<resource-file src="google-services.json" target="app/google-services.json" />
+	
+	<!-- Optional permissions for location -->
+	<config-file parent="/manifest" target="AndroidManifest.xml" xmlns:android="http://schemas.android.com/apk/res/android">
+		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+		<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	</config-file>
 
 	<config-file parent="/manifest/application" target="AndroidManifest.xml" xmlns:android="http://schemas.android.com/apk/res/android">
 
