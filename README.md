@@ -3,6 +3,7 @@
 # Cordova EMMA plugin for Android and iOS
 
 [![npm version](https://badge.fury.io/js/cordova-plugin-emma-sdk.svg)](https://badge.fury.io/js/cordova-plugin-emma-sdk)
+[![Build Status](https://travis-ci.org/EMMADevelopment/Cordova-Plugin-EMMA-SDK.svg?branch=master)](https://travis-ci.org/EMMADevelopment/Cordova-Plugin-EMMA-SDK)
 
 For any question related to support, you can write to support@emma.io, we will answer as soon as possible.
 
