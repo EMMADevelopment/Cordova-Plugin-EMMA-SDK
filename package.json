@@ -39,5 +39,12 @@
       "version": ">=5.0.0"
     }
   ],
-  "homepage": "https://github.com/EMMADevelopment/Cordova-Plugin-EMMA-SDK#readme"
+  "scripts": {
+    "test": "npm run jshint",
+    "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint tests"
+  },
+  "homepage": "https://github.com/EMMADevelopment/Cordova-Plugin-EMMA-SDK#readme",
+  "devDependencies": {
+    "jshint": "^2.10.2"
+  }
 }
