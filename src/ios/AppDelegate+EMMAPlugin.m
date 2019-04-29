@@ -7,8 +7,12 @@
 @import UserNotifications;
 
 @interface AppDelegate () <UNUserNotificationCenterDelegate>
-@end
+#else
+interface AppDelegate ()
 #endif
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler;
+@end
 
 @implementation AppDelegate (EMMAPlugin)
 
@@ -91,6 +95,15 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 
 - (void)openURL:(NSURL*)url options:(NSDictionary<NSString *, id> *)options completionHandler:(void (^ __nullable)(BOOL success))completion {
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:EMMALinkNotification object:url]];
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+    
+    if (userActivity.webpageURL) {
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:EMMALinkNotification object:[userActivity webpageURL]]];
+    }
+    
+    return YES;
 }
 
 - (BOOL) isPushFromEMMA: (NSDictionary*) userInfo {
