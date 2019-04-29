@@ -64,6 +64,8 @@ public class EMMAPlugin extends CordovaPlugin {
         if (pushInitialized) {
             EMMA.getInstance().onNewNotification(intent, true);
         }
+
+        processIntentIfNeeded(intent);
     }
 
     private void processIntentIfNeeded(Intent currentIntent) {
