@@ -121,7 +121,8 @@ this.platform.ready().then(() => {
 * To enable iOS notification and obtained the certificates or auth key follow this [guide](https://support.emma.io/hc/en-us/articles/360016440053-iOS-certificates-for-Push-Notifications). Note that is mandatory activate notification in capabilities with Xcode tool.
  
 ## <a id="docs"> 📑 Docs
- Building ... Coming soon.
+[English](https://support.emma.io/hc/en-us/articles/360022213754) <br/>
+[Spanish](https://support.emma.io/hc/es/articles/360022213754)
 
 ## <a id="example"> 📱 Example
  See example project [here](https://github.com/EMMADevelopment/EMMAIonicExample/tree/master).
