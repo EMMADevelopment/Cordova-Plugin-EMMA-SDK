@@ -29,6 +29,7 @@ import java.util.Map;
 import io.emma.android.Constants;
 import io.emma.android.EMMA;
 import io.emma.android.activities.EMMAWebViewActivity;
+import io.emma.android.controllers.EMMAKeysController;
 import io.emma.android.controllers.EMMASecurityController;
 import io.emma.android.interfaces.EMMABatchNativeAdInterface;
 import io.emma.android.interfaces.EMMANativeAdInterface;
@@ -41,6 +42,7 @@ import io.emma.android.model.EMMANativeAdField;
 import io.emma.android.model.EMMANativeAdRequest;
 import io.emma.android.model.EMMAPushCampaign;
 import io.emma.android.model.EMMAPushOptions;
+import io.emma.android.push.EMMAPushNotificationsManager;
 import io.emma.android.utils.EMMALog;
 import io.emma.android.utils.EMMAUrlUtils;
 import io.emma.android.utils.ManifestInfo;
@@ -149,6 +151,18 @@ public class EMMAPlugin extends CordovaPlugin {
             return isUserTrackingEnabled(callbackContext);
         } else if (action.equals("onDeviceReady")) {
             return onDeviceReady(callbackContext);
+        } else if (action.equals("onTokenRefresh")) {
+            if (args.length() == 1) {
+                return onTokenRefresh(args.getString(0), callbackContext);
+            }
+        } else if (action.equals("handleNotification")) {
+            if (args.length() == 1) {
+                return handleNotification(args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("sendPushToken")) {
+            if (args.length() == 1) {
+                return sendPushToken(args.getString(0), callbackContext);
+            }
         }
 
         EMMALog.w(INVALID_METHOD_OR_ARGUMENTS);
@@ -837,5 +851,64 @@ public class EMMAPlugin extends CordovaPlugin {
         }
 
         return null;
+    }
+
+    private boolean onTokenRefresh(String token, CallbackContext callbackContext) {
+        final Context context = cordova.getActivity().getApplicationContext();
+
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                EMMAPushNotificationsManager.refreshToken(context, token);
+                callbackContext.success();
+            }
+        });
+
+        return true;
+    }
+
+    private boolean sendPushToken(String token, CallbackContext callbackContext) {
+        final Context context = cordova.getActivity().getApplicationContext();
+
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Map<String, String> tokenMap = new HashMap<>();
+                tokenMap.put(
+                        EMMAKeysController.getInstance().getKey(EMMAKeysController.ServerKey.TOKEN),
+                        token
+                );
+
+                EMMA.getInstance().trackExtraUserInfo(tokenMap);
+                callbackContext.success();
+            }
+        });
+
+        return true;
+    }
+
+    private boolean handleNotification(JSONObject args, CallbackContext callbackContext) {
+
+        try {
+            Map<String, String> payload  = objectToMap(args);
+            final Context context = cordova.getActivity().getApplicationContext();
+
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    EMMAPushNotificationsManager.handleNotification(context, payload);
+                    callbackContext.success();
+                }
+            });
+            return true;
+        } catch (JSONException e) {
+            EMMALog.e("Error processing push payload");
+            callbackContext.success();
+            return false;
+        } catch (IllegalArgumentException e) {
+            EMMALog.e("Payload invalid format");
+            callbackContext.success();
+            return false;
+        }
     }
 }

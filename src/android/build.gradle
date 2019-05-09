@@ -18,8 +18,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.emma:eMMaSDK:4.5.1-RC4'
-    implementation 'com.google.firebase:firebase-messaging:17.5.0'
+    implementation 'io.emma:eMMaSDK:4.5.1'
 }
 
 ext.postBuildExtras = {

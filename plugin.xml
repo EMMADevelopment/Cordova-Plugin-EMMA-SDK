@@ -43,6 +43,8 @@
         <source-file src="src/android/io/emma/cordova/plugin/EMMAPlugin.java" target-dir="src/io/emma/cordova/plugin"/>
 
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+        <framework src="com.google.firebase:firebase-messaging:+" />
+
     </platform>
 
     <platform name="ios">
@@ -58,9 +60,17 @@
         <source-file src="src/ios/AppDelegate+EMMAPlugin.h"/>
         <source-file src="src/ios/AppDelegate+EMMAPlugin.m"/>
 
-        <framework src="eMMa" type="podspec" spec="~> 4.5.0" />
         <framework src="AdSupport.framework" weak="true" />
         <framework src="iAd.framework" weak="true" />
+        <podspec>
+            <config>
+                <source url="https://github.com/brightcove/BrightcoveSpecs.git" />
+                <source url="https://github.com/CocoaPods/Specs.git"/>
+            </config>
+            <pods use-frameworks="true">
+                <pod name="eMMa" spec="~> 4.5.0" embed="true" />
+            </pods>
+        </podspec>
     </platform>
     
 </plugin>
