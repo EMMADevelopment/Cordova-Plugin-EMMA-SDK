@@ -156,7 +156,7 @@ exports.isUserTrackingEnabled = function(cb) {
 exports.onTokenRefresh = function(token) {
     argscheck.checkArgs('S', 'EMMAPlugin.onTokenRefresh', arguments);
     exec(null, null, 'EMMAPlugin', 'onTokenRefresh', [token]);
-}
+};
 
 /**
  * Method to send token.
@@ -165,7 +165,7 @@ exports.onTokenRefresh = function(token) {
 exports.sendPushToken = function(token) {
     argscheck.checkArgs('S', 'EMMAPlugin.onTokenRefresh', arguments);
     exec(null, null, 'EMMAPlugin', 'onTokenRefresh', [token]);
-}
+};
 
 /**
  * Method to show notification from EMMA push service.
@@ -174,5 +174,5 @@ exports.sendPushToken = function(token) {
 exports.handleNotification = function(notification) {
     argscheck.checkArgs('O', 'EMMAPlugin.handleNotification', arguments);
     exec(null, null, 'EMMAPlugin', 'handleNotification', [notification]);
-}
+};
 

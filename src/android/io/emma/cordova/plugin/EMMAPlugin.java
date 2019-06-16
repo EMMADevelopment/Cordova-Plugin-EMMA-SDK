@@ -84,7 +84,7 @@ public class EMMAPlugin extends CordovaPlugin {
         }
     }
 
-    private void fireDeepLinkEvent(String url) {
+    private void fireDeepLinkEvent(final String url) {
         cordova.getActivity().runOnUiThread(new Runnable() {
             String js = "javascript:cordova.fireDocumentEvent('onDeepLink'," +
                     "{'url':'" + url + "'});";
@@ -234,7 +234,7 @@ public class EMMAPlugin extends CordovaPlugin {
     }
 
     private boolean startPush(JSONObject args, final CallbackContext callbackContext) {
-        Context context = cordova.getContext().getApplicationContext();
+        Context context = cordova.getActivity().getApplicationContext();
 
         Class clazz;
         try {
@@ -300,6 +300,7 @@ public class EMMAPlugin extends CordovaPlugin {
         return true;
     }
 
+    @SuppressWarnings("unchecked cast")
     private boolean trackEvent(JSONObject args, final CallbackContext callbackContext) {
 
         final String token = args.optString(EVENT_TOKEN);
@@ -319,8 +320,8 @@ public class EMMAPlugin extends CordovaPlugin {
 
                 if (attributes != null) {
                     try {
-                        Map<String, String> keyValueAttr = objectToMap(attributes);
-                        request.setAttributes(Collections.unmodifiableMap(keyValueAttr));
+                        Map<String, ? extends Object> keyValueAttr = objectToMap(attributes);
+                        request.setAttributes((Map<String, Object>) keyValueAttr);
                     } catch (JSONException ex) {
                         EMMALog.e(KEY_VALUE_MAPPING_ERROR);
                     } catch (IllegalArgumentException ex) {
@@ -336,7 +337,7 @@ public class EMMAPlugin extends CordovaPlugin {
         return true;
     }
 
-    private boolean trackUserExtras(JSONObject object, CallbackContext callbackContext) {
+    private boolean trackUserExtras(JSONObject object, final CallbackContext callbackContext) {
         try {
 
             final Map<String, String> userTags = objectToMap(object);
@@ -518,7 +519,7 @@ public class EMMAPlugin extends CordovaPlugin {
         return true;
     }
 
-    private boolean trackOrder(CallbackContext callbackContext) {
+    private boolean trackOrder(final CallbackContext callbackContext) {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -790,7 +791,7 @@ public class EMMAPlugin extends CordovaPlugin {
         return true;
     }
 
-    private boolean onDeviceReady(CallbackContext callbackContext) {
+    private boolean onDeviceReady(final CallbackContext callbackContext) {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -804,7 +805,7 @@ public class EMMAPlugin extends CordovaPlugin {
     }
 
     private void checkRichPush() {
-        Context context = cordova.getContext();
+        Context context = cordova.getActivity().getApplicationContext();
         SharedPreferences sp =
                 context.getSharedPreferences(Constants.kEMMAFilesName, Context.MODE_PRIVATE);
         String url = sp.getString(Constants.kEMMANotificationUrl, "");
@@ -853,7 +854,7 @@ public class EMMAPlugin extends CordovaPlugin {
         return null;
     }
 
-    private boolean onTokenRefresh(String token, CallbackContext callbackContext) {
+    private boolean onTokenRefresh(final String token, final CallbackContext callbackContext) {
         final Context context = cordova.getActivity().getApplicationContext();
 
         cordova.getActivity().runOnUiThread(new Runnable() {
@@ -867,9 +868,7 @@ public class EMMAPlugin extends CordovaPlugin {
         return true;
     }
 
-    private boolean sendPushToken(String token, CallbackContext callbackContext) {
-        final Context context = cordova.getActivity().getApplicationContext();
-
+    private boolean sendPushToken(final String token, final CallbackContext callbackContext) {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -887,10 +886,10 @@ public class EMMAPlugin extends CordovaPlugin {
         return true;
     }
 
-    private boolean handleNotification(JSONObject args, CallbackContext callbackContext) {
+    private boolean handleNotification(JSONObject args, final CallbackContext callbackContext) {
 
         try {
-            Map<String, String> payload  = objectToMap(args);
+            final Map<String, String> payload  = objectToMap(args);
             final Context context = cordova.getActivity().getApplicationContext();
 
             cordova.getActivity().runOnUiThread(new Runnable() {
