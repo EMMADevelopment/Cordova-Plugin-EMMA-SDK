@@ -1,0 +1,6 @@
+framework module EMMA_iOS {
+  umbrella header "EMMA_iOS.h"
+
+  export *
+  module * { export * }
+}

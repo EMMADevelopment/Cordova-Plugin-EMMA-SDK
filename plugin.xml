@@ -62,15 +62,9 @@
 
         <framework src="AdSupport.framework" weak="true" />
         <framework src="iAd.framework" weak="true" />
-        <podspec>
-            <config>
-                <source url="https://github.com/brightcove/BrightcoveSpecs.git" />
-                <source url="https://github.com/CocoaPods/Specs.git"/>
-            </config>
-            <pods use-frameworks="true">
-                <pod name="eMMa" spec="~> 4.5.0" embed="true" />
-            </pods>
-        </podspec>
+        <framework src="src/ios/EMMA_iOS.framework" custom="true" embed="true"/>
+
+        <hook type="after_plugin_add" src="scripts/iOSAfterAdd.js" />
     </platform>
     
 </plugin>

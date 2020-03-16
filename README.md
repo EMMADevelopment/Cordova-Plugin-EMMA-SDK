@@ -1,4 +1,4 @@
-<img src="https://emma.io/blog/wp-content/uploads/2016/09/Logotipo-EMMA-Small.png">
+<img src="https://emma.io/wp-content/uploads/2019/06/Logotipo-EMMA-Medium.png">
 
 # Cordova EMMA plugin for Android and iOS
 
@@ -17,14 +17,13 @@ Documentation: https://support.emma.io/hc/en-us <br/>
 - [Native SDK equivalences](#native-sdk-equivalences)
 - [Installation](#installation)
 - [Setup](#setup)
-- [Docs](#docs) 
-- [Example](#example)  
+- [Docs](#docs)
+- [Example](#example)
 
 ### <a id="native-sdk-equivalences"> Native SDK equivalences
 
-- iOS SDK **v4.5.0**
+- iOS SDK **v4.5.2**
 - Android SDK **v4.5.1**
-
 
 ## <a id="installation">📲Installation
 
@@ -33,13 +32,16 @@ $ cordova plugin add cordova-plugin-emma-sdk
 ```
 
 ## <a id="setup"> 🚀 Setup
+
 **❗️Important**
 This setup is focused on an Ionic app.
-	
-####  Session key.  
+
+#### Session key.
+
 > To obtain the key you have to create an EMMA account and create an app. In My account section you will find the key. For more information contact [support](support@emma.io).
 
 First, add to config.xml file:
+
 ```xml
 <platform  name="android">
 	<resource-file src="resources/android/notification/drawable-mdpi-notification.png" target="app/src/main/res/drawable-mdpi/notification.png" />
@@ -49,7 +51,7 @@ First, add to config.xml file:
 	<resource-file src="resources/android/notification/drawable-xxxhdpi-notification.png" target="app/src/main/res/drawable-xxxhdpi/notification.png" />
 
 	<resource-file src="google-services.json" target="app/google-services.json" />
-	
+
 	<!-- Optional permissions for location -->
 	<config-file parent="/manifest" target="AndroidManifest.xml" xmlns:android="http://schemas.android.com/apk/res/android">
 		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -63,7 +65,7 @@ First, add to config.xml file:
 				<action android:name="com.google.firebase.MESSAGING_EVENT" />
 			</intent-filter>
 		</service>
-		
+
 		<activity android:name="io.emma.android.activities.EMMADeepLinkActivity" android:noHistory="true" android:theme="@android:style/Theme.NoDisplay">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
@@ -74,55 +76,63 @@ First, add to config.xml file:
 		</activity>
 
 		<meta-data android:name="io.emma.DEEPLINK_OPEN_ACTIVITY" android:value="${config_id}.MainActivity" />
-	
+
 	</config-file>
 <platform>
 ```
+
 Remember replace:
-* ${config_id} for id in config.xml file.
-* ${scheme} for your app scheme (eg. ionicapp). In iOS is necessary configure URL types in Xcode.
-* Add the google-services.json explained in [push](#push)
+
+- \${config_id} for id in config.xml file.
+- \${scheme} for your app scheme (eg. ionicapp). In iOS is necessary configure URL types in Xcode.
+- Add the google-services.json explained in [push](#push)
 
 Declare window at the top of component where plugin is used:
+
 ```javascript
-declare  var window:  any;
+declare var window: any;
 ```
+
 Initialize the plugin:
+
 ```javascript
 this.platform.ready().then(() => {
+  document.addEventListener("onDeepLink", event => {
+    //process deeplink(eg. added in rich push)
+  });
 
-	document.addEventListener('onDeepLink', (event) => {
-		//process deeplink(eg. added in rich push)
-	});
+  const EMMA = window.plugins.EMMA; // gets EMMA plugin instance
 
-	const EMMA = window.plugins.EMMA; // gets EMMA plugin instance
-	
-	const configuration = {
-		sessionKey: '<session_key>', //session key from EMMA Dashboard
-		debug: true
-	};
+  const configuration = {
+    sessionKey: "<session_key>", //session key from EMMA Dashboard
+    debug: true
+  };
 
-	EMMA.startSession(configuration);
-	
-	// Start push with options. Options are only used for Android. iOS use default app icon and open default controller
-	const pushOptions = {
-		classToOpen: '${config_id}.MainActivity', //replace ${config_id} for id in config.xml file
-		iconResource: 'notification' // icon added in config.xml file
-	};
+  EMMA.startSession(configuration);
 
-	EMMA.startPush(pushOptions);
+  // Start push with options. Options are only used for Android. iOS use default app icon and open default controller
+  const pushOptions = {
+    classToOpen: "${config_id}.MainActivity", //replace ${config_id} for id in config.xml file
+    iconResource: "notification" // icon added in config.xml file
+  };
 
-	this.statusBar.styleDefault();
-	this.splashScreen.hide();
+  EMMA.startPush(pushOptions);
+
+  this.statusBar.styleDefault();
+  this.splashScreen.hide();
 });
 ```
+
 ### <a id="push"> Push
-* The file google-services.json is mandatory for android push notification configuration. To obtain the google-services.json file follow this [guide](https://support.emma.io/hc/en-us/articles/203196802).
-* To enable iOS notification and obtained the certificates or auth key follow this [guide](https://support.emma.io/hc/en-us/articles/360016440053-iOS-certificates-for-Push-Notifications). Note that is mandatory activate notification in capabilities with Xcode tool.
- 
+
+- The file google-services.json is mandatory for android push notification configuration. To obtain the google-services.json file follow this [guide](https://support.emma.io/hc/en-us/articles/203196802).
+- To enable iOS notification and obtained the certificates or auth key follow this [guide](https://support.emma.io/hc/en-us/articles/360016440053-iOS-certificates-for-Push-Notifications). Note that is mandatory activate notification in capabilities with Xcode tool.
+
 ## <a id="docs"> 📑 Docs
+
 [English](https://support.emma.io/hc/en-us/articles/360022213754) <br/>
 [Spanish](https://support.emma.io/hc/es/articles/360022213754)
 
 ## <a id="example"> 📱 Example
- See example project [here](https://github.com/EMMADevelopment/EMMAIonicExample/tree/master).
+
+See example project [here](https://github.com/EMMADevelopment/EMMAIonicExample/tree/master).
