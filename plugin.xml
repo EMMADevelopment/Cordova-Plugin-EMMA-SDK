@@ -14,6 +14,8 @@
         <clobbers target="window.plugins.EMMA"/>
     </js-module>
 
+    <hook type="after_plugin_add" src="scripts/androidPushDependencies.js" />
+
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="EMMAPlugin">
@@ -43,7 +45,6 @@
         <source-file src="src/android/io/emma/cordova/plugin/EMMAPlugin.java" target-dir="src/io/emma/cordova/plugin"/>
 
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
-        <framework src="com.google.firebase:firebase-messaging:+" />
 
     </platform>
 

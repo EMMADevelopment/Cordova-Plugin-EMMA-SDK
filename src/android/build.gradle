@@ -6,7 +6,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:+'
-        classpath 'com.google.gms:google-services:4.2.0'
     }
 }
 
@@ -19,10 +18,4 @@ repositories {
 
 dependencies {
     implementation 'io.emma:eMMaSDK:4.5.1'
-}
-
-ext.postBuildExtras = {
-    if (project.extensions.findByName('googleServices') == null) {
-        apply plugin: com.google.gms.googleservices.GoogleServicesPlugin
-    }
 }
