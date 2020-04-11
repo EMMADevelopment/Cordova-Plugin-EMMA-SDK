@@ -397,11 +397,19 @@ enum ActionTypes {
 
 - (void)onLinkReceivedNotification:(NSNotification *)notification {
     NSURL * url = notification.object;
-    if (url) {
-        [EMMA handleLink:url];
-        NSString *js = [NSString stringWithFormat:@"cordova.fireDocumentEvent('onDeepLink', {'url':'%@'});", url.absoluteString];
-        [self.commandDelegate evalJs:js];
-    }
+    @try {
+        if (url) {
+            [EMMA handleLink:url];
+            NSString *js = [NSString stringWithFormat:@"cordova.fireDocumentEvent('onDeepLink', {'url':'%@'});", url.absoluteString];
+            [self.commandDelegate evalJs:js];
+        }
+     } @catch (NSException * ex) {
+         NSLog(@"Error opening url: %@", url);
+     }
+}
+
+- (void)handleOpenURL:(NSNotification*)notification {
+    [self onLinkReceivedNotification:notification];
 }
 
 @end
