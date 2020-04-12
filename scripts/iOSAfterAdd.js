@@ -84,5 +84,5 @@ done`;
   buildPhase["runOnlyForDeploymentPostprocessing"] = 0;
 
   fs.writeFileSync(projectPath, myProj.writeSync());
-  console.log("Executed trim arch script build phase");
+  console.log("iOS: Executed trim arch script build phase");
 };

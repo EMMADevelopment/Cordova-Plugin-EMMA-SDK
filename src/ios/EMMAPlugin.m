@@ -76,6 +76,8 @@ enum ActionTypes {
 }
 
 - (void)startPush:(CDVInvokedUrlCommand*)command {
+#if PUSH_ENABLED == 1
+
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
     [EMMA setPushNotificationsDelegate: _pushDelegate];
 #endif
@@ -87,6 +89,7 @@ enum ActionTypes {
         [self setReceivedRemoteNotification:nil];
         [EMMA handlePush:receivedRemoteNotification];
     }
+#endif
 }
 
 - (void)trackLocation:(CDVInvokedUrlCommand *)command {

@@ -77,8 +77,8 @@ module.exports = function(context) {
     GSERVICES_PLUGIN_VERSION = variables.GSERVICES_PLUGIN_VERSION || GSERVICES_PLUGIN_VERSION;
     if (isPushToEnable(variables.ADD_PUSH)) {
         addPushDependencies();
-        console.log("Added push dependencies");
+        console.log("Android: Added push dependencies");
         return;
     }
-    console.log("Discarted push dependencies");
+    console.log("Android: Discarted push dependencies");
 };

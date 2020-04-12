@@ -3,12 +3,12 @@
 #import <objc/runtime.h>
 #import <EMMA_iOS/EMMA.h>
 
-#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0 && PUSH_ENABLED == 1
 @import UserNotifications;
 
 @interface AppDelegate () <UNUserNotificationCenterDelegate>
 #else
-interface AppDelegate ()
+@interface AppDelegate ()
 #endif
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler;
@@ -25,12 +25,13 @@ interface AppDelegate ()
 - (void) application:(UIApplication*)application swizzledDidFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
     [self application:application swizzledDidFinishLaunchingWithOptions:launchOptions];
     
-#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0 && PUSH_ENABLED == 1
     EMMAPlugin * plugin = [self getPlugin];
     [plugin setPushDelegate:self];
 #endif
 }
 
+#if PUSH_ENABLED == 1
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [EMMA registerToken:deviceToken];
     NSLog(@"Obtained token %@", deviceToken);
@@ -75,6 +76,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [[UIApplication sharedApplication] registerForRemoteNotifications];
 }
 
+#endif
 #endif
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {

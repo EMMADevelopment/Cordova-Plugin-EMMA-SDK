@@ -2,6 +2,7 @@
 #import <Cordova/CDVPlugin.h>
 #import <EMMA_iOS/EMMA_iOS.h>
 
+#define PUSH_ENABLED 1
 
 /* ERROR MESSAGES */
 #define invalidMethodArguments @"Check if method exists or arguments are correct"
@@ -63,12 +64,12 @@
 
 #define EMMALinkNotification @"EMMALinkNotification"
 
-#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0 && PUSH_ENABLED == 1
 @import UserNotifications;
 #endif
 
 @interface EMMAPlugin : CDVPlugin<EMMAInAppMessageDelegate>
-#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0 && PUSH_ENABLED == 1
 @property (nonatomic, strong) id<UNUserNotificationCenterDelegate> pushDelegate;
 #endif
 @property (nonatomic, strong) NSDictionary* receivedRemoteNotification;

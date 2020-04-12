@@ -15,6 +15,7 @@
     </js-module>
 
     <hook type="after_plugin_add" src="scripts/androidPushDependencies.js" />
+    <hook type="after_plugin_add" src="scripts/iOSPushMethods.js" />
 
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
