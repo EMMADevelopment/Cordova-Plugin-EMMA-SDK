@@ -23,7 +23,7 @@
 
 @property (nonatomic, strong) id filterInfo;
 
-@property int idPromo;
+@property  long idPromo;
 
 @property (nonatomic, strong) NSURL *promoURL;
 
@@ -32,6 +32,8 @@
 @property BOOL canClose;
 
 @property NSInteger times;
+
+@property (nonatomic, strong) NSDictionary * params;
 
 +(EMMACampaignType) typeFromString: (NSString*) type;
 

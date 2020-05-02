@@ -11,10 +11,11 @@
 @class EMMANativeAd;
 @class EMMACoupon;
 @class EMMAInstallAttribution;
+@class EMMAPush;
 
 
-#ifndef eMMa_EMMADefines_h
-#define eMMa_EMMADefines_h
+#ifndef EMMADefines_h
+#define EMMADefines_h
 
 typedef void(^imageCompletionBlock)(UIImage *image);
 
@@ -87,21 +88,12 @@ typedef void(^EMMAGetCouponsBlock)(NSDictionary* couponsResponse);
  This protocol defines the delegate methods of the push system
  */
 @protocol EMMAPushDelegate <NSObject>
-
-@optional
 /**
- Sends the pushtag to the delegate when a push is received
+ Sends the push campaign  to the delegate when a push is opened
  
  @param pushTag the push tag on the push message
  */
--(void)pushTag:(NSString*)pushTag;
-
-/**
- Sends the message to the delegate when a push is received
- 
- @param pushMessage the content of the push message
- */
--(void)pushMessage:(NSString*)pushMessage;
+-(void)onPushOpen:(EMMAPush*)push;
 @end
 
 /**

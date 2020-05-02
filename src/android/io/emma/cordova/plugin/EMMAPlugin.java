@@ -815,7 +815,7 @@ public class EMMAPlugin extends CordovaPlugin {
             } else {
                 EMMAPushCampaign pushCampaign = createPushCampaign(sp);
                 if (pushCampaign != null) {
-                    pushCampaign.setRichPushURL(url);
+                    pushCampaign.setCampaignUrl(url);
                     pushCampaign.setCanClose(true);
                     processRichPushUrl(pushCampaign);
                 }
@@ -840,13 +840,13 @@ public class EMMAPlugin extends CordovaPlugin {
 
     private EMMAPushCampaign createPushCampaign(SharedPreferences sp) {
         String message = sp.getString(Constants.kEMMANotificationMessage, "");
-        String productId = sp.getString(Constants.kEMMANotificationProductId, "");
+        String tag = sp.getString(Constants.kEMMANotificationProductId, "");
         String pushId = sp.getString(Constants.kEMMANotificationId, "");
 
         if (pushId != null && !pushId.isEmpty() && Integer.parseInt(pushId) > 0) {
             EMMAPushCampaign pushCampaign = new EMMAPushCampaign(Integer.parseInt(pushId));
             pushCampaign.setMessage(message);
-            pushCampaign.setProductID(productId);
+            pushCampaign.setTag(tag);
 
             return pushCampaign;
         }

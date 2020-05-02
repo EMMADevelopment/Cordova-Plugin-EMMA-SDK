@@ -14,5 +14,6 @@
 @property int id;
 @property NSString *name;
 @property EMMAInstallAttributionSource *source;
+@property NSDictionary *clickParams;
 
 @end

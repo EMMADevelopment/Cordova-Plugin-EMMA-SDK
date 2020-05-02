@@ -15,7 +15,7 @@
 @property (nonatomic,retain) NSString * couponDescription;
 @property (nonatomic,retain) NSString * couponCode;
 @property (nonatomic,retain) NSString * imageUrl;
-@property (nonatomic,assign) int couponId;
+@property (nonatomic,assign) long couponId;
 @property (nonatomic,assign) int maxRedeem;
 @property (nonatomic,assign) int currentRedeems;
 @property (nonatomic,retain) NSDate * begin;
@@ -23,6 +23,7 @@
 @property (nonatomic,retain) UIImage  * image;
 @property (nonatomic,assign) int EMMAId;
 @property (nonatomic,assign) BOOL isNew;
+@property (nonatomic,retain) NSDictionary * params;
 
 - (id)initWithDictionary:(NSDictionary*)info EMMAId:(int)emmaId;
 
