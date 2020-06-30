@@ -663,4 +663,10 @@ For a simple configuration put this in you AppDelegate's method:
 */
 +(void)didReceiveNotificationRequest:(UNNotificationRequest *)request withNotificationContent:(UNMutableNotificationContent *)content AndCompletionHandler:(void (^)(UNNotificationContent *)) completion;
 
+/**
+*   This method returns the id associate with device.
+*   @return  device identifier
+*/
++(NSString*) deviceId;
+
 @end
