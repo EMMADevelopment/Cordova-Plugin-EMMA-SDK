@@ -32,6 +32,7 @@ import io.emma.android.activities.EMMAWebViewActivity;
 import io.emma.android.controllers.EMMAKeysController;
 import io.emma.android.controllers.EMMASecurityController;
 import io.emma.android.interfaces.EMMABatchNativeAdInterface;
+import io.emma.android.interfaces.EMMADeviceIdListener;
 import io.emma.android.interfaces.EMMANativeAdInterface;
 import io.emma.android.interfaces.EMMASessionStartListener;
 import io.emma.android.model.EMMACampaign;
@@ -49,7 +50,7 @@ import io.emma.android.utils.ManifestInfo;
 
 import static io.emma.cordova.plugin.EMMAPluginConstants.*;
 
-public class EMMAPlugin extends CordovaPlugin {
+public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
 
     private boolean pushInitialized = false;
     private Map<String, EMMACampaign.Type> inAppTypesMap;
@@ -84,15 +85,18 @@ public class EMMAPlugin extends CordovaPlugin {
         }
     }
 
-    private void fireDeepLinkEvent(final String url) {
+    private void fireEvent(String js) {
         cordova.getActivity().runOnUiThread(new Runnable() {
-            String js = "javascript:cordova.fireDocumentEvent('onDeepLink'," +
-                    "{'url':'" + url + "'});";
             @Override
             public void run() {
                 webView.loadUrl(js);
             }
         });
+    }
+
+    private void fireDeepLinkEvent(final String url) {
+        this.fireEvent("javascript:cordova.fireDocumentEvent('onDeepLink'," +
+        "{'url':'" + url + "'});");
     }
 
     @Override
@@ -226,6 +230,7 @@ public class EMMAPlugin extends CordovaPlugin {
         EMMA.getInstance().startSession(configuration.build(), new EMMASessionStartListener() {
             @Override
             public void onSessionStarted() {
+                EMMA.getInstance().getDeviceId(EMMAPlugin.this);
                 callbackContext.success();
             }
         });
@@ -809,7 +814,7 @@ public class EMMAPlugin extends CordovaPlugin {
         SharedPreferences sp =
                 context.getSharedPreferences(Constants.kEMMAFilesName, Context.MODE_PRIVATE);
         String url = sp.getString(Constants.kEMMANotificationUrl, "");
-        if (url != null && !url.equals("")) {
+        if (!url.equals("")) {
             if (!EMMASecurityController.getInstance().urlInWhitelist(url)) {
                 EMMALog.d("URL in push is not whitelisted: " + url);
             } else {
@@ -843,7 +848,7 @@ public class EMMAPlugin extends CordovaPlugin {
         String tag = sp.getString(Constants.kEMMANotificationProductId, "");
         String pushId = sp.getString(Constants.kEMMANotificationId, "");
 
-        if (pushId != null && !pushId.isEmpty() && Integer.parseInt(pushId) > 0) {
+        if (!pushId.isEmpty() && Integer.parseInt(pushId) > 0) {
             EMMAPushCampaign pushCampaign = new EMMAPushCampaign(Integer.parseInt(pushId));
             pushCampaign.setMessage(message);
             pushCampaign.setTag(tag);
@@ -909,5 +914,10 @@ public class EMMAPlugin extends CordovaPlugin {
             callbackContext.success();
             return false;
         }
+    }
+
+    @Override
+    public void onObtained(String deviceId) {
+        this.fireEvent("javascript:cordova.fireDocumentEvent('onDeviceId', {'deviceId':'" + deviceId + "'});");
     }
 }
