@@ -22,8 +22,8 @@ Documentation: https://support.emma.io/hc/en-us <br/>
 
 ### <a id="native-sdk-equivalences"> Native SDK equivalences
 
-- iOS SDK **v4.5.2**
-- Android SDK **v4.5.1**
+- iOS SDK **v4.6.4**
+- Android SDK **v4.7.1**
 
 ## <a id="installation">📲Installation
 
@@ -100,7 +100,10 @@ this.platform.ready().then(() => {
   document.addEventListener("onDeepLink", event => {
     //process deeplink(eg. added in rich push)
   });
-
+  document.addEventListener("onDeviceId", event => {
+    //event.deviceId
+  });
+  
   const EMMA = window.plugins.EMMA; // gets EMMA plugin instance
 
   const configuration = {
