@@ -73,6 +73,7 @@ enum ActionTypes {
     }
 
     [EMMA startSessionWithConfiguration:configuration];
+    [self onDeviceId];
 }
 
 - (void)startPush:(CDVInvokedUrlCommand*)command {
@@ -413,6 +414,21 @@ enum ActionTypes {
 
 - (void)handleOpenURL:(NSNotification*)notification {
     [self onLinkReceivedNotification:notification];
+}
+
+-(void)onDeviceId {
+    [self.commandDelegate runInBackground:^{
+        @try {
+
+            NSLog(@"DeviceId");
+            NSString* deviceId = [EMMA deviceId];
+            NSString *js = [NSString stringWithFormat:@"cordova.fireDocumentEvent('onDeviceId', {'deviceId':'%@'});", deviceId];
+            [self.commandDelegate evalJs:js];
+            NSLog(@"eval js");
+        } @catch (NSException * ex) {
+            NSLog(@"Error obtaining deviceId");
+        }
+    }];
 }
 
 @end
