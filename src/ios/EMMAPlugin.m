@@ -416,15 +416,17 @@ enum ActionTypes {
     [self onLinkReceivedNotification:notification];
 }
 
+-(void) fireDeviceIdEvent:(NSString*)deviceId withEventName:(NSString*)eventName {
+    NSString *js = [NSString stringWithFormat:@"cordova.fireDocumentEvent('%@', {'deviceId':'%@'});", eventName, deviceId];
+    [self.commandDelegate evalJs:js];
+}
+
 -(void)onDeviceId {
     [self.commandDelegate runInBackground:^{
         @try {
-
-            NSLog(@"DeviceId");
             NSString* deviceId = [EMMA deviceId];
-            NSString *js = [NSString stringWithFormat:@"cordova.fireDocumentEvent('onDeviceId', {'deviceId':'%@'});", deviceId];
-            [self.commandDelegate evalJs:js];
-            NSLog(@"eval js");
+            [self fireDeviceIdEvent: deviceId withEventName: @"onDeviceId"];
+            [self fireDeviceIdEvent: deviceId withEventName: @"syncDeviceId"];
         } @catch (NSException * ex) {
             NSLog(@"Error obtaining deviceId");
         }

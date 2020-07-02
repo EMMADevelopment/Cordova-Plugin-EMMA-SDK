@@ -916,8 +916,18 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         }
     }
 
+    public void fireDeviceIdEvent(String name, String deviceId) {
+        this.fireEvent("javascript:cordova.fireDocumentEvent('" + name + "', {'deviceId':'" + deviceId + "'});");
+    }
+
     @Override
-    public void onObtained(String deviceId) {
-        this.fireEvent("javascript:cordova.fireDocumentEvent('onDeviceId', {'deviceId':'" + deviceId + "'});");
+    public void onObtained(final String deviceId) {
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                EMMAPlugin.this.fireDeviceIdEvent("syncDeviceId", deviceId);
+                EMMAPlugin.this.fireDeviceIdEvent("onDeviceId", deviceId);
+            }
+        });
     }
 }
