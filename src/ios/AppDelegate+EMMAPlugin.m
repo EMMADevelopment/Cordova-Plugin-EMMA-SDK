@@ -16,22 +16,43 @@
 
 @implementation AppDelegate (EMMAPlugin)
 
+#if PUSH_ENABLED == 1
 + (void)load {
-    Method originalMethod = class_getInstanceMethod(self, @selector(application:didFinishLaunchingWithOptions:));
-    Method swizzledMethod = class_getInstanceMethod(self, @selector(application:swizzledDidFinishLaunchingWithOptions:));
-    method_exchangeImplementations(originalMethod, swizzledMethod);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class = [self class];
+
+        SEL originalSelector = @selector(application:didFinishLaunchingWithOptions:);
+        SEL swizzledSelector = @selector(application:swizzledDidFinishLaunchingWithOptions:);
+
+        Method originalMethod = class_getInstanceMethod(class, originalSelector);
+        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+
+        BOOL didAddMethod =
+        class_addMethod(class,
+                        originalSelector,
+                        method_getImplementation(swizzledMethod),
+                        method_getTypeEncoding(swizzledMethod));
+
+        if (didAddMethod) {
+            class_replaceMethod(class,
+                                swizzledSelector,
+                                method_getImplementation(originalMethod),
+                                method_getTypeEncoding(originalMethod));
+        } else {
+            method_exchangeImplementations(originalMethod, swizzledMethod);
+        }
+    });
 }
 
 - (void) application:(UIApplication*)application swizzledDidFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
     [self application:application swizzledDidFinishLaunchingWithOptions:launchOptions];
-    
-#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0 && PUSH_ENABLED == 1
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
     EMMAPlugin * plugin = [self getPlugin];
     [plugin setPushDelegate:self];
 #endif
 }
 
-#if PUSH_ENABLED == 1
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [EMMA registerToken:deviceToken];
     NSLog(@"Obtained token %@", deviceToken);
@@ -97,3 +118,4 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 }
 
 @end
+
