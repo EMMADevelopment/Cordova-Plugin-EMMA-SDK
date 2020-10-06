@@ -28,7 +28,7 @@ Documentation: https://support.emma.io/hc/en-us <br/>
 ## <a id="installation">📲Installation
 
 ```
-$ cordova plugin add cordova-plugin-emma-sdk
+$ cordova plugin add cordova-plugin-emma-sdk --variable ADD_PUSH=1 
 ```
 
 ## <a id="setup"> 🚀 Setup
