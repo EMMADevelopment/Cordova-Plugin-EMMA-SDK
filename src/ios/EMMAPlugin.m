@@ -367,7 +367,7 @@ enum ActionTypes {
              @"id": [NSNumber numberWithInt:[nativeAd idPromo]],
              @"templateId": [nativeAd nativeAdTemplateId],
              @"times": [NSNumber numberWithLong:[nativeAd times]],
-             @"tag": [nativeAd tag],
+             @"tag": [nativeAd tag] == nil? [NSNull null] : [nativeAd tag],
              @"showOn": [nativeAd openInSafari]? @"browser" : @"inapp",
              @"fields": [nativeAd nativeAdContent]
              };
