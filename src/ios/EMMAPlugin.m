@@ -433,4 +433,14 @@ enum ActionTypes {
     }];
 }
 
+-(void)setCustomerId:(NSString*) customerId {
+   [self.commandDelegate runInBackground:^{
+       [EMMA setCustomerId:customerId];
+   }];
+}
+
+-(void)requestTrackingWithIdfa {
+    [EMMA requestTrackingWithIdfa];
+}
+
 @end

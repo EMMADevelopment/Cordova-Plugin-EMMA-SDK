@@ -7,8 +7,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -166,6 +164,10 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         } else if (action.equals("sendPushToken")) {
             if (args.length() == 1) {
                 return sendPushToken(args.getString(0), callbackContext);
+            }
+        } else if (action.equals("setCustomerId")) {
+            if (args.length() == 1) {
+                return setCustomerId(args.getString(0), callbackContext);
             }
         }
 
@@ -709,14 +711,12 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         return metaData != null && metaData.getString("io.emma.SESSION_KEY") != null;
     }
 
-    private @DrawableRes
-    int getNotificationIcon(Context context, String imageName) {
+    private int getNotificationIcon(Context context, String imageName) {
         Resources res = context.getResources();
         return res.getIdentifier(imageName, "drawable", context.getPackageName());
     }
 
-    private @ColorInt
-    int getNotificationColor(String hexColor) {
+    private int getNotificationColor(String hexColor) {
         return Color.parseColor(hexColor);
     }
 
@@ -761,20 +761,14 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
     }
 
 
-    private JSONArray processNativeAdFields(Map<String, EMMANativeAdField> fields) throws JSONException {
-        JSONArray result = new JSONArray();
+    private JSONObject processNativeAdFields(Map<String, EMMANativeAdField> fields) throws JSONException {
+        JSONObject object = new JSONObject();
 
         for (Map.Entry<String, EMMANativeAdField> entry : fields.entrySet()) {
-            JSONObject object = new JSONObject();
-            object.put("name", entry.getValue().getFieldName());
-            object.put("type", entry.getValue().getFieldType());
-            object.put("subtype", entry.getValue().getFieldSubType());
-            object.put("value", entry.getValue().getFieldValue());
-
-            result.put(object);
+            object.put(entry.getValue().getFieldName(), entry.getValue().getFieldValue());
         }
 
-        return result;
+        return object;
     }
 
     private boolean enableUserTracking(CallbackContext callbackContext) {
@@ -929,5 +923,16 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
                 EMMAPlugin.this.fireDeviceIdEvent("onDeviceId", deviceId);
             }
         });
+    }
+
+    private boolean setCustomerId(String customerId, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().setCustomerId(customerId);
+                callbackContext.success();
+            }
+        });
+        return true;
     }
 }

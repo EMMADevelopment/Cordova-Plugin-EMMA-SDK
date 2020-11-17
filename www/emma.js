@@ -211,3 +211,23 @@ exports.handleNotification = function (notification) {
 exports.getSyncDeviceId = function () {
   return deviceId;
 };
+
+/**
+ * This method allows add client id without use login and register event.
+ * Method added in version 4.8.0.
+ * @param customerId
+ */
+exports.setCustomerId = function (customerId) {
+  argscheck.checkArgs('S', 'EMMAPlugin.setCustomerId', arguments);
+  exec(null, null, 'EMMAPlugin', 'setCustomerId', [customerId]);
+};
+
+/**
+ * ONLY IOS
+ *
+ * This method allows request permissions to obtain idfa identifier
+ * Method added in version 4.8.0.
+ */
+exports.requestTrackingWithIdfa = function () {
+  exec(null, null, 'EMMAPlugin', 'requestTrackingWithIdfa', []);
+};

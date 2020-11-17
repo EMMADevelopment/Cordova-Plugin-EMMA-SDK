@@ -22,13 +22,13 @@ Documentation: https://support.emma.io/hc/en-us <br/>
 
 ### <a id="native-sdk-equivalences"> Native SDK equivalences
 
-- iOS SDK **v4.6.4**
-- Android SDK **v4.7.1**
+- iOS SDK **v4.8.0**
+- Android SDK **v4.8.0**
 
 ## <a id="installation">📲Installation
 
 ```
-$ cordova plugin add cordova-plugin-emma-sdk --variable ADD_PUSH=1 
+$ cordova plugin add cordova-plugin-emma-sdk --variable ADD_PUSH=1
 ```
 
 ## <a id="setup"> 🚀 Setup
@@ -97,17 +97,17 @@ Initialize the plugin:
 
 ```javascript
 this.platform.ready().then(() => {
-  document.addEventListener("onDeepLink", event => {
+  document.addEventListener('onDeepLink', (event) => {
     //process deeplink(eg. added in rich push)
   });
-  document.addEventListener("onDeviceId", event => {
+  document.addEventListener('onDeviceId', (event) => {
     //event.deviceId
   });
-  
+
   const EMMA = window.plugins.EMMA; // gets EMMA plugin instance
 
   const configuration = {
-    sessionKey: "<session_key>", //session key from EMMA Dashboard
+    sessionKey: '<session_key>', //session key from EMMA Dashboard
     debug: true
   };
 
@@ -115,8 +115,8 @@ this.platform.ready().then(() => {
 
   // Start push with options. Options are only used for Android. iOS use default app icon and open default controller
   const pushOptions = {
-    classToOpen: "${config_id}.MainActivity", //replace ${config_id} for id in config.xml file
-    iconResource: "notification" // icon added in config.xml file
+    classToOpen: '${config_id}.MainActivity', //replace ${config_id} for id in config.xml file
+    iconResource: 'notification' // icon added in config.xml file
   };
 
   EMMA.startPush(pushOptions);

@@ -93,19 +93,6 @@ For a simple configuration put this in you AppDelegate's method:
  */
 +(void)setRootViewController:(UIViewController*)viewController;
 
-/**
- Enable or disable IDFA Tracking
- 
-    *IMPORTANT*
- 
-    IDFA tracking is enabled by default on EMMA. If you don’t want to track with IDFA please use method [EMMA setUseIDFA:BOOL]; in order to disable.
-    Anyway you need to check the speciefied box on iTunnes Connect question regarding IDFA tracking.
- 
- @param use tells to EMMA when to use IDFA tracking. If NO VendorID will be used. It can be enabled/disabled for future app releases.
- */
-+(void)setUseIDFA:(BOOL)use;
-
-
 /** 
  * @name Tracking User Behaviour
  * 
@@ -668,5 +655,18 @@ For a simple configuration put this in you AppDelegate's method:
 *   @return  device identifier
 */
 +(NSString*) deviceId;
+
+
+/**
+ Request IDFA Tracking for iOS 14 and over
+ */
++(void) requestTrackingWithIdfa API_AVAILABLE(ios(14.0));
+
+
+/**
+ This method associates the user with the device.
+  @param customerId The customer Id
+ */
++(void) setCustomerId: (NSString*) customerId;
 
 @end
