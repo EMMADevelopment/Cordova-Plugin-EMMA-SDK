@@ -421,7 +421,7 @@ enum ActionTypes {
     [self.commandDelegate evalJs:js];
 }
 
--(void)onDeviceId {
+- (void)onDeviceId {
     [self.commandDelegate runInBackground:^{
         @try {
             NSString* deviceId = [EMMA deviceId];
@@ -433,14 +433,66 @@ enum ActionTypes {
     }];
 }
 
--(void)setCustomerId:(NSString*) customerId {
+- (void)setCustomerId:(CDVInvokedUrlCommand *)command  {
+   NSString* customerId = [[command argumentAtIndex:0 withDefault: nil] stringValue];
    [self.commandDelegate runInBackground:^{
        [EMMA setCustomerId:customerId];
    }];
 }
 
--(void)requestTrackingWithIdfa {
+- (void)requestTrackingWithIdfa:(CDVInvokedUrlCommand *)command {
     [EMMA requestTrackingWithIdfa];
+}
+
+- (void)sendInAppImpressionOrClick:(CDVInvokedUrlCommand *)command isImpression:(bool) isImpression {
+    NSDictionary* inAppEvent = [command argumentAtIndex:0 withDefault: nil];
+    NSString * type = [inAppEvent objectForKey:inAppTypeArg];
+    if (!type || [type isEqualToString:@""]) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(inAppTypeArg, mandatoryNotEmpty)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    NSNumber *requestType = [self.inAppTypes objectForKey: type];
+    NSNumber *campaignId = [NSNumber numberWithInt:[[inAppEvent objectForKey:inAppCampaignId] intValue]];
+    
+    if (!campaignId || campaignId <= 0) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(inAppCampaignId, mandatoryNotEmpty)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    if (isImpression) {
+        [EMMA sendImpression:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
+    } else {
+        [EMMA sendClick:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
+    }
+}
+
+- (void)sendInAppImpression:(CDVInvokedUrlCommand *)command {
+    [self sendInAppImpressionOrClick:command isImpression:true];
+}
+
+- (void)sendInAppClick:(CDVInvokedUrlCommand *)command {
+    [self sendInAppImpressionOrClick:command isImpression:false];
+}
+
+- (void)openNativeAd:(CDVInvokedUrlCommand *)command {
+    NSDictionary* nativeAdMessage = [command argumentAtIndex:0 withDefault: nil];
+    NSNumber * identifier = [NSNumber numberWithInt:[[nativeAdMessage objectForKey:nativeAdId] intValue]];
+    
+    if (!identifier || identifier <= 0) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(nativeAdId, mandatoryNotEmpty)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    [self.commandDelegate runInBackground:^{
+        [EMMA openNativeAd:[NSString stringWithFormat:@"%@", identifier]];
+    }];
 }
 
 @end

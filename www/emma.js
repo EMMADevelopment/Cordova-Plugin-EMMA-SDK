@@ -231,3 +231,43 @@ exports.setCustomerId = function (customerId) {
 exports.requestTrackingWithIdfa = function () {
   exec(null, null, 'EMMAPlugin', 'requestTrackingWithIdfa', []);
 };
+
+/**
+ * Sends impression associated with inapp campaign. This method is mainly used to send native Ad impressions.
+ * Formats startview, banner, adball send impression automatically
+ *
+ * @param inAppType The inapp type
+ * @param campaignId The campaign identifier
+ */
+exports.sendInAppImpression = function (inAppType, campaignId) {
+  argscheck.checkArgs('SN', 'EMMAPlugin.sendInAppImpression', arguments);
+  exec(null, null, 'EMMAPlugin', 'sendInAppImpression', [
+    { type: inAppType, campaignId }
+  ]);
+};
+
+/**
+ * Sends click associated with inapp campaign. This method is mainly used to send native Ad impressions.
+ * Formats startview, banner, adball send impression automatically
+ *
+ * @param inAppType The inapp type
+ * @param campaignId The campaign identifier
+ */
+exports.sendInAppClick = function (inAppType, campaignId) {
+  argscheck.checkArgs('SN', 'EMMAPlugin.inAppType', arguments);
+  exec(null, null, 'EMMAPlugin', 'sendInAppClick', [
+    { type: inAppType, campaignId }
+  ]);
+};
+
+/**
+ * Opens native ad CTA inapp or outapp. This method track native ad click automatically. It is not necessary call to sendInAppClick method.
+ *
+ * @param id The native ad id
+ * @param cta The native ad cta
+ * @param showOn Open the cta on browser or inapp
+ */
+exports.openNativeAd = function (id, cta, showOn) {
+  argscheck.checkArgs('NSS', 'EMMAPlugin.openNativeAd', arguments);
+  exec(null, null, 'EMMAPlugin', 'openNativeAd', [{ id, cta, showOn }]);
+};

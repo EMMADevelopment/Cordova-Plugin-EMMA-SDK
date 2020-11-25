@@ -63,10 +63,15 @@ public class EMMAPluginConstants {
     static final String INAPP_TYPE = "type";
     static final String INAPP_TEMPLATE_ID = "templateId";
     static final String INAPP_BATCH = "batch";
+    static final String INAPP_CAMPAIGN_ID = "campaignId";
 
     static final String INAPP_STARTVIEW = "startview";
     static final String INAPP_BANNER = "banner";
     static final String INAPP_STRIP = "strip";
     static final String INAPP_ADBALL = "adball";
     static final String INAPP_NATIVEAD = "nativeAd";
+
+    static final String NATIVE_AD_ID = "id";
+    static final String NATIVE_AD_CTA = "cta";
+    static final String NATIVE_AD_SHOW_ON = "showOn";
 }
