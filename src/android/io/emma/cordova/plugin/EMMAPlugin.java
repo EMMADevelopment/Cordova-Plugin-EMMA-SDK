@@ -29,6 +29,7 @@ import io.emma.android.EMMA;
 import io.emma.android.activities.EMMAWebViewActivity;
 import io.emma.android.controllers.EMMAKeysController;
 import io.emma.android.controllers.EMMASecurityController;
+import io.emma.android.enums.CommunicationTypes;
 import io.emma.android.interfaces.EMMABatchNativeAdInterface;
 import io.emma.android.interfaces.EMMADeviceIdListener;
 import io.emma.android.interfaces.EMMANativeAdInterface;
@@ -168,6 +169,18 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         } else if (action.equals("setCustomerId")) {
             if (args.length() == 1) {
                 return setCustomerId(args.getString(0), callbackContext);
+            }
+        } else if (action.equals("sendInAppImpression")) {
+            if (args.length() == 1) {
+                return sendInAppImpressionOrClick(true, args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("sendInAppClick")) {
+            if (args.length() == 1) {
+                return sendInAppImpressionOrClick(false, args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("openNativeAd")) {
+            if (args.length() == 1) {
+                return openNativeAd(args.getJSONObject(0), callbackContext);
             }
         }
 
@@ -748,6 +761,7 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         try {
             object.put("id", nativeAd.getCampaignID().intValue());
             object.put("templateId", nativeAd.getTemplateId());
+            object.put("cta", nativeAd.getCta());
             object.put("times", nativeAd.getTimes().intValue());
             object.put("tag", nativeAd.getTag());
             object.put("showOn", nativeAd.showOnWebView() ? "inapp" : "browser");
@@ -930,6 +944,91 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             @Override
             public void run() {
                 EMMA.getInstance().setCustomerId(customerId);
+                callbackContext.success();
+            }
+        });
+        return true;
+    }
+
+    private CommunicationTypes inappTypeToCommType(EMMACampaign.Type type) {
+        if (type == null) {
+            return null;
+        }
+
+        switch (type) {
+            case STARTVIEW:
+                return CommunicationTypes.STARTVIEW;
+            case NATIVEAD:
+                return CommunicationTypes.NATIVE_AD;
+            case BANNER:
+                return CommunicationTypes.BANNER;
+            case ADBALL:
+                return CommunicationTypes.ADBALL;
+            default:
+                return null;
+        }
+    }
+
+    private boolean sendInAppImpressionOrClick(boolean isInAppImpression, JSONObject args,
+                                            final CallbackContext callbackContext) {
+        String type = args.optString(INAPP_TYPE);
+        int campaignId = args.optInt(INAPP_CAMPAIGN_ID);
+
+        if (type.isEmpty() || campaignId == 0) {
+            callbackContext.success();
+            EMMALog.w("inApp type or campaign id cannot be null");
+            return false;
+        }
+
+        EMMACampaign.Type campaignType = inAppTypeFromString(type);
+        CommunicationTypes communicationType = inappTypeToCommType(campaignType);
+
+        if (campaignType == null || communicationType == null) {
+            callbackContext.success();
+            EMMALog.w("Invalid inapp type or campaign id");
+            return false;
+        }
+
+        EMMACampaign campaign = new EMMACampaign(campaignType);
+        campaign.setCampaignID(campaignId);
+
+        if (isInAppImpression) {
+            EMMA.getInstance().sendInAppImpression(communicationType, campaign);
+        } else {
+            EMMA.getInstance().sendInAppClick(communicationType, campaign);
+        }
+
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean openNativeAd(final JSONObject args, final CallbackContext callbackContext) {
+        int id = args.optInt(NATIVE_AD_ID);
+        String cta = args.optString(NATIVE_AD_CTA);
+        String showOn = args.optString(NATIVE_AD_SHOW_ON);
+
+        if (id == 0) {
+            callbackContext.success();
+            EMMALog.w("Invalid campaign id");
+            return false;
+        }
+
+        if (cta.isEmpty()) {
+            callbackContext.success();
+            EMMALog.w("Cta cannot be empty or null");
+            return false;
+        }
+
+        final EMMANativeAd nativeAd = new EMMANativeAd();
+        nativeAd.setCampaignID(id);
+        nativeAd.setCampaignUrl(cta);
+        nativeAd.setShowOn(showOn.isEmpty() || showOn.equals("inapp") ? 0 : 1);
+
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().setCurrentActivity(cordova.getActivity());
+                EMMA.getInstance().openNativeAd(nativeAd);
                 callbackContext.success();
             }
         });

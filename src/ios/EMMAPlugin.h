@@ -50,6 +50,7 @@
 /* INAPP */
 #define inAppTypeArg @"type"
 #define inAppTemplateIdArg @"templateId"
+#define inAppCampaignId @"campaignId"
 #define inAppBatchArg @"batch"
 
 #define inAppStartview @"startview"
@@ -57,6 +58,8 @@
 #define inAppStrip @"strip"
 #define inAppAdball @"adball"
 #define inAppNativeAd @"nativeAd"
+
+#define nativeAdId @"id"
 
 #define CONCAT(a, b) \
     [NSString stringWithFormat:@"%@%@", a, b]
@@ -90,4 +93,9 @@
 - (void)isUserTrackingEnabled:(CDVInvokedUrlCommand *)command;
 - (void)inAppMessage:(CDVInvokedUrlCommand *)command;
 - (void)onDeviceReady:(CDVInvokedUrlCommand *)command;
+- (void)setCustomerId:(CDVInvokedUrlCommand *)command;
+- (void)requestTrackingWithIdfa:(CDVInvokedUrlCommand *)command;
+- (void)sendInAppImpression:(CDVInvokedUrlCommand *)command;
+- (void)sendInAppClick:(CDVInvokedUrlCommand *)command;
+- (void)openNativeAd:(CDVInvokedUrlCommand *)command;
 @end
