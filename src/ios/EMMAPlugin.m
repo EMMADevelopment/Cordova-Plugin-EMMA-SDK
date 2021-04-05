@@ -27,7 +27,8 @@ enum ActionTypes {
                        inAppNativeAd: @(NativeAd)
                        };
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLinkReceivedNotification:) name:EMMALinkNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onLinkReceivedNotification:) name:EMMALinkNotification object:nil];
 }
 
 - (void) startSession:(CDVInvokedUrlCommand *)command {
@@ -72,7 +73,7 @@ enum ActionTypes {
         configuration.urlBase = urlApi;
     }
 
-    [EMMA startSessionWithConfiguration:configuration];
+    [EMMALegacy startSessionWithConfiguration:configuration];
     [self onDeviceId];
 }
 
@@ -80,21 +81,21 @@ enum ActionTypes {
 #if PUSH_ENABLED == 1
 
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
-    [EMMA setPushNotificationsDelegate: _pushDelegate];
+    [EMMALegacy setPushNotificationsDelegate: _pushDelegate];
 #endif
     
-    [EMMA startPushSystem];
+    [EMMALegacy startPushSystem];
     
     NSDictionary *receivedRemoteNotification = [[self receivedRemoteNotification] copy];
     if (receivedRemoteNotification) {
         [self setReceivedRemoteNotification:nil];
-        [EMMA handlePush:receivedRemoteNotification];
+        [EMMALegacy handlePush:receivedRemoteNotification];
     }
 #endif
 }
 
 - (void)trackLocation:(CDVInvokedUrlCommand *)command {
-    [EMMA trackLocation];
+    [EMMALegacy trackLocation];
 }
 
 -(void) trackEvent: (CDVInvokedUrlCommand*)command {
@@ -124,7 +125,7 @@ enum ActionTypes {
             [request setAttributes:attributes];
         }
         
-        [EMMA trackEvent:request];
+        [EMMALegacy trackEvent:request];
     }];
 }
 
@@ -146,7 +147,7 @@ enum ActionTypes {
     }
     
     [self.commandDelegate runInBackground:^{
-        [EMMA trackExtraUserInfo:userExtrasMsg];
+        [EMMALegacy trackExtraUserInfo:userExtrasMsg];
     }];
 }
 
@@ -172,9 +173,9 @@ enum ActionTypes {
     NSString *email = [loginRegisterMessage objectForKey:emailArg];
     
     if (type == Login) {
-        [EMMA loginUser:userId forMail:email];
+        [EMMALegacy loginUser:userId forMail:email];
     } else {
-        [EMMA registerUser:userId forMail:email];
+        [EMMALegacy registerUser:userId forMail:email];
     }
 }
 
@@ -208,9 +209,9 @@ enum ActionTypes {
     
     id _currencyCode = [startOrderMsg objectForKey:orderCurrencyCodeArg];
     if (_currencyCode) {
-        [EMMA setCurrencyCode:_currencyCode];
+        [EMMALegacy setCurrencyCode:_currencyCode];
     } else {
-        [EMMA setCurrencyCode:@"EUR"];
+        [EMMALegacy setCurrencyCode:@"EUR"];
     }
     
     NSString* coupon = [startOrderMsg objectForKey:orderCouponArg];
@@ -222,7 +223,7 @@ enum ActionTypes {
         extras = (NSDictionary*) _extras;
     }
     
-    [EMMA startOrder:orderId customerId:customerId totalPrice:totalPrice coupon:coupon extras:extras];
+    [EMMALegacy startOrder:orderId customerId:customerId totalPrice:totalPrice coupon:coupon extras:extras];
 }
 
 - (void)addProduct:(CDVInvokedUrlCommand *)command {
@@ -270,12 +271,12 @@ enum ActionTypes {
         extras = (NSDictionary*) _extras;
     }
     
-    [EMMA addProduct:productId name:productName qty:quantity price:price extras:extras];
+    [EMMALegacy addProduct:productId name:productName qty:quantity price:price extras:extras];
 }
 
 - (void)trackOrder:(CDVInvokedUrlCommand *)command {
     [self.commandDelegate runInBackground:^{
-        [EMMA trackOrder];
+        [EMMALegacy trackOrder];
     }];
 }
 
@@ -288,20 +289,20 @@ enum ActionTypes {
         return;
     }
     
-    [EMMA cancelOrder:orderId];
+    [EMMALegacy cancelOrder:orderId];
 }
 
 - (void) enableUserTracking: (CDVInvokedUrlCommand *)command {
-    [EMMA enableUserTracking];
+    [EMMALegacy enableUserTracking];
 }
 
 - (void) disableUserTracking:(CDVInvokedUrlCommand *)command  {
     BOOL deleteUser = [[command argumentAtIndex:0 withDefault: nil] boolValue];
-    [EMMA disableUserTracking:deleteUser];
+    [EMMALegacy disableUserTracking:deleteUser];
 }
 
 - (void) isUserTrackingEnabled:(CDVInvokedUrlCommand *)command {
-    BOOL userTracking = [EMMA isUserTrackingEnabled];
+    BOOL userTracking = [EMMALegacy isUserTrackingEnabled];
     
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                   messageAsBool:userTracking];
@@ -345,11 +346,11 @@ enum ActionTypes {
         EMMANativeAdRequest *request = [EMMANativeAdRequest new];
         [request setIsBatch:batch];
         [request setTemplateId:templateId];
-        [EMMA inAppMessage:request withDelegate:self];
+        [EMMALegacy inAppMessage:request withDelegate:self];
         
     } else {
         EMMAInAppRequest *request = [[EMMAInAppRequest alloc] initWithType: [requestType integerValue]];
-        [EMMA inAppMessage:request];
+        [EMMALegacy inAppMessage:request];
     }
     
 }
@@ -403,7 +404,7 @@ enum ActionTypes {
     NSURL * url = notification.object;
     @try {
         if (url) {
-            [EMMA handleLink:url];
+            [EMMALegacy handleLink:url];
             NSString *js = [NSString stringWithFormat:@"cordova.fireDocumentEvent('onDeepLink', {'url':'%@'});", url.absoluteString];
             [self.commandDelegate evalJs:js];
         }
@@ -424,7 +425,7 @@ enum ActionTypes {
 - (void)onDeviceId {
     [self.commandDelegate runInBackground:^{
         @try {
-            NSString* deviceId = [EMMA deviceId];
+            NSString* deviceId = [EMMALegacy deviceId];
             [self fireDeviceIdEvent: deviceId withEventName: @"onDeviceId"];
             [self fireDeviceIdEvent: deviceId withEventName: @"syncDeviceId"];
         } @catch (NSException * ex) {
@@ -436,12 +437,14 @@ enum ActionTypes {
 - (void)setCustomerId:(CDVInvokedUrlCommand *)command  {
    NSString* customerId = [[command argumentAtIndex:0 withDefault: nil] stringValue];
    [self.commandDelegate runInBackground:^{
-       [EMMA setCustomerId:customerId];
+       [EMMALegacy setCustomerId:customerId];
    }];
 }
 
 - (void)requestTrackingWithIdfa:(CDVInvokedUrlCommand *)command {
-    [EMMA requestTrackingWithIdfa];
+    if (@available(iOS 14.0, *)) {
+        [EMMALegacy requestTrackingWithIdfa];
+    }
 }
 
 - (void)sendInAppImpressionOrClick:(CDVInvokedUrlCommand *)command isImpression:(bool) isImpression {
@@ -465,9 +468,9 @@ enum ActionTypes {
     }
     
     if (isImpression) {
-        [EMMA sendImpression:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
+        [EMMALegacy sendImpression:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
     } else {
-        [EMMA sendClick:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
+        [EMMALegacy sendClick:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
     }
 }
 
@@ -491,8 +494,9 @@ enum ActionTypes {
     }
     
     [self.commandDelegate runInBackground:^{
-        [EMMA openNativeAd:[NSString stringWithFormat:@"%@", identifier]];
+        [EMMALegacy openNativeAd:[NSString stringWithFormat:@"%@", identifier]];
     }];
 }
 
 @end
+

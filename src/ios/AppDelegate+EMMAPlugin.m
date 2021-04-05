@@ -1,7 +1,7 @@
 #import "AppDelegate+EMMAPlugin.h"
 #import "EMMAPlugin.h"
 #import <objc/runtime.h>
-#import <EMMA_iOS/EMMA.h>
+#import <EMMA_iOS/EMMA_iOS.h>
 
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0 && PUSH_ENABLED == 1
 @import UserNotifications;
@@ -54,7 +54,7 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [EMMA registerToken:deviceToken];
+    [EMMALegacy registerToken:deviceToken];
     NSLog(@"Obtained token %@", deviceToken);
 }
 
@@ -85,7 +85,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
     NSDictionary * userInfo = notification.request.content.userInfo;
     if ([self isPushFromEMMA: userInfo]) {
-        [EMMA handlePush: userInfo];
+        [EMMALegacy handlePush: userInfo];
     }
     
     completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionBadge);
