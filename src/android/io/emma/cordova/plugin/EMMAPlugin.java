@@ -775,11 +775,26 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
     }
 
 
+    private JSONArray nativeAdContainerToJSON(List<Map<String, EMMANativeAdField>> fieldsContainer)  throws JSONException {
+        JSONArray processFieldsContainer = new JSONArray();
+
+        for (Map<String, EMMANativeAdField> fields: fieldsContainer) {
+            processFieldsContainer.put(processNativeAdFields(fields));
+        }
+
+        return processFieldsContainer;
+    }
+
+
     private JSONObject processNativeAdFields(Map<String, EMMANativeAdField> fields) throws JSONException {
         JSONObject object = new JSONObject();
 
         for (Map.Entry<String, EMMANativeAdField> entry : fields.entrySet()) {
-            object.put(entry.getValue().getFieldName(), entry.getValue().getFieldValue());
+            if (entry.getValue().getFieldContainer() != null ) {
+                object.put(entry.getValue().getFieldName(), nativeAdContainerToJSON(entry.getValue().getFieldContainer()));
+            } else {
+                object.put(entry.getValue().getFieldName(), entry.getValue().getFieldValue());
+            }
         }
 
         return object;
