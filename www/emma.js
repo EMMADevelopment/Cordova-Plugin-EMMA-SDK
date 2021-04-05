@@ -254,7 +254,7 @@ exports.sendInAppImpression = function (inAppType, campaignId) {
  * @param campaignId The campaign identifier
  */
 exports.sendInAppClick = function (inAppType, campaignId) {
-  argscheck.checkArgs('SN', 'EMMAPlugin.inAppType', arguments);
+  argscheck.checkArgs('SN', 'EMMAPlugin.sendInAppClick', arguments);
   exec(null, null, 'EMMAPlugin', 'sendInAppClick', [
     { type: inAppType, campaignId }
   ]);
