@@ -182,6 +182,10 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             if (args.length() == 1) {
                 return openNativeAd(args.getJSONObject(0), callbackContext);
             }
+        } else if (action.equals("handleLink")) {
+            if (args.length() == 1) {
+                return handleLink(args.getString(0), callbackContext);
+            }
         }
 
         EMMALog.w(INVALID_METHOD_OR_ARGUMENTS);
@@ -1047,6 +1051,19 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
                 callbackContext.success();
             }
         });
+        return true;
+    }
+
+    private boolean handleLink(final String link, final CallbackContext callbackContext) {
+        if (link != null) {
+            cordova.getThreadPool().execute(new Runnable() {
+                @Override
+                public void run() {
+                    EMMA.handleLink(link);
+                    callbackContext.success();
+                }
+            });
+        }
         return true;
     }
 }

@@ -271,3 +271,13 @@ exports.openNativeAd = function (id, cta, showOn) {
   argscheck.checkArgs('NSS', 'EMMAPlugin.openNativeAd', arguments);
   exec(null, null, 'EMMAPlugin', 'openNativeAd', [{ id, cta, showOn }]);
 };
+
+/**
+ * Process the link and sends the click event to EMMA.
+ *
+ * @param link The powlink that opened the app.
+ */
+exports.handleLink = function (link) {
+  argscheck.checkArgs('S', 'EMMAPlugin.handleLink', arguments);
+  exec(null, null, 'EMMAPlugin', 'handleLink', [link]);
+};

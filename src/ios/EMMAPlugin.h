@@ -98,4 +98,5 @@
 - (void)sendInAppImpression:(CDVInvokedUrlCommand *)command;
 - (void)sendInAppClick:(CDVInvokedUrlCommand *)command;
 - (void)openNativeAd:(CDVInvokedUrlCommand *)command;
+- (void)handleLink:(CDVInvokedUrlCommand *)command;
 @end

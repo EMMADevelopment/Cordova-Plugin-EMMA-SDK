@@ -404,7 +404,6 @@ enum ActionTypes {
     NSURL * url = notification.object;
     @try {
         if (url) {
-            [EMMALegacy handleLink:url];
             NSString *js = [NSString stringWithFormat:@"cordova.fireDocumentEvent('onDeepLink', {'url':'%@'});", url.absoluteString];
             [self.commandDelegate evalJs:js];
         }
@@ -495,6 +494,14 @@ enum ActionTypes {
     
     [self.commandDelegate runInBackground:^{
         [EMMALegacy openNativeAd:[NSString stringWithFormat:@"%@", identifier]];
+    }];
+}
+
+- (void)handleLink:(CDVInvokedUrlCommand *)command {
+    NSString* link = [[command argumentAtIndex:0 withDefault: nil] stringValue];  
+    NSString* url = [NSURL URLWithString:url];
+    [self.commandDelegate runInBackground:^{
+         [EMMALegacy handleLink:url];
     }];
 }
 
