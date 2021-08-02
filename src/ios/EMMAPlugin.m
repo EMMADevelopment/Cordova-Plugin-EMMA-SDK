@@ -5,6 +5,8 @@
 @interface EMMAPlugin()
 @property (nonatomic, strong) NSDictionary* inAppTypes;
 @property (nonatomic, copy) NSString *nativeAdCallbackId;
+@property (nonatomic, strong) NSURL *pendingDeepLink;
+@property BOOL deviceReady;
 @end
 
 @implementation EMMAPlugin
@@ -397,11 +399,14 @@ enum ActionTypes {
 }
 
 - (void)onDeviceReady:(CDVInvokedUrlCommand *)command {
-    // not implemented for iOS
+    self.deviceReady = YES;
+    if (self.pendingDeepLink) {
+        [self fireDeepLinkEvent:self.pendingDeepLink];
+        self.pendingDeepLink = nil;
+    }
 }
 
-- (void)onLinkReceivedNotification:(NSNotification *)notification {
-    NSURL * url = notification.object;
+-(void)fireDeepLinkEvent:(NSURL*) url {
     @try {
         if (url) {
             NSString *js = [NSString stringWithFormat:@"cordova.fireDocumentEvent('onDeepLink', {'url':'%@'});", url.absoluteString];
@@ -410,6 +415,16 @@ enum ActionTypes {
      } @catch (NSException * ex) {
          NSLog(@"Error opening url: %@", url);
      }
+}
+
+- (void)onLinkReceivedNotification:(NSNotification *)notification {
+    NSURL * url = notification.object;
+    if (self.deviceReady) {
+        self.pendingDeepLink = nil;
+        [self fireDeepLinkEvent:url];
+    } else {
+        self.pendingDeepLink = url;
+    }
 }
 
 - (void)handleOpenURL:(NSNotification*)notification {
@@ -499,7 +514,7 @@ enum ActionTypes {
 
 - (void)handleLink:(CDVInvokedUrlCommand *)command {
     NSString* link = [[command argumentAtIndex:0 withDefault: nil] stringValue];  
-    NSString* url = [NSURL URLWithString:url];
+    NSURL* url = [NSURL URLWithString:link];
     [self.commandDelegate runInBackground:^{
          [EMMALegacy handleLink:url];
     }];
