@@ -8,7 +8,8 @@
 For any question related to support, you can write to support@emma.io, we will answer as soon as possible.
 
 EMMA website: https://emma.io <br/>
-Documentation: https://support.emma.io/hc/en-us <br/>
+Documentation: https://docs.emma.io <br/>
+Developer Documentation: https://developer.emma.io <br />
 
 ❗️**Important** Native SDK documentation is conceptually equals to cordova plugin.
 
@@ -128,13 +129,13 @@ this.platform.ready().then(() => {
 
 ### <a id="push"> Push
 
-- The file google-services.json is mandatory for android push notification configuration. To obtain the google-services.json file follow this [guide](https://support.emma.io/hc/en-us/articles/203196802).
-- To enable iOS notification and obtained the certificates or auth key follow this [guide](https://support.emma.io/hc/en-us/articles/360016440053-iOS-certificates-for-Push-Notifications). Note that is mandatory activate notification in capabilities with Xcode tool.
+- The file google-services.json is mandatory for android push notification configuration. [Android push dependencies](https://developer.emma.io/es/cordova/ionic-plugin#dependencias).
+- To enable iOS notification check [iOS Push Dependencies](https://developer.emma.io/es/cordova/ionic-plugin#dependencias-1).
 
 ## <a id="docs"> 📑 Docs
 
-[English](https://support.emma.io/hc/en-us/articles/360022213754) <br/>
-[Spanish](https://support.emma.io/hc/es/articles/360022213754)
+[English](https://developer.emma.io/en/cordova/ionic-plugin) <br/>
+[Spanish](https://developer.emma.io/es/cordova/ionic-plugin)
 
 ## <a id="example"> 📱 Example
 
