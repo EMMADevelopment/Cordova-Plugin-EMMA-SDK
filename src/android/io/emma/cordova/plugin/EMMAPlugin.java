@@ -2,7 +2,6 @@ package io.emma.cordova.plugin;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
@@ -24,11 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import io.emma.android.Constants;
 import io.emma.android.EMMA;
-import io.emma.android.activities.EMMAWebViewActivity;
 import io.emma.android.controllers.EMMAKeysController;
-import io.emma.android.controllers.EMMASecurityController;
 import io.emma.android.enums.CommunicationTypes;
 import io.emma.android.interfaces.EMMABatchNativeAdInterface;
 import io.emma.android.interfaces.EMMADeviceIdListener;
@@ -40,17 +36,14 @@ import io.emma.android.model.EMMAInAppRequest;
 import io.emma.android.model.EMMANativeAd;
 import io.emma.android.model.EMMANativeAdField;
 import io.emma.android.model.EMMANativeAdRequest;
-import io.emma.android.model.EMMAPushCampaign;
 import io.emma.android.model.EMMAPushOptions;
 import io.emma.android.push.EMMAPushNotificationsManager;
 import io.emma.android.utils.EMMALog;
-import io.emma.android.utils.EMMAUrlUtils;
 import io.emma.android.utils.ManifestInfo;
 
 import static io.emma.cordova.plugin.EMMAPluginConstants.*;
 
 public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
-
     private boolean pushInitialized = false;
     private Map<String, EMMACampaign.Type> inAppTypesMap;
 
@@ -249,6 +242,7 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             @Override
             public void onSessionStarted() {
                 EMMA.getInstance().getDeviceId(EMMAPlugin.this);
+                EMMA.getInstance().checkForRichPushUrl();
                 callbackContext.success();
             }
         });
@@ -362,7 +356,6 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
 
     private boolean trackUserExtras(JSONObject object, final CallbackContext callbackContext) {
         try {
-
             final Map<String, String> userTags = objectToMap(object);
             if (userTags.size() > 0) {
                 cordova.getActivity().runOnUiThread(new Runnable() {
@@ -826,63 +819,14 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                checkRichPush();
+                EMMA.getInstance().setCurrentActivity(cordova.getActivity());
+                EMMA.getInstance().checkForRichPushUrl();
                 processIntentIfNeeded(cordova.getActivity().getIntent());
                 callbackContext.success();
             }
         });
 
         return true;
-    }
-
-    private void checkRichPush() {
-        Context context = cordova.getActivity().getApplicationContext();
-        SharedPreferences sp =
-                context.getSharedPreferences(Constants.kEMMAFilesName, Context.MODE_PRIVATE);
-        String url = sp.getString(Constants.kEMMANotificationUrl, "");
-        if (!url.equals("")) {
-            if (!EMMASecurityController.getInstance().urlInWhitelist(url)) {
-                EMMALog.d("URL in push is not whitelisted: " + url);
-            } else {
-                EMMAPushCampaign pushCampaign = createPushCampaign(sp);
-                if (pushCampaign != null) {
-                    pushCampaign.setCampaignUrl(url);
-                    pushCampaign.setCanClose(true);
-                    processRichPushUrl(pushCampaign);
-                }
-            }
-
-            SharedPreferences.Editor editor = sp.edit();
-            editor.remove(Constants.kEMMANotificationUrl);
-            editor.apply();
-        }
-    }
-
-    private void processRichPushUrl(EMMAPushCampaign pushCampaign) {
-        if (!EMMAUrlUtils.isWebAddress(pushCampaign.getCampaignUrl())) {
-            fireDeepLinkEvent(pushCampaign.getCampaignUrl());
-        } else {
-            Context context = cordova.getActivity();
-            Intent intent = EMMAWebViewActivity.makeIntent(context,
-                    pushCampaign, true);
-            context.startActivity(intent);
-        }
-    }
-
-    private EMMAPushCampaign createPushCampaign(SharedPreferences sp) {
-        String message = sp.getString(Constants.kEMMANotificationMessage, "");
-        String tag = sp.getString(Constants.kEMMANotificationProductId, "");
-        String pushId = sp.getString(Constants.kEMMANotificationId, "");
-
-        if (!pushId.isEmpty() && Integer.parseInt(pushId) > 0) {
-            EMMAPushCampaign pushCampaign = new EMMAPushCampaign(Integer.parseInt(pushId));
-            pushCampaign.setMessage(message);
-            pushCampaign.setTag(tag);
-
-            return pushCampaign;
-        }
-
-        return null;
     }
 
     private boolean onTokenRefresh(final String token, final CallbackContext callbackContext) {

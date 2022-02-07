@@ -1,8 +1,8 @@
 buildscript {
     repositories {
-        jcenter()
-        mavenLocal()
+        mavenCentral()
         google()
+        maven { url 'https://repo.emma.io/emma' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:+'
@@ -12,10 +12,9 @@ buildscript {
 repositories {
     mavenCentral()
     google()
-    jcenter()
     maven { url 'https://repo.emma.io/emma' }
 }
 
 dependencies {
-    implementation 'io.emma:eMMaSDK:4.9.+'
+    implementation 'io.emma:eMMaSDK:4.10.+'
 }

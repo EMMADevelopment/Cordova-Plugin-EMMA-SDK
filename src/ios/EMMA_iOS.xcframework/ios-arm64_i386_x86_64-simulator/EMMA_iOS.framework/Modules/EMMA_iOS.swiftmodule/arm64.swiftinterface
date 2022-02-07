@@ -1,18 +1,45 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
 // swift-module-flags: -target arm64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name EMMA_iOS
 @_exported import EMMA_iOS
 import Foundation
 import Swift
 import UIKit
+import UserNotifications
+import _Concurrency
 @objc @_inheritsConvenienceInitializers @objcMembers public class EMMAViewUtils : ObjectiveC.NSObject {
   @objc public static func getKeyWindow() -> UIKit.UIWindow?
   @objc public static func safeAreaMargins() -> CoreGraphics.CGFloat
   @objc public static func hasTopNotch() -> Swift.Bool
   @objc public static func getRootViewController() -> UIKit.UIViewController?
   @objc public static func isSwiftUIApp(_ viewControllerName: Swift.String) -> Swift.Bool
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @available(iOS 10.0, *)
+@objcMembers public class EMMANotificationServiceController : ObjectiveC.NSObject {
+  @objc public static func didReceiveNotificationRequest(request: UserNotifications.UNNotificationRequest, withNotificationContent content: UserNotifications.UNMutableNotificationContent, AndCompletionHandler completion: @escaping ((UserNotifications.UNNotificationContent?) -> Swift.Void))
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class EMMAPushOptions : ObjectiveC.NSObject {
+  @objc public var showOpenAlert: Swift.Bool
+  @objc public var badgeClearing: Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class EMMAPushBadgeController : ObjectiveC.NSObject {
+  @objc public static func clearBadge(fromOpen: Swift.Bool)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @objcMembers public class EMMAPush : EMMA_iOS.EMMACampaign {
+  @objc public var message: Swift.String?
+  @objc public var tag: Swift.String?
+  @objc public var showAlert: Swift.Bool
+  @objc public var openedFromAction: EMMA_iOS.EMMAPushActionButton?
+  @objc public init(payload: EMMA_iOS.EMMAPushPayload)
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @objcMembers public class EMMANativeAdField : ObjectiveC.NSObject {
   @objc public var name: Swift.String
@@ -35,8 +62,8 @@ import UIKit
   @objc public class func invokeShownDelegates(campaign: EMMA_iOS.EMMACampaign)
   @objc public class func invokeHideDelegates(campaign: EMMA_iOS.EMMACampaign)
   @objc public class func invokeCloseDelegates(campaign: EMMA_iOS.EMMACampaign)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAInAppPluginProtocol
 @objc @_inheritsConvenienceInitializers @objcMembers public class EMMAUtils : ObjectiveC.NSObject {
@@ -51,8 +78,32 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   @objc public static func dateToStringLocalTime(date: Foundation.Date, withFormat format: Swift.String) -> Swift.String
   @objc public static func getSharedApplication() -> UIKit.UIApplication?
   @objc public static func isNil(_ object: Any?) -> Swift.Bool
-  @objc deinit
+  @objc public static func isEmpty(_ value: Swift.String?) -> Swift.Bool
+  @objc public static func valueToBool(_ value: Any?) -> Swift.Bool
+  @objc public static func getAppBundleIdentifier() -> Swift.String?
+  @objc public static func getAppGroupName() -> Swift.String?
+  @objc public static func getUrlParams(_ url: Foundation.URL) -> [Swift.String : Swift.String]
+  @objc public static func sleep(seconds: Swift.Double)
   @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum EMMAPushButtonIconType : Swift.Int {
+  case System
+  case Custom
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @objcMembers public class EMMAPushActionButton : ObjectiveC.NSObject {
+  @objc final public let id: Swift.String
+  @objc final public let text: Swift.String
+  @objc public var action: Foundation.URL?
+  @objc public var isSystemIcon: EMMA_iOS.EMMAPushButtonIconType
+  @objc public var icon: Swift.String?
+  @objc public init?(_ rawButton: [Swift.AnyHashable : Any])
+  @objc deinit
 }
 @_hasMissingDesignatedInitializers public class EMMA {
   public static func startSession(with configuration: EMMA_iOS.EMMAConfiguration)
@@ -110,11 +161,14 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   public static func setCurrencyCode(currencyCode: Swift.String)
   public static func cancelOrder(orderId: Swift.String)
   public static func startPushSystem()
+  public static func startPushSystem(with options: EMMA_iOS.EMMAPushOptions)
+  @available(*, deprecated)
   public static func setPushSystemOptions(_ options: EMMA_iOS.EMMAPushSystemOptions)
   public static func setPushSystemDelegate(delegate: EMMA_iOS.EMMAPushDelegate)
   @available(iOS 10.0, *)
   public static func setPushNotificationsDelegate(delegate: UserNotifications.UNUserNotificationCenterDelegate)
   public static func handlePush(userInfo: Swift.Dictionary<Swift.AnyHashable, Any>)
+  public static func handlePush(userInfo: Swift.Dictionary<Swift.AnyHashable, Any>, actionIdentifier: Swift.String)
   public static func registerToken(_ token: Foundation.Data)
   @available(iOS 10.0, *)
   public static func isEMMAPushNotification(content: UserNotifications.UNNotificationContent) -> Swift.Bool
@@ -126,12 +180,18 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   public static func rootViewController() -> UIKit.UIViewController?
   @objc deinit
 }
+@objc @objcMembers public class EMMAPushPayload : ObjectiveC.NSObject {
+  @objc public init?(userInfo: [Swift.AnyHashable : Any]?)
+  public static func getBadgeIncrementFromRaw(_ rawNotification: [Swift.AnyHashable : Any]) -> Swift.Int?
+  @objc public func getActionButtonByActionId(_ actionId: Swift.String) -> EMMA_iOS.EMMAPushActionButton?
+  @objc deinit
+}
 @objc @_inheritsConvenienceInitializers @objcMembers public class EMMAInAppPluginController : ObjectiveC.NSObject {
   @objc public var plugins: [Swift.String : EMMA_iOS.EMMAInAppPluginProtocol] {
     get
   }
   @objc public func addPlugins(_ addedPlugins: Swift.Array<EMMA_iOS.EMMAInAppPluginProtocol>)
   @objc public func isAvailablePlugin(_ type: Swift.String) -> Swift.Bool
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }

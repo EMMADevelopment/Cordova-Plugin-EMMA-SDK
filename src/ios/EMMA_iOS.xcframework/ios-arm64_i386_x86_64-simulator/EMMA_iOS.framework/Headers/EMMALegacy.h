@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+
 @class UIButton;
-@class EMMAPushSystemController;
+@class EMMAPushOptions;
 @protocol EMMAInAppPluginProtocol;
 
 @import UserNotifications;
@@ -587,13 +588,15 @@ For a simple configuration put this in you AppDelegate's method:
   */
 +(void)startPushSystem;
 
++(void)startPushSystemWithOptions: (EMMAPushOptions*) options;
+
 /**
  This method allows to configure the behaviour of the push system.
  
  Currently the supported options are:
  kPushSystemDisableAlert -> Disables showing alert messages for new pushs received.
  */
-+(void)setPushSystemOptions: (EMMAPushSystemOptions) options;
++(void)setPushSystemOptions: (EMMAPushSystemOptions) options  __attribute__((deprecated("Use startPushSystemWithOptions insstead")));;
 
 /**
  Configures the delegate for push handling
@@ -623,6 +626,7 @@ For a simple configuration put this in you AppDelegate's method:
  @param userInfo The userInfo payload
  */
 +(void)handlePush: (NSDictionary*) userInfo;
++(void)handlePush:(NSDictionary *)userInfo withActionIdentifier: (NSString* _Nullable) actionId;
 
 /**
  This method registers a new token on eMMa servers.
@@ -681,9 +685,7 @@ For a simple configuration put this in you AppDelegate's method:
   @param launchOptions pass the launch options on the appdelegate's didFinishLaunching method
 */
 
-+(void)startSession:(NSString*)appKey withOptions:(NSDictionary*)launchOptions __attribute__((deprecated("Use startSession without options")));
 
-+(void)startPushSystem: (NSDictionary*) launchOptions __attribute__((deprecated("Use startPushSystem without parameters")));
 
 +(void)addInAppPlugins: (NSArray<EMMAInAppPluginProtocol>* ) plugins;
 
