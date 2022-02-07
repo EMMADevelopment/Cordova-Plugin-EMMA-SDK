@@ -43,13 +43,13 @@ function addPushClassPath(gradleFile) {
 }
 
 function addRepos(gradleFile) {
-  var match = gradleFile.match(/^(\s*)jcenter\(\)/m);
+  var match = gradleFile.match(/^(\s*)mavenCentral\(\)/m);
   var whitespace = match[1];
 
   var emmaRepo = whitespace + "maven { url 'https://repo.emma.io/emma' }";
   var modifiedLine = match[0] + '\n' + emmaRepo;
 
-  return gradleFile.replace(/^(\s*)jcenter\(\)/m, modifiedLine);
+  return gradleFile.replace(/^(\s*)mavenCentral\(\)/m, modifiedLine);
 }
 
 function addFirebaseDependency(gradleFile) {

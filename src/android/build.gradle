@@ -10,8 +10,8 @@ buildscript {
 }
 
 repositories {
-    mavenCentral()
     google()
+    mavenCentral()
     maven { url 'https://repo.emma.io/emma' }
 }
 

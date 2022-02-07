@@ -64,6 +64,7 @@
 
         <framework src="AdSupport.framework" weak="true" />
         <framework src="iAd.framework" weak="true" />
+        <framework src="AdServices.framework" weak="true" />
         <framework src="src/ios/EMMA_iOS.xcframework" custom="true" embed="true"/>
     </platform>
     
