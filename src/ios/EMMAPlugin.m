@@ -79,20 +79,19 @@ enum ActionTypes {
     [self onDeviceId];
 }
 
+-(void) setNotificationDelegate:(id<UNUserNotificationCenterDelegate>)delegate {
+    if (delegate) {
+        self.pushDelegate = delegate;
+        [[UNUserNotificationCenter currentNotificationCenter] setDelegate:delegate];
+    }
+}
+
 - (void)startPush:(CDVInvokedUrlCommand*)command {
 #if PUSH_ENABLED == 1
-
-#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
-    [EMMALegacy setPushNotificationsDelegate: _pushDelegate];
-#endif
-
-    [EMMALegacy startPushSystem];
-
-    NSDictionary *receivedRemoteNotification = [[self receivedRemoteNotification] copy];
-    if (receivedRemoteNotification) {
-        [self setReceivedRemoteNotification:nil];
-        [EMMALegacy handlePush:receivedRemoteNotification];
+    if (_pushDelegate) {
+        [EMMALegacy setPushNotificationsDelegate:_pushDelegate];
     }
+    [EMMALegacy startPushSystem];
 #endif
 }
 

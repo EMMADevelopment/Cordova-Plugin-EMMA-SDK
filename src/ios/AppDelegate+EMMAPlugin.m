@@ -49,7 +49,7 @@
     [self application:application swizzledDidFinishLaunchingWithOptions:launchOptions];
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
     EMMAPlugin * plugin = [self getPlugin];
-    [plugin setPushDelegate:self];
+    [plugin setNotificationDelegate:self];
 #endif
 }
 
@@ -60,22 +60,6 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"Remote notification registration failed: %@", error);
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    if ([self isPushFromEMMA: userInfo]){
-        EMMAPlugin * plugin = [self getPlugin];
-        [plugin setReceivedRemoteNotification:userInfo];
-    }
-    completionHandler(UIBackgroundFetchResultNoData);
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    if ([self isPushFromEMMA: userInfo]){
-        EMMAPlugin * plugin = [self getPlugin];
-        [plugin setReceivedRemoteNotification:userInfo];
-    }
 }
 
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
@@ -91,12 +75,14 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionBadge);
 }
 
-#else
-
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+-(void) userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if ([self isPushFromEMMA: userInfo]) {
+        [EMMALegacy handlePush: userInfo withActionIdentifier:response.actionIdentifier];
+    }
+    
+    completionHandler();
 }
-
 #endif
 #endif
 
@@ -118,4 +104,3 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 }
 
 @end
-
