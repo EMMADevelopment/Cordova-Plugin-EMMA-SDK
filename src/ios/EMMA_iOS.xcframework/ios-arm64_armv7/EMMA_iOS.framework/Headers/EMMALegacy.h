@@ -118,7 +118,7 @@ For a simple configuration put this in you AppDelegate's method:
 +(void) reset;
 
 /**
- * This method enable or disable screen events. Default: YES
+ * This method enable or disable screen events. Default: NO
  *
  * @param trackScreenEvents if YES track screen events
  */
@@ -312,13 +312,6 @@ For a simple configuration put this in you AppDelegate's method:
  */
 +(void)setStartViewDelegate:(id<EMMAStartViewDelegate>) delegate;
 
-
-/**
- *  If you want you can pass a NSDictionary of parameters (key-value pair) that will append to the URL as a GET parameters. This is useful in case that you need to pass some data from the app to a StartView with a landing page.
- *
- *  @param parameters NSDictionary of parameters
- */
-+(void)setStartViewParameters:(NSDictionary*) parameters;
 
 /**
  *  Closes the current StartView

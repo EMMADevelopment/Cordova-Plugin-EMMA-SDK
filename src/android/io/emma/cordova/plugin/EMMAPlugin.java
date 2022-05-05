@@ -66,9 +66,10 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
     private void processIntentIfNeeded(Intent currentIntent) {
         if (currentIntent != null) {
             String action = currentIntent.getAction();
-            if (action != null && action.equals("android.intent.action.VIEW")) {
+            Bundle extras = currentIntent.getExtras();
+            if (action != null && action.equals("android.intent.action.VIEW") && extras != null) {
                 Uri data = currentIntent.getData();
-                if (data != null) {
+                if (data != null && extras.getBoolean("from_emma_sdk")) {
                     fireDeepLinkEvent(data.toString());
                     cordova.getActivity().setIntent(null);
                 }

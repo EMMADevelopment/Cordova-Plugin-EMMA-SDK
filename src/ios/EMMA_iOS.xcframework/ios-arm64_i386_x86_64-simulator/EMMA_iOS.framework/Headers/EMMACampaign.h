@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "EMMADefines.h"
 
-@class EMMABannerPromotion; 
+@class EMMABannerCampaign; 
 @class EMMAStripCampaign;
-@class EMMATabBarPromotion;
-@class EMMAAdBallPromotion;
+@class EMMATabBarCampaign;
+@class EMMAAdBallCampaign;
+@class EMMAStartViewCampaign;
 
 @interface EMMACampaign : NSObject
 
@@ -37,15 +38,17 @@
 
 +(EMMACampaignType) typeFromString: (NSString*) type;
 
--(EMMABannerPromotion*) toBanner;
+-(EMMABannerCampaign*) toBanner;
 
 -(EMMAStripCampaign*) toStrip;
 
--(EMMATabBarPromotion*) toTabBar;
+-(EMMATabBarCampaign*) toTabBar;
 
 -(void) parseCampaignInfo:(NSDictionary*) response;
 
--(EMMAAdBallPromotion*) toAdBall;
+-(EMMAAdBallCampaign*) toAdBall;
+
+-(EMMAStartViewCampaign*) toStartView;
 
 -(BOOL) checkTimesShown;
 

@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
 // swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name EMMA_iOS
 @_exported import EMMA_iOS
 import Foundation
@@ -22,10 +22,36 @@ import _Concurrency
   @objc override dynamic public init()
   @objc deinit
 }
+@objc public enum EMMAClickModeType : Swift.Int {
+  case tap
+  case deeplink
+  case changeUrl
+  case customUrl
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class EMMAClickMode : ObjectiveC.NSObject {
+  @objc public var type: EMMA_iOS.EMMAClickModeType
+  @objc public var ctaUrl: Foundation.URL?
+  @objc override dynamic public init()
+  @objc public init(_ rawClickMode: [Swift.AnyHashable : Any])
+  @objc deinit
+}
 @objc @_inheritsConvenienceInitializers @objcMembers public class EMMAPushOptions : ObjectiveC.NSObject {
   @objc public var showOpenAlert: Swift.Bool
   @objc public var badgeClearing: Swift.Bool
   @objc override dynamic public init()
+  @objc deinit
+}
+@objc @objcMembers public class EMMAAdBallCampaign : EMMA_iOS.EMMACampaign {
+  @objc public var clickMode: EMMA_iOS.EMMAClickMode
+  @objc public var horizontalLocation: Swift.Int
+  @objc public var verticalLocation: Swift.Int
+  @objc override dynamic public init()
+  @objc public func parseResponseInfo(_ response: [Swift.AnyHashable : Any])
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @objcMembers public class EMMAPushBadgeController : ObjectiveC.NSObject {
@@ -74,7 +100,8 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   @objc public static func dateFromString(_ dateString: Swift.String, withFormat format: Swift.String) -> Foundation.Date?
   @objc public static func dateToString(_ date: Foundation.Date, withFormat format: Swift.String, andTimeZone timeZone: Foundation.TimeZone?) -> Swift.String
   @objc public static func addHours(hours: Swift.Int, toDate date: Foundation.Date) -> Foundation.Date
-  @objc public static func isWebAddress(_ url: Foundation.URL) -> Swift.Bool
+  @objc public static func isWebAddress(_ url: Foundation.URL?) -> Swift.Bool
+  @objc public static func areEqualsUrls(_ url1: Foundation.URL?, _ url2: Foundation.URL?) -> Swift.Bool
   @objc public static func dateToStringLocalTime(date: Foundation.Date, withFormat format: Swift.String) -> Swift.String
   @objc public static func getSharedApplication() -> UIKit.UIApplication?
   @objc public static func isNil(_ object: Any?) -> Swift.Bool
@@ -88,8 +115,7 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   @objc deinit
 }
 @objc public enum EMMAPushButtonIconType : Swift.Int {
-  case System
-  case Custom
+  case System, Custom
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -139,7 +165,6 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   public static func sendClick(campaignType: EMMA_iOS.EMMACampaignType, withId campaignId: Swift.String)
   public static func setStartViewOptions(options: EMMA_iOS.EMMAStartViewOptions)
   public static func setStartViewDelegate(delegate: EMMA_iOS.EMMAStartViewDelegate)
-  public static func setStartViewParameters(parameters: Swift.Dictionary<Swift.String, Swift.String>)
   public static func closeStartView()
   public static func isAdBallShowing() -> Swift.Bool
   public static func setBannerAutoCreation(autoCreation: Swift.Bool)
@@ -195,3 +220,15 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   @objc override dynamic public init()
   @objc deinit
 }
+@objc @objcMembers public class EMMAStartViewCampaign : EMMA_iOS.EMMACampaign {
+  @objc public var clickMode: EMMA_iOS.EMMAClickMode
+  @objc override dynamic public init()
+  @objc public func parseResponseInfo(_ response: [Swift.AnyHashable : Any])
+  @objc deinit
+}
+extension EMMA_iOS.EMMAClickModeType : Swift.Equatable {}
+extension EMMA_iOS.EMMAClickModeType : Swift.Hashable {}
+extension EMMA_iOS.EMMAClickModeType : Swift.RawRepresentable {}
+extension EMMA_iOS.EMMAPushButtonIconType : Swift.Equatable {}
+extension EMMA_iOS.EMMAPushButtonIconType : Swift.Hashable {}
+extension EMMA_iOS.EMMAPushButtonIconType : Swift.RawRepresentable {}
