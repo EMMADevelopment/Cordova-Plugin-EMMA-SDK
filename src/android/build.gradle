@@ -4,9 +4,6 @@ buildscript {
         google()
         maven { url 'https://repo.emma.io/emma' }
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:+'
-    }
 }
 
 repositories {

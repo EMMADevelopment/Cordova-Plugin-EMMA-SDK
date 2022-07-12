@@ -26,18 +26,18 @@ function readPlatformPluginGradleFile(pluginIdLastToken) {
 }
 
 function addPushClassPath(gradleFile) {
-  var match = gradleFile.match(/^(\s*)classpath 'com.android.tools.build(.*)/m);
-  var whitespace = match[1];
+  var match = gradleFile.match(/^(\s*)buildscript {(.*)/m);
 
-  var googlePlayDependency =
-    whitespace +
-    "classpath 'com.google.gms:google-services:" +
+  var googlesServicesDependency =
+    "    dependencies { \n" +
+    "        classpath 'com.google.gms:google-services:" +
     GSERVICES_PLUGIN_VERSION +
-    "'";
-  var modifiedLine = match[0] + '\n' + googlePlayDependency;
+    "' \n" + 
+    "    }";
+  var modifiedLine = match[0] + '\n' + googlesServicesDependency;
 
   return gradleFile.replace(
-    /^(\s*)classpath 'com.android.tools.build(.*)/m,
+    /^(\s*)buildscript {(.*)/m,
     modifiedLine
   );
 }
