@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-emma-sdk" version="1.4.8" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+<plugin id="cordova-plugin-emma-sdk" version="1.5.0" xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android">
     <name>EMMA</name>
     <description>Cordova Plugin for EMMA</description>
@@ -28,18 +28,25 @@
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.VIBRATE"/>
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
         </config-file>
 
         <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest/application" mode="merge">
             <activity
-                android:name="io.emma.android.activities.EMMAWebViewActivity"
+                android:exported="false"
+                android:name=".activities.EMMAWebViewActivity"
                 android:hardwareAccelerated="true"
                 android:theme="@android:style/Theme.Holo.Light.NoActionBar"/>
-
             <activity
+                android:exported="false"
                 android:launchMode="singleTask"
-                android:name="io.emma.android.activities.EMMAInternalPushActivity"
+                android:name=".activities.EMMAInternalPushActivity"
                 android:theme="@android:style/Theme.NoDisplay"/>
+            <activity
+                android:exported="false"
+                android:launchMode="singleTask"
+                android:name=".activities.PermissionsActivity"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         </config-file>
         
         <source-file src="src/android/io/emma/cordova/plugin/EMMAPluginConstants.java" target-dir="src/io/emma/cordova/plugin" />

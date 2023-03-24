@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		oqdV4cAn4ppfBR5MJVuyyrmax8E=
+		0H0xsZv/t0toK43G84uoSyDp5Tk=
 		</data>
 		<key>Headers/EMMACampaign.h</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Headers/EMMA_iOS-Swift.h</key>
 		<data>
-		xRnFlxSdvmk4UkM0xk50IP2ruWg=
+		HuHBp4PSQlSVZ6A5oIAAhpnCQG4=
 		</data>
 		<key>Headers/EMMA_iOS.h</key>
 		<data>
@@ -74,43 +74,43 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Ku4d0suOTJKq575E5GcR2DFNJgg=
+		LqKDu6SmTsSSDfkmnY3zQQirCx0=
 		</data>
 		<key>Modules/EMMA_iOS.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		DQ3W8Oc7KtRjM4q9lQyteyxroqk=
+		EfXAiI4ubIUqG3vJO3nWhEQnX2Y=
 		</data>
 		<key>Modules/EMMA_iOS.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		7C8tagOZ8UhlpGPi78KgxoEmOIA=
+		dfWx7F7s8Z6IPTsQOFsW/XsczUo=
 		</data>
 		<key>Modules/EMMA_iOS.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		/NXlRPiO8ceiUXDUgn6g+G0g1+Y=
+		eEL2xoTcH9hu1F/M3lCeGNmZgmc=
 		</data>
 		<key>Modules/EMMA_iOS.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
-		HKOzMB62jKhWSqz5Hv0DZ3kTsA0=
+		4atKKfH4v+0e7Khbf5hdlGYaKgg=
 		</data>
 		<key>Modules/EMMA_iOS.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<data>
-		ZKwZffxmEU+eV48TfVRoskMRxC0=
+		abJ7+XN1o2a1GCujOyXviNDZ+vk=
 		</data>
 		<key>Modules/EMMA_iOS.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		kfQe3NnPBAaspaIjeCEt0rgBPFY=
+		F/gDNjcshzss1aKPiBKLjJjtWzs=
 		</data>
 		<key>Modules/EMMA_iOS.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		vDXE/AeF2+gVWWmDKNOf2bRxpoo=
+		OdygOVnuh3kEiizP5IFhR+Q0Qr0=
 		</data>
 		<key>Modules/EMMA_iOS.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		6ftu1ERRwrlkqesBtUFmyTicaNc=
+		XqUZRubtSMXanPIhwlWRI7dfIrk=
 		</data>
 		<key>Modules/EMMA_iOS.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		APkSaNxUFudaoLho4QdQzO2OvAA=
+		ujsvPxshbo0QhQwoi3THvwRiNjM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -123,11 +123,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oqdV4cAn4ppfBR5MJVuyyrmax8E=
+			0H0xsZv/t0toK43G84uoSyDp5Tk=
 			</data>
 			<key>hash2</key>
 			<data>
-			HxbExnuuH8lpnYKP9eZT+sHcebI7GcQYM0gujcuQ1AU=
+			A37kEJ9asIpcN5BBKthgcgbBkuHwa92Y1AK2C61faPs=
 			</data>
 		</dict>
 		<key>Headers/EMMACampaign.h</key>
@@ -288,11 +288,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xRnFlxSdvmk4UkM0xk50IP2ruWg=
+			HuHBp4PSQlSVZ6A5oIAAhpnCQG4=
 			</data>
 			<key>hash2</key>
 			<data>
-			pHrCvJoA3BGPERbtLERJrEb2lgdvPAmqvJzqhWUCk7w=
+			MEIKvIDNRmsarXHFQA2UKmHgmJ6QIXGvwSmBkSDbWso=
 			</data>
 		</dict>
 		<key>Headers/EMMA_iOS.h</key>
@@ -310,99 +310,99 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DQ3W8Oc7KtRjM4q9lQyteyxroqk=
+			EfXAiI4ubIUqG3vJO3nWhEQnX2Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			/fPS3nTqu2fX/zoMkuGiu9PgozaqX9QMGK4d/6sicSA=
+			MlWjICe6STSGCLDttFiDGor4DcJr+gUT3boBlv2Iqk4=
 			</data>
 		</dict>
 		<key>Modules/EMMA_iOS.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7C8tagOZ8UhlpGPi78KgxoEmOIA=
+			dfWx7F7s8Z6IPTsQOFsW/XsczUo=
 			</data>
 			<key>hash2</key>
 			<data>
-			GkXcrI8nvbjlq85m4dPArgLp+/f3qjJgD9kEZuwHuKc=
+			Pb742JCzJhPwX5qAi5a8z4eQQmAiFXZ0NPc3xPgMj/w=
 			</data>
 		</dict>
 		<key>Modules/EMMA_iOS.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/NXlRPiO8ceiUXDUgn6g+G0g1+Y=
+			eEL2xoTcH9hu1F/M3lCeGNmZgmc=
 			</data>
 			<key>hash2</key>
 			<data>
-			eepqyPlTrLwribqAgkwadR6EBV+/gknxKj0UAA+JGmU=
+			PDh0ygOstxkiNgk1uzyHvu2+770U/hb/K4KAISPGAVU=
 			</data>
 		</dict>
 		<key>Modules/EMMA_iOS.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			HKOzMB62jKhWSqz5Hv0DZ3kTsA0=
+			4atKKfH4v+0e7Khbf5hdlGYaKgg=
 			</data>
 			<key>hash2</key>
 			<data>
-			ecVqkXgImPhVUJ4Si3qE0WWJNpZIqgcYUSdQ1KYjRQo=
+			i+Z7grAjif2/o6E3moFTsDLaDbHFFkXkP0tyRidrb/8=
 			</data>
 		</dict>
 		<key>Modules/EMMA_iOS.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZKwZffxmEU+eV48TfVRoskMRxC0=
+			abJ7+XN1o2a1GCujOyXviNDZ+vk=
 			</data>
 			<key>hash2</key>
 			<data>
-			SKfEQyXjbUPWC2qpaak5j7PkxQqVj5hbaxP9JhjVMiE=
+			EP/cVthpnPvMGbYW5P+WT5+6aUGSRsPdE41jQp2blMY=
 			</data>
 		</dict>
 		<key>Modules/EMMA_iOS.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kfQe3NnPBAaspaIjeCEt0rgBPFY=
+			F/gDNjcshzss1aKPiBKLjJjtWzs=
 			</data>
 			<key>hash2</key>
 			<data>
-			O7l6k9ad/n0J7y+LE0zMrglQ+2bzvJHtPrZV8WdqWd4=
+			hA5wfxfHqAULFnvFVAPgNavEdiXqZ6V0MhTWOfYjG6A=
 			</data>
 		</dict>
 		<key>Modules/EMMA_iOS.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vDXE/AeF2+gVWWmDKNOf2bRxpoo=
+			OdygOVnuh3kEiizP5IFhR+Q0Qr0=
 			</data>
 			<key>hash2</key>
 			<data>
-			hkMVo7WoQtyT9PyIsC65F0tuIbLz5l9wL6R/d5raXyI=
+			dC+ZLSDinTX4jCiqNB5t9NYT4GglNmwmZeqnudatjGU=
 			</data>
 		</dict>
 		<key>Modules/EMMA_iOS.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6ftu1ERRwrlkqesBtUFmyTicaNc=
+			XqUZRubtSMXanPIhwlWRI7dfIrk=
 			</data>
 			<key>hash2</key>
 			<data>
-			Dnmfrk+wInTwo0XyPqB6GbO8g4//e/do0brLOTPK0r0=
+			U4++yPUAlxxL2VYtLVN4J5q9dliqpsE757KPJcvYTtc=
 			</data>
 		</dict>
 		<key>Modules/EMMA_iOS.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			APkSaNxUFudaoLho4QdQzO2OvAA=
+			ujsvPxshbo0QhQwoi3THvwRiNjM=
 			</data>
 			<key>hash2</key>
 			<data>
-			olABw3EWOxWln7UujPhycj7H8jFlGO68Hh0fvXucj0o=
+			8ll3exk68fMHDpc2oSPD0wXAEsYeW63Q2bOJnBtvzZs=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

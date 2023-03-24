@@ -7,6 +7,23 @@ public class EMMAPluginConstants {
         LOGIN
     }
 
+    enum PermissionStatus {
+        GRANTED(0),
+        DENIED(1),
+        SHOULD_REQUEST_RATIONALE(2),
+        UNSUPPORTED(3);
+
+        private final int value;
+
+        PermissionStatus(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
     /* ERROR MESSAGES */
     static final String INVALID_METHOD_OR_ARGUMENTS =
             "Check if method exists or arguments are correct";

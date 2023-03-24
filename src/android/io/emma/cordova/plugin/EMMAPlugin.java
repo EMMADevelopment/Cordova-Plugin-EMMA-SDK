@@ -179,6 +179,10 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             if (args.length() == 1) {
                 return handleLink(args.getString(0), callbackContext);
             }
+        } else if (action.equals("areNotificationsEnabled")) {
+            return areNotificationsEnabled(callbackContext);
+        } else if (action.equals("requestNotificationsPermission")) {
+            return requestNotificationsPermission(callbackContext);
         }
 
         EMMALog.w(INVALID_METHOD_OR_ARGUMENTS);
@@ -1008,6 +1012,49 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
                 }
             });
         }
+        return true;
+    }
+
+    private boolean requestNotificationsPermission(final CallbackContext callbackContext) {
+        if (Build.VERSION.SDK_INT < 33 || EMMAUtils.getTargetSdkVersion(cordova.getContext()) < 33) {
+            PluginResult pluginResult =
+                    new PluginResult(PluginResult.Status.OK, PermissionStatus.UNSUPPORTED.getValue());
+            callbackContext.sendPluginResult(pluginResult);
+            return true;
+        }
+
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().requestNotificationPermission(new EMMAPermissionInterface() {
+                    @Override
+                    public void onPermissionGranted(@NonNull String s, boolean b) {
+                        PluginResult pluginResult =
+                                new PluginResult(PluginResult.Status.OK, PermissionStatus.GRANTED.getValue());
+                        callbackContext.sendPluginResult(pluginResult);
+                    }
+
+                    @Override
+                    public void onPermissionDenied(@NonNull String s) {
+                        PluginResult pluginResult =
+                                new PluginResult(PluginResult.Status.OK, PermissionStatus.DENIED.getValue());
+                        callbackContext.sendPluginResult(pluginResult);
+                    }
+
+                    @Override
+                    public void onPermissionWaitingForAction(@NonNull String s) {
+
+                    }
+
+                    @Override
+                    public void onPermissionShouldShowRequestPermissionRationale(@NonNull String s) {
+                        PluginResult pluginResult =
+                                new PluginResult(PluginResult.Status.OK, PermissionStatus.SHOULD_REQUEST_RATIONALE.getValue());
+                        callbackContext.sendPluginResult(pluginResult);
+                    }
+                });
+            }
+        });
         return true;
     }
 }

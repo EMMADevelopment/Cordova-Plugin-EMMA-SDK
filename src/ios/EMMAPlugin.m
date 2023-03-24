@@ -528,4 +528,7 @@ enum ActionTypes {
     }
 }
 
+- (void)areNotificationsEnabled:(CDVInvokedUrlCommand *)command {}
+- (void)requestNotificationsPermission:(CDVInvokedUrlCommand *)command {}
+
 @end

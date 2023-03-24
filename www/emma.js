@@ -165,6 +165,8 @@ exports.disableUserTracking = function (deleteUser) {
 
 /**
  * Method to check if user tracking is enable
+ * 
+ * Callback returns true or false.
  */
 exports.isUserTrackingEnabled = function (cb) {
   exec(cb, null, 'EMMAPlugin', 'isUserTrackingEnabled', []);
@@ -223,7 +225,7 @@ exports.setCustomerId = function (customerId) {
 };
 
 /**
- * ONLY IOS
+ * ONLY IOS.
  *
  * This method allows request permissions to obtain idfa identifier
  * Method added in version 4.8.0.
@@ -280,4 +282,32 @@ exports.openNativeAd = function (id, cta, showOn) {
 exports.handleLink = function (link) {
   argscheck.checkArgs('S', 'EMMAPlugin.handleLink', arguments);
   exec(null, null, 'EMMAPlugin', 'handleLink', [link]);
+};
+
+
+/**
+ * ONLY ANDROID.
+ * 
+ * Method for checking if Android notifications are enabled.
+ *
+ * Callback returns true or false.
+ */
+exports.areNotificationsEnabled = function (cb) {
+  argscheck.checkArgs('F', 'EMMAPlugin.areNotificationsEnabled', arguments);
+  exec(cb, null, 'EMMAPlugin', 'areNotificationsEnabled', []);
+};
+
+
+/**
+ * ONLY ANDROID.
+ * 
+ * Method for requesting Android 13 notifications permissions.
+ * 
+ * Callback returns permissions status.
+ * 
+ * 0 = Granted, 1 = Denied, 2 = ShouldPermissionRationale, 3 = Unsupported.
+ */
+exports.requestNotificationsPermission = function(cb) {
+  argscheck.checkArgs('F', 'EMMAPlugin.requestNotificationsPermission', arguments);
+  exec(cb, null, 'EMMAPlugin', 'requestNotificationsPermission', []);
 };

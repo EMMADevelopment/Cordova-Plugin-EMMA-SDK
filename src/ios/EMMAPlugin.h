@@ -99,4 +99,6 @@
 - (void)sendInAppClick:(CDVInvokedUrlCommand *)command;
 - (void)openNativeAd:(CDVInvokedUrlCommand *)command;
 - (void)handleLink:(CDVInvokedUrlCommand *)command;
+- (void)areNotificationsEnabled:(CDVInvokedUrlCommand *)command;
+- (void)requestNotificationsPermission:(CDVInvokedUrlCommand *)command;
 @end

@@ -55,7 +55,7 @@ function enableDisablePushMethods(addPush) {
 }
 
 function isPushToEnable(addPush) {
-    return addPush && (addPush === "true" || addPush === "1");
+    return addPush && (addPush === "true" || addPush === "1" || addPush === "ios");
 }
 
 module.exports = function(context) {

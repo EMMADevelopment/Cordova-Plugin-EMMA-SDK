@@ -13,4 +13,5 @@ Thumbs.db
 .idea/
 .vscode/
 src/android/.gradle/*
+src/android/.idea
 node_modules/

@@ -109,7 +109,7 @@ function addPushDependencies(gradleFile) {
 }
 
 function isPushToEnable(addPush) {
-  return addPush && (addPush === 'true' || addPush === '1');
+  return addPush && (addPush === 'true' || addPush === '1' || addPush === 'android');
 }
 
 function getPluginId(context) {
