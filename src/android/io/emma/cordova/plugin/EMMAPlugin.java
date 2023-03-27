@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Build;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -40,6 +41,8 @@ import io.emma.android.model.EMMAPushOptions;
 import io.emma.android.push.EMMAPushNotificationsManager;
 import io.emma.android.utils.EMMALog;
 import io.emma.android.utils.ManifestInfo;
+import io.emma.android.utils.EMMAUtils;
+import io.emma.android.interfaces.EMMAPermissionInterface;
 
 import static io.emma.cordova.plugin.EMMAPluginConstants.*;
 
@@ -1015,6 +1018,19 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         return true;
     }
 
+    private boolean areNotificationsEnabled(final CallbackContext callbackContext) {
+      cordova.getActivity().runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+          PluginResult pluginResult =
+            new PluginResult(PluginResult.Status.OK, EMMA.getInstance().areNotificationsEnabled());
+          callbackContext.sendPluginResult(pluginResult);
+        }
+      });
+
+      return true;
+    }
+
     private boolean requestNotificationsPermission(final CallbackContext callbackContext) {
         if (Build.VERSION.SDK_INT < 33 || EMMAUtils.getTargetSdkVersion(cordova.getContext()) < 33) {
             PluginResult pluginResult =
@@ -1028,26 +1044,26 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             public void run() {
                 EMMA.getInstance().requestNotificationPermission(new EMMAPermissionInterface() {
                     @Override
-                    public void onPermissionGranted(@NonNull String s, boolean b) {
+                    public void onPermissionGranted(String s, boolean b) {
                         PluginResult pluginResult =
                                 new PluginResult(PluginResult.Status.OK, PermissionStatus.GRANTED.getValue());
                         callbackContext.sendPluginResult(pluginResult);
                     }
 
                     @Override
-                    public void onPermissionDenied(@NonNull String s) {
+                    public void onPermissionDenied(String s) {
                         PluginResult pluginResult =
                                 new PluginResult(PluginResult.Status.OK, PermissionStatus.DENIED.getValue());
                         callbackContext.sendPluginResult(pluginResult);
                     }
 
                     @Override
-                    public void onPermissionWaitingForAction(@NonNull String s) {
+                    public void onPermissionWaitingForAction(String s) {
 
                     }
 
                     @Override
-                    public void onPermissionShouldShowRequestPermissionRationale(@NonNull String s) {
+                    public void onPermissionShouldShowRequestPermissionRationale(String s) {
                         PluginResult pluginResult =
                                 new PluginResult(PluginResult.Status.OK, PermissionStatus.SHOULD_REQUEST_RATIONALE.getValue());
                         callbackContext.sendPluginResult(pluginResult);
