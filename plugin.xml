@@ -11,27 +11,27 @@
     </engines>
 
     <js-module name="emma" src="www/emma.js">
-        <clobbers target="window.plugins.EMMA"/>
+        <clobbers target="EMMA"/>
     </js-module>
 
     <hook type="after_plugin_add" src="scripts/androidPushDependencies.js" />
     <hook type="after_plugin_add" src="scripts/iOSPushMethods.js" />
 
     <platform name="android">
-        <config-file parent="/*" target="res/xml/config.xml">
+        <config-file parent="/*" target="config.xml">
             <feature name="EMMAPlugin">
                 <param name="android-package" value="io.emma.cordova.plugin.EMMAPlugin"/>
                 <param name="onload" value="true" />
             </feature>
         </config-file>
-        <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest" mode="merge">
+        <config-file target="AndroidManifest.xml" parent="/manifest" mode="merge">
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.VIBRATE"/>
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
             <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
         </config-file>
 
-        <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest/application" mode="merge">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application" mode="merge">
             <activity
                 android:exported="false"
                 android:name=".activities.EMMAWebViewActivity"
