@@ -14,7 +14,7 @@
     </engines>
 
     <js-module name="emma" src="www/emma.js">
-        <clobbers target="EMMA"/>
+        <clobbers target="window.plugins.EMMA"/>
     </js-module>
 
     <hook type="after_plugin_add" src="scripts/androidPushDependencies.js" />
@@ -73,7 +73,6 @@
         <source-file src="src/ios/AppDelegate+EMMAPlugin.m"/>
 
         <framework src="AdSupport.framework" weak="true" />
-        <framework src="iAd.framework" weak="true" />
         <framework src="AdServices.framework" weak="true" />
         <framework src="src/ios/EMMA_iOS.xcframework" custom="true" embed="true"/>
     </platform>
