@@ -6,8 +6,11 @@
     <license>MIT</license>
     <keywords>cordova,mobile marketing,emma</keywords>
     <repo>https://github.com/EMMADevelopment/Cordova-Plugin-EMMA-SDK.git</repo>
+
     <engines>
-        <engine name="cordova" version=">=5.0.0"/>
+        <engine name="cordova" version=">=7.0.0" />
+        <engine name="cordova-android" version=">=6.3.0" />
+        <engine name="cordova-ios" version=">=4.3.0" />
     </engines>
 
     <js-module name="emma" src="www/emma.js">
@@ -24,28 +27,28 @@
                 <param name="onload" value="true" />
             </feature>
         </config-file>
-        <config-file target="AndroidManifest.xml" parent="/manifest" mode="merge">
+        <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.VIBRATE"/>
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
             <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application" mode="merge">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity
                 android:exported="false"
-                android:name=".activities.EMMAWebViewActivity"
+                android:name="io.emma.android.activities.EMMAWebViewActivity"
                 android:hardwareAccelerated="true"
                 android:theme="@android:style/Theme.Holo.Light.NoActionBar"/>
             <activity
                 android:exported="false"
                 android:launchMode="singleTask"
-                android:name=".activities.EMMAInternalPushActivity"
+                android:name="io.emma.android.activities.EMMAInternalPushActivity"
                 android:theme="@android:style/Theme.NoDisplay"/>
             <activity
                 android:exported="false"
                 android:launchMode="singleTask"
-                android:name=".activities.PermissionsActivity"
+                android:name="io.emma.android.activities.PermissionsActivity"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         </config-file>
         
