@@ -10,6 +10,8 @@
 #define mandatoryNotZero @" can not be zero"
 #define keyValueMappingError @" key-value attributes invalid"
 #define mappingValueError @"only allowed property value in string type"
+#define conversionValueMustBe1And63 @" conversionValues must be a number between 1 and 63"
+#define coarseValueMustBe @" must be high, medium or low"
 
 /* START SESSION */
 #define sessionKeyArg @"sessionKey"
@@ -20,6 +22,8 @@
 #define customPowlinkDomainsArg @"powlinkDomains"
 #define customShortPowlinkDomainsArg @"customShortPowlinkDomains"
 #define minQueueTime 10
+#define skanAttributionArg @"skanAttribution"
+#define skanCustomManagementAttributionArg @"skanCustomManagementAttribution"
 
 /* PUSH */
 #define EMMAPushKey @"eMMa"
@@ -61,6 +65,11 @@
 
 #define nativeAdId @"id"
 
+/* SKAdNetwork */
+#define skadConversionValue @"conversionValue"
+#define skadCoarseValue @"coarseValue"
+#define skadLockWindow @"lockWindow"
+
 #define CONCAT(a, b) \
     [NSString stringWithFormat:@"%@%@", a, b]
 
@@ -101,4 +110,6 @@
 - (void)handleLink:(CDVInvokedUrlCommand *)command;
 - (void)areNotificationsEnabled:(CDVInvokedUrlCommand *)command;
 - (void)requestNotificationsPermission:(CDVInvokedUrlCommand *)command;
+- (void)updatePostbackConversionValue:(CDVInvokedUrlCommand *)command;
+- (void)updatePostbackConversionValueSkad4:(CDVInvokedUrlCommand *)command;
 @end

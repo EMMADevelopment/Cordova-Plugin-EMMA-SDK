@@ -9,8 +9,8 @@
 
     <engines>
         <engine name="cordova" version=">=7.0.0" />
-        <engine name="cordova-android" version=">=6.3.0" />
-        <engine name="cordova-ios" version=">=4.3.0" />
+        <engine name="cordova-android" version=">=7.0.0" />
+        <engine name="cordova-ios" version=">=6.0.0" />
     </engines>
 
     <js-module name="emma" src="www/emma.js">
@@ -74,6 +74,7 @@
 
         <framework src="AdSupport.framework" weak="true" />
         <framework src="AdServices.framework" weak="true" />
+        <framework src="StoreKit.framework" weak="true" />
         <framework src="src/ios/EMMA_iOS.xcframework" custom="true" embed="true"/>
     </platform>
     

@@ -311,3 +311,35 @@ exports.requestNotificationsPermission = function(cb) {
   argscheck.checkArgs('F', 'EMMAPlugin.requestNotificationsPermission', arguments);
   exec(cb, null, 'EMMAPlugin', 'requestNotificationsPermission', []);
 };
+
+/**
+ * ONLY IOS
+ * 
+ * Method for sending conversion value to SKAdNetwork postback. 
+ * Compatible with iOS 15.4+.
+ * 
+ * Use this method only if skanCustomManagement in startSession is enabled.
+ * 
+ * @param conversionValue Number between 1 and 63
+ */
+exports.updatePostbackConversionValue = function(conversionValue) {
+  argscheck.checkArgs('N', 'EMMAPlugin.updatePostbackConversionValue', arguments);
+  exec(null, null, 'EMMAPlugin', 'updatePostbackConversionValue', [conversionValue]);
+}
+
+/**
+ * ONLY IOS
+ * 
+ * Method for sending conversion value to SKAdNetwork postback. 
+ * Compatible with iOS 16.1+.
+ * 
+ * Use this method only if skanCustomManagement in startSession is enabled.
+ * 
+ * @param conversionModel.conversionValue Number between 1 and 63
+ * @param conversionModel.coarseValue Accepted values: high, medium, low.
+ * @param conversionModel.lockWindow Optional. If true postback doesn't wait to window.
+ */
+exports.updatePostbackConversionValueSkad4 = function(conversionModel) {
+  argscheck.checkArgs('O', 'EMMAPlugin.updatePostbackConversionValueSkad4', arguments);
+  exec(null, null, 'EMMAPlugin', 'updatePostbackConversionValueSkad4', [conversionModel]);
+}

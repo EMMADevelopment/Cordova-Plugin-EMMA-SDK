@@ -75,6 +75,16 @@ enum ActionTypes {
         configuration.urlBase = urlApi;
     }
 
+    id skanAttribution = [configurationArgs objectForKey:skanAttributionArg];
+    if (skanAttribution) {
+        configuration.skanAttribution = [skanAttribution boolValue];
+    }
+    
+    id skanCustomManagementAttribution = [configurationArgs objectForKey:skanCustomManagementAttributionArg];
+    if (skanCustomManagementAttribution) {
+        configuration.skanCustomManagementAttribution = [skanCustomManagementAttribution boolValue];
+    }
+
     [EMMALegacy startSessionWithConfiguration:configuration];
     [self onDeviceId];
 }
@@ -530,5 +540,71 @@ enum ActionTypes {
 
 - (void)areNotificationsEnabled:(CDVInvokedUrlCommand *)command {}
 - (void)requestNotificationsPermission:(CDVInvokedUrlCommand *)command {}
+
+-(void)updatePostbackConversionValue:(CDVInvokedUrlCommand *)command {
+    id _conversionValue = [command argumentAtIndex:0 withDefault: nil];
+    if (!_conversionValue) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(skadConversionValue, mandatoryNotEmpty)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    NSInteger conversionValue = [_conversionValue integerValue];
+    if (conversionValue < 1 || conversionValue > 63){
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(skadConversionValue, conversionValueMustBe1And63)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    [self.commandDelegate runInBackground:^{
+        [EMMALegacy updatePostbackConversionValue:conversionValue completionHandler:nil];
+    }];
+}
+
+-(void)updatePostbackConversionValueSkad4:(CDVInvokedUrlCommand *)command {
+    NSDictionary* conversionModel = [command argumentAtIndex:0 withDefault: nil];
+    if (!conversionModel) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(@"conversionModel", mandatoryNotEmpty)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    id _conversionValue = [conversionModel objectForKey:skadConversionValue];
+    NSString* coarseValue = [conversionModel objectForKey:skadCoarseValue];
+    BOOL lockWindow = [conversionModel objectForKey:skadLockWindow] != nil
+        && [conversionModel objectForKey:skadLockWindow] != [NSNull null] ? [conversionModel objectForKey:skadLockWindow] : NO;
+    
+    if (!_conversionValue) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(skadConversionValue, mandatoryNotEmpty)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    
+    NSInteger conversionValue = [_conversionValue integerValue];
+    if (conversionValue < 1 || conversionValue > 63){
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(skadConversionValue, conversionValueMustBe1And63)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    NSArray *coarseValidValues = @[@"high", @"medium", @"low"];
+    if (![coarseValidValues containsObject:coarseValue]) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(skadCoarseValue, coarseValueMustBe)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+    
+    [self.commandDelegate runInBackground:^{
+        [EMMALegacy updatePostbackConversionValue:conversionValue coarseValue:coarseValue lockWindow:lockWindow completionHandler:nil];
+    }];
+}
+
 
 @end

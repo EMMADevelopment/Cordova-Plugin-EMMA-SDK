@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 
 var FIREBASE_VERSION = '20.3.0';
-var GSERVICES_PLUGIN_VERSION = '4.3.10';
+var GSERVICES_PLUGIN_VERSION = '4.3.15';
 
 function readPluginGradleFile() {
   var target = path.join(
