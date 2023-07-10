@@ -69,6 +69,7 @@
 #define skadConversionValue @"conversionValue"
 #define skadCoarseValue @"coarseValue"
 #define skadLockWindow @"lockWindow"
+#define conversionModelArg @"conversionModel"
 
 #define CONCAT(a, b) \
     [NSString stringWithFormat:@"%@%@", a, b]
@@ -110,6 +111,7 @@
 - (void)handleLink:(CDVInvokedUrlCommand *)command;
 - (void)areNotificationsEnabled:(CDVInvokedUrlCommand *)command;
 - (void)requestNotificationsPermission:(CDVInvokedUrlCommand *)command;
+- (void)sendPushToken:(CDVInvokedUrlCommand *)command;
 - (void)updatePostbackConversionValue:(CDVInvokedUrlCommand *)command;
 - (void)updatePostbackConversionValueSkad4:(CDVInvokedUrlCommand *)command;
 @end

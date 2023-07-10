@@ -188,8 +188,8 @@ exports.onTokenRefresh = function (token) {
  * @param token
  */
 exports.sendPushToken = function (token) {
-  argscheck.checkArgs('S', 'EMMAPlugin.onTokenRefresh', arguments);
-  exec(null, null, 'EMMAPlugin', 'onTokenRefresh', [token]);
+  argscheck.checkArgs('S', 'EMMAPlugin.sendPushToken', arguments);
+  exec(null, null, 'EMMAPlugin', 'sendPushToken', [token]);
 };
 
 /**

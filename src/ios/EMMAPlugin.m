@@ -541,6 +541,14 @@ enum ActionTypes {
 - (void)areNotificationsEnabled:(CDVInvokedUrlCommand *)command {}
 - (void)requestNotificationsPermission:(CDVInvokedUrlCommand *)command {}
 
+- (void) sendPushToken: (CDVInvokedUrlCommand *)command {
+    NSString* token = [command argumentAtIndex:0 withDefault: nil];
+    [self.commandDelegate runInBackground:^{
+        NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:token, eventTokenArg, nil];
+        [EMMALegacy trackExtraUserInfo: params];
+    }];
+}
+
 -(void)updatePostbackConversionValue:(CDVInvokedUrlCommand *)command {
     id _conversionValue = [command argumentAtIndex:0 withDefault: nil];
     if (!_conversionValue) {
@@ -567,7 +575,7 @@ enum ActionTypes {
     NSDictionary* conversionModel = [command argumentAtIndex:0 withDefault: nil];
     if (!conversionModel) {
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                                    messageAsString: CONCAT(@"conversionModel", mandatoryNotEmpty)];
+                                                    messageAsString: CONCAT(conversionModelArg, mandatoryNotEmpty)];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         return;
     }

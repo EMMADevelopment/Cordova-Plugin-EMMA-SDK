@@ -852,21 +852,7 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
     }
 
     private boolean sendPushToken(final String token, final CallbackContext callbackContext) {
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Map<String, String> tokenMap = new HashMap<>();
-                tokenMap.put(
-                        EMMAKeysController.getInstance().getKey(EMMAKeysController.ServerKey.TOKEN),
-                        token
-                );
-
-                EMMA.getInstance().trackExtraUserInfo(tokenMap);
-                callbackContext.success();
-            }
-        });
-
-        return true;
+        return onTokenRefresh(token, callbackContext);
     }
 
     private boolean handleNotification(JSONObject args, final CallbackContext callbackContext) {
