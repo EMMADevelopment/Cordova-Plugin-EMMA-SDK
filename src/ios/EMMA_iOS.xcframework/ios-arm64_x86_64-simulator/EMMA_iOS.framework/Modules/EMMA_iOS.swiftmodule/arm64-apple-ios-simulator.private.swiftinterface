@@ -1,20 +1,27 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
-// swift-module-flags: -target arm64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name EMMA_iOS
-// swift-module-flags-ignorable: -enable-bare-slash-regex
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target arm64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name EMMA_iOS
+import DeveloperToolsSupport
 @_exported import EMMA_iOS
 import Foundation
 import Swift
+import SwiftUI
 import UIKit
 import UserNotifications
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @objc @_inheritsConvenienceInitializers @objcMembers public class EMMAViewUtils : ObjectiveC.NSObject {
   @objc public static func getKeyWindow() -> UIKit.UIWindow?
   @objc public static func safeAreaMargins() -> CoreFoundation.CGFloat
   @objc public static func hasTopNotch() -> Swift.Bool
   @objc public static func getRootViewController() -> UIKit.UIViewController?
   @objc public static func isSwiftUIApp(_ viewControllerName: Swift.String) -> Swift.Bool
+  @objc @available(iOS 13.0, *)
+  public static func getMainWindowScene() -> UIKit.UIWindowScene?
+  @objc public static func getStatusBarFrame() -> CoreFoundation.CGRect
+  @objc public static func getStatusBarSyle() -> UIKit.UIStatusBarStyle
+  @objc public static func getDeviceOrientation() -> UIKit.UIInterfaceOrientation
   @objc override dynamic public init()
   @objc deinit
 }
@@ -94,6 +101,12 @@ import _StringProcessing
   @objc deinit
 }
 public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAInAppPluginProtocol
+@objc @_inheritsConvenienceInitializers @objcMembers public class EMMABannerParams : ObjectiveC.NSObject {
+  @objc public var offsetTop: Swift.Double
+  @objc public var offsetBottom: Swift.Double
+  @objc override dynamic public init()
+  @objc deinit
+}
 @objc @_inheritsConvenienceInitializers @objcMembers public class EMMAUtils : ObjectiveC.NSObject {
   @objc public static func hexaStrToColor(_ hexa: Swift.String) -> UIKit.UIColor
   @objc public static func newDateWithDefaultTimezone() -> Swift.String
@@ -167,7 +180,6 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   public static func sendClick(campaignType: EMMA_iOS.EMMACampaignType, withId campaignId: Swift.String)
   public static func setStartViewOptions(options: EMMA_iOS.EMMAStartViewOptions)
   public static func setStartViewDelegate(delegate: any EMMA_iOS.EMMAStartViewDelegate)
-  public static func closeStartView()
   public static func isAdBallShowing() -> Swift.Bool
   public static func setBannerAutoCreation(autoCreation: Swift.Bool)
   public static func setStripAutoCreation(autoCreation: Swift.Bool)
@@ -185,7 +197,6 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   public static func startOrder(orderId: Swift.String, andCustomer customerId: Swift.String, withTotalPrice totalPrice: Swift.Float, withExtras extras: Swift.Dictionary<Swift.String, Swift.String>?, assignCoupon coupon: Swift.String?)
   public static func addProduct(productId: Swift.String, andName name: Swift.String, withQty qty: Swift.Float, andPrice price: Swift.Float, withExtras extras: Swift.Dictionary<Swift.String, Swift.String>?)
   public static func trackOrder()
-  public static func setCurrencyCode(currencyCode: Swift.String)
   public static func cancelOrder(orderId: Swift.String)
   public static func startPushSystem()
   public static func startPushSystem(with options: EMMA_iOS.EMMAPushOptions)
@@ -205,11 +216,12 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   public static func setWebSDKDomain(domain: Swift.String)
   public static func addInAppPlugins(_ plugins: [any EMMA_iOS.EMMAInAppPluginProtocol])
   public static func rootViewController() -> UIKit.UIViewController?
-  public static func closeStrip()
+  public static func closeInApp(type: EMMA_iOS.InAppType)
   public static func updatePostbackConversionValue(_ conversionValue: Swift.Int, completionHandler completion: (((any Swift.Error)?) -> Swift.Void)? = nil)
   public static func updatePostbackConversionValue(_ fineValue: Swift.Int, coarseValue: Swift.String, completionHandler completion: (((any Swift.Error)?) -> Swift.Void)? = nil)
   public static func updatePostbackConversionValue(_ fineValue: Swift.Int, coarseValue: Swift.String, lockWindow: Swift.Bool, completionHandler completion: (((any Swift.Error)?) -> Swift.Void)? = nil)
   public static func updateConversionValue(_ conversionValue: Swift.Int)
+  public static func setBannerParams(_ params: EMMA_iOS.EMMABannerParams?)
   @objc deinit
 }
 @objc @objcMembers public class EMMAPushPayload : ObjectiveC.NSObject {

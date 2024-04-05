@@ -169,6 +169,112 @@
             "funcSelfKind": "NonMutating"
           },
           {
+            "kind": "Function",
+            "name": "getMainWindowScene",
+            "printedName": "getMainWindowScene()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIWindowScene?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIWindowScene",
+                    "printedName": "UIKit.UIWindowScene",
+                    "usr": "c:objc(cs)UIWindowScene"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAViewUtils(cm)getMainWindowScene",
+            "mangledName": "$s8EMMA_iOS13EMMAViewUtilsC18getMainWindowSceneSo08UIWindowH0CSgyFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "intro_iOS": "13.0",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "Available",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getStatusBarFrame",
+            "printedName": "getStatusBarFrame()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CGRect",
+                "printedName": "CoreFoundation.CGRect",
+                "usr": "c:@S@CGRect"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAViewUtils(cm)getStatusBarFrame",
+            "mangledName": "$s8EMMA_iOS13EMMAViewUtilsC17getStatusBarFrameSo6CGRectVyFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getStatusBarSyle",
+            "printedName": "getStatusBarSyle()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIStatusBarStyle",
+                "printedName": "UIKit.UIStatusBarStyle",
+                "usr": "c:@E@UIStatusBarStyle"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAViewUtils(cm)getStatusBarSyle",
+            "mangledName": "$s8EMMA_iOS13EMMAViewUtilsC16getStatusBarSyleSo08UIStatusG5StyleVyFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getDeviceOrientation",
+            "printedName": "getDeviceOrientation()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIInterfaceOrientation",
+                "printedName": "UIKit.UIInterfaceOrientation",
+                "usr": "c:@E@UIInterfaceOrientation"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAViewUtils(cm)getDeviceOrientation",
+            "mangledName": "$s8EMMA_iOS13EMMAViewUtilsC20getDeviceOrientationSo011UIInterfaceG0VyFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init()",
@@ -3672,6 +3778,300 @@
         ]
       },
       {
+        "kind": "TypeDecl",
+        "name": "EMMABannerParams",
+        "printedName": "EMMABannerParams",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "offsetTop",
+            "printedName": "offsetTop",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMABannerParams(py)offsetTop",
+            "mangledName": "$s8EMMA_iOS16EMMABannerParamsC9offsetTopSdvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMABannerParams(im)offsetTop",
+                "mangledName": "$s8EMMA_iOS16EMMABannerParamsC9offsetTopSdvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMABannerParams(im)setOffsetTop:",
+                "mangledName": "$s8EMMA_iOS16EMMABannerParamsC9offsetTopSdvs",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8EMMA_iOS16EMMABannerParamsC9offsetTopSdvM",
+                "mangledName": "$s8EMMA_iOS16EMMABannerParamsC9offsetTopSdvM",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "offsetBottom",
+            "printedName": "offsetBottom",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMABannerParams(py)offsetBottom",
+            "mangledName": "$s8EMMA_iOS16EMMABannerParamsC12offsetBottomSdvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMABannerParams(im)offsetBottom",
+                "mangledName": "$s8EMMA_iOS16EMMABannerParamsC12offsetBottomSdvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMABannerParams(im)setOffsetBottom:",
+                "mangledName": "$s8EMMA_iOS16EMMABannerParamsC12offsetBottomSdvs",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8EMMA_iOS16EMMABannerParamsC12offsetBottomSdvM",
+                "mangledName": "$s8EMMA_iOS16EMMABannerParamsC12offsetBottomSdvM",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "EMMABannerParams",
+                "printedName": "EMMA_iOS.EMMABannerParams",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMABannerParams"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMABannerParams(im)init",
+            "mangledName": "$s8EMMA_iOS16EMMABannerParamsCACycfc",
+            "moduleName": "EMMA_iOS",
+            "overriding": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@EMMA_iOS@objc(cs)EMMABannerParams",
+        "mangledName": "$s8EMMA_iOS16EMMABannerParamsC",
+        "moduleName": "EMMA_iOS",
+        "declAttributes": [
+          "AccessControl",
+          "ObjCMembers",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "EMMA_iOS",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
         "kind": "Import",
         "name": "UIKit",
         "printedName": "UIKit",
@@ -5922,7 +6322,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "EMMAInstallAttributionDelegate",
-                "printedName": "EMMA_iOS.EMMAInstallAttributionDelegate",
+                "printedName": "any EMMA_iOS.EMMAInstallAttributionDelegate",
                 "usr": "c:objc(pl)EMMAInstallAttributionDelegate"
               }
             ],
@@ -5957,12 +6357,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "EMMA_iOS.EMMAInAppMessageDelegate?",
+                "printedName": "(any EMMA_iOS.EMMAInAppMessageDelegate)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "EMMAInAppMessageDelegate",
-                    "printedName": "EMMA_iOS.EMMAInAppMessageDelegate",
+                    "printedName": "any EMMA_iOS.EMMAInAppMessageDelegate",
                     "usr": "c:objc(pl)EMMAInAppMessageDelegate"
                   }
                 ],
@@ -5995,7 +6395,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "EMMAInAppMessageDelegate",
-                "printedName": "EMMA_iOS.EMMAInAppMessageDelegate",
+                "printedName": "any EMMA_iOS.EMMAInAppMessageDelegate",
                 "usr": "c:objc(pl)EMMAInAppMessageDelegate"
               }
             ],
@@ -6024,7 +6424,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "EMMAInAppMessageDelegate",
-                "printedName": "EMMA_iOS.EMMAInAppMessageDelegate",
+                "printedName": "any EMMA_iOS.EMMAInAppMessageDelegate",
                 "usr": "c:objc(pl)EMMAInAppMessageDelegate"
               }
             ],
@@ -6053,7 +6453,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "EMMACouponDelegate",
-                "printedName": "EMMA_iOS.EMMACouponDelegate",
+                "printedName": "any EMMA_iOS.EMMACouponDelegate",
                 "usr": "c:objc(pl)EMMACouponDelegate"
               }
             ],
@@ -6210,36 +6610,13 @@
               {
                 "kind": "TypeNominal",
                 "name": "EMMAStartViewDelegate",
-                "printedName": "EMMA_iOS.EMMAStartViewDelegate",
+                "printedName": "any EMMA_iOS.EMMAStartViewDelegate",
                 "usr": "c:objc(pl)EMMAStartViewDelegate"
               }
             ],
             "declKind": "Func",
             "usr": "s:8EMMA_iOS0A0C20setStartViewDelegate8delegateySo09EMMAStarteF0_p_tFZ",
             "mangledName": "$s8EMMA_iOS0A0C20setStartViewDelegate8delegateySo09EMMAStarteF0_p_tFZ",
-            "moduleName": "EMMA_iOS",
-            "static": true,
-            "declAttributes": [
-              "Final",
-              "AccessControl",
-              "RawDocComment"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "closeStartView",
-            "printedName": "closeStartView()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:8EMMA_iOS0A0C14closeStartViewyyFZ",
-            "mangledName": "$s8EMMA_iOS0A0C14closeStartViewyyFZ",
             "moduleName": "EMMA_iOS",
             "static": true,
             "declAttributes": [
@@ -6944,35 +7321,6 @@
           },
           {
             "kind": "Function",
-            "name": "setCurrencyCode",
-            "printedName": "setCurrencyCode(currencyCode:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:8EMMA_iOS0A0C15setCurrencyCode08currencyE0ySS_tFZ",
-            "mangledName": "$s8EMMA_iOS0A0C15setCurrencyCode08currencyE0ySS_tFZ",
-            "moduleName": "EMMA_iOS",
-            "static": true,
-            "declAttributes": [
-              "Final",
-              "AccessControl",
-              "RawDocComment"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
             "name": "cancelOrder",
             "printedName": "cancelOrder(orderId:)",
             "children": [
@@ -7096,7 +7444,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "EMMAPushDelegate",
-                "printedName": "EMMA_iOS.EMMAPushDelegate",
+                "printedName": "any EMMA_iOS.EMMAPushDelegate",
                 "usr": "c:objc(pl)EMMAPushDelegate"
               }
             ],
@@ -7125,7 +7473,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "UNUserNotificationCenterDelegate",
-                "printedName": "UserNotifications.UNUserNotificationCenterDelegate",
+                "printedName": "any UserNotifications.UNUserNotificationCenterDelegate",
                 "usr": "c:objc(pl)UNUserNotificationCenterDelegate"
               }
             ],
@@ -7422,12 +7770,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Array",
-                "printedName": "[EMMA_iOS.EMMAInAppPluginProtocol]",
+                "printedName": "[any EMMA_iOS.EMMAInAppPluginProtocol]",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "EMMAInAppPluginProtocol",
-                    "printedName": "EMMA_iOS.EMMAInAppPluginProtocol",
+                    "printedName": "any EMMA_iOS.EMMAInAppPluginProtocol",
                     "usr": "c:@M@EMMA_iOS@objc(pl)EMMAInAppPluginProtocol"
                   }
                 ],
@@ -7480,23 +7828,30 @@
           },
           {
             "kind": "Function",
-            "name": "closeStrip",
-            "printedName": "closeStrip()",
+            "name": "closeInApp",
+            "printedName": "closeInApp(type:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Void",
                 "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "InAppType",
+                "printedName": "EMMA_iOS.InAppType",
+                "usr": "c:@E@InAppType"
               }
             ],
             "declKind": "Func",
-            "usr": "s:8EMMA_iOS0A0C10closeStripyyFZ",
-            "mangledName": "$s8EMMA_iOS0A0C10closeStripyyFZ",
+            "usr": "s:8EMMA_iOS0A0C10closeInApp4typeySo0dE4TypeV_tFZ",
+            "mangledName": "$s8EMMA_iOS0A0C10closeInApp4typeySo0dE4TypeV_tFZ",
             "moduleName": "EMMA_iOS",
             "static": true,
             "declAttributes": [
               "Final",
-              "AccessControl"
+              "AccessControl",
+              "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -7519,12 +7874,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "((Swift.Error?) -> ())?",
+                "printedName": "(((any Swift.Error)?) -> ())?",
                 "children": [
                   {
                     "kind": "TypeFunc",
                     "name": "Function",
-                    "printedName": "(Swift.Error?) -> ()",
+                    "printedName": "((any Swift.Error)?) -> ()",
                     "children": [
                       {
                         "kind": "TypeNominal",
@@ -7534,12 +7889,12 @@
                       {
                         "kind": "TypeNominal",
                         "name": "Optional",
-                        "printedName": "Swift.Error?",
+                        "printedName": "(any Swift.Error)?",
                         "children": [
                           {
                             "kind": "TypeNominal",
                             "name": "Error",
-                            "printedName": "Swift.Error",
+                            "printedName": "any Swift.Error",
                             "usr": "s:s5ErrorP"
                           }
                         ],
@@ -7588,12 +7943,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "((Swift.Error?) -> ())?",
+                "printedName": "(((any Swift.Error)?) -> ())?",
                 "children": [
                   {
                     "kind": "TypeFunc",
                     "name": "Function",
-                    "printedName": "(Swift.Error?) -> ()",
+                    "printedName": "((any Swift.Error)?) -> ()",
                     "children": [
                       {
                         "kind": "TypeNominal",
@@ -7603,12 +7958,12 @@
                       {
                         "kind": "TypeNominal",
                         "name": "Optional",
-                        "printedName": "Swift.Error?",
+                        "printedName": "(any Swift.Error)?",
                         "children": [
                           {
                             "kind": "TypeNominal",
                             "name": "Error",
-                            "printedName": "Swift.Error",
+                            "printedName": "any Swift.Error",
                             "usr": "s:s5ErrorP"
                           }
                         ],
@@ -7663,12 +8018,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "((Swift.Error?) -> ())?",
+                "printedName": "(((any Swift.Error)?) -> ())?",
                 "children": [
                   {
                     "kind": "TypeFunc",
                     "name": "Function",
-                    "printedName": "(Swift.Error?) -> ()",
+                    "printedName": "((any Swift.Error)?) -> ()",
                     "children": [
                       {
                         "kind": "TypeNominal",
@@ -7678,12 +8033,12 @@
                       {
                         "kind": "TypeNominal",
                         "name": "Optional",
-                        "printedName": "Swift.Error?",
+                        "printedName": "(any Swift.Error)?",
                         "children": [
                           {
                             "kind": "TypeNominal",
                             "name": "Error",
-                            "printedName": "Swift.Error",
+                            "printedName": "any Swift.Error",
                             "usr": "s:s5ErrorP"
                           }
                         ],
@@ -7727,6 +8082,42 @@
             "declKind": "Func",
             "usr": "s:8EMMA_iOS0A0C21updateConversionValueyySiFZ",
             "mangledName": "$s8EMMA_iOS0A0C21updateConversionValueyySiFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setBannerParams",
+            "printedName": "setBannerParams(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "EMMA_iOS.EMMABannerParams?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "EMMABannerParams",
+                    "printedName": "EMMA_iOS.EMMABannerParams",
+                    "usr": "c:@M@EMMA_iOS@objc(cs)EMMABannerParams"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8EMMA_iOS0A0C15setBannerParamsyyAA010EMMABannerE0CSgFZ",
+            "mangledName": "$s8EMMA_iOS0A0C15setBannerParamsyyAA010EMMABannerE0CSgFZ",
             "moduleName": "EMMA_iOS",
             "static": true,
             "declAttributes": [
@@ -8019,7 +8410,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Dictionary",
-                "printedName": "[Swift.String : EMMA_iOS.EMMAInAppPluginProtocol]",
+                "printedName": "[Swift.String : any EMMA_iOS.EMMAInAppPluginProtocol]",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -8030,7 +8421,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "EMMAInAppPluginProtocol",
-                    "printedName": "EMMA_iOS.EMMAInAppPluginProtocol",
+                    "printedName": "any EMMA_iOS.EMMAInAppPluginProtocol",
                     "usr": "c:@M@EMMA_iOS@objc(pl)EMMAInAppPluginProtocol"
                   }
                 ],
@@ -8058,7 +8449,7 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Dictionary",
-                    "printedName": "[Swift.String : EMMA_iOS.EMMAInAppPluginProtocol]",
+                    "printedName": "[Swift.String : any EMMA_iOS.EMMAInAppPluginProtocol]",
                     "children": [
                       {
                         "kind": "TypeNominal",
@@ -8069,7 +8460,7 @@
                       {
                         "kind": "TypeNominal",
                         "name": "EMMAInAppPluginProtocol",
-                        "printedName": "EMMA_iOS.EMMAInAppPluginProtocol",
+                        "printedName": "any EMMA_iOS.EMMAInAppPluginProtocol",
                         "usr": "c:@M@EMMA_iOS@objc(pl)EMMAInAppPluginProtocol"
                       }
                     ],
@@ -8101,12 +8492,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Array",
-                "printedName": "[EMMA_iOS.EMMAInAppPluginProtocol]",
+                "printedName": "[any EMMA_iOS.EMMAInAppPluginProtocol]",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "EMMAInAppPluginProtocol",
-                    "printedName": "EMMA_iOS.EMMAInAppPluginProtocol",
+                    "printedName": "any EMMA_iOS.EMMAInAppPluginProtocol",
                     "usr": "c:@M@EMMA_iOS@objc(pl)EMMAInAppPluginProtocol"
                   }
                 ],
@@ -8524,6 +8915,34 @@
             "mangledName": "$ss28CustomDebugStringConvertibleP"
           }
         ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "EMMA_iOS"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "EMMA_iOS"
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "EMMA_iOS"
+      },
+      {
+        "kind": "Import",
+        "name": "DeveloperToolsSupport",
+        "printedName": "DeveloperToolsSupport",
+        "declKind": "Import",
+        "moduleName": "EMMA_iOS"
       }
     ],
     "json_format_version": 8
@@ -8738,6 +9157,20 @@
       "offset": 354,
       "length": 2,
       "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMABannerParams.swift",
+      "kind": "IntegerLiteral",
+      "offset": 248,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMABannerParams.swift",
+      "kind": "IntegerLiteral",
+      "offset": 288,
+      "length": 1,
+      "value": "0"
     },
     {
       "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
@@ -8969,6 +9402,13 @@
       "offset": 193,
       "length": 21,
       "value": "\"EMMA_iOS.EMMAStartViewCampaign\""
+    },
+    {
+      "filePath": "\/Users\/acarrera\/Library\/Developer\/Xcode\/DerivedData\/EMMA-gmrfldzkbcjmgpctichlcjxtzjxo\/Build\/Intermediates.noindex\/ArchiveIntermediates\/EMMA_iOS\/IntermediateBuildFilesPath\/EMMA.build\/Release-iphoneos\/EMMA_iOS.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 742,
+      "length": 17,
+      "value": "\"startview_close\""
     }
   ]
 }

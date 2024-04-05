@@ -12,6 +12,7 @@
 
 @class UIButton;
 @class EMMAPushOptions;
+@class EMMABannerParams;
 @protocol EMMAInAppPluginProtocol;
 
 @import UserNotifications;
@@ -292,12 +293,6 @@
  */
 +(void)setStartViewDelegate:(id<EMMAStartViewDelegate>) delegate;
 
-
-/**
- *  Closes the current StartView
- */
-+(void)closeStartView;
-
 /**
  Tells if AdBall is on Screen
  
@@ -468,9 +463,6 @@
  The sequence of tracking order in EMMA is always startOrder>addProduct(*distinct products)>trackOrder
  */
 +(void)trackOrder;
-
-/** Sets the current currency code for the orders */
-+(void)setCurrencyCode:(NSString*)currencyCode;
 
 /**
  Cancel the order referenced by an order id. If your e-commerce allows canceling orders this method updates the purchases data with the cancelled orders.
@@ -670,8 +662,6 @@
 
 +(void)invokeCloseDelegates:(EMMACampaign*) campaign;
 
-+(void)closeStrip;
-
 +(void)updateConversionValue:(NSInteger)conversionValue;
 
 +(void)updatePostbackConversionValue:(NSInteger)conversionValue
@@ -685,6 +675,13 @@
                           coarseValue:(nonnull NSString *)coarseValue
                            lockWindow:(BOOL)lockWindow
                     completionHandler:(void (^_Nullable)(NSError *_Nullable error))completion;
+
+/**
+ *  This method closes an Inapp communication. Only allowed  Adball, Banner, Startview and Strip.
+ */
++(void)closeInAppWithType:(InAppType) type;
+
++(void) setBannerParams: (EMMABannerParams*) bannerParams;
 
 #pragma clang diagnostic pop
 @end
