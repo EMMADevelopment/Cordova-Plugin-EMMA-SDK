@@ -27,6 +27,7 @@ import java.util.Map;
 import io.emma.android.EMMA;
 import io.emma.android.controllers.EMMAKeysController;
 import io.emma.android.enums.CommunicationTypes;
+import io.emma.android.enums.EMMAPushType;
 import io.emma.android.interfaces.EMMABatchNativeAdInterface;
 import io.emma.android.interfaces.EMMADeviceIdListener;
 import io.emma.android.interfaces.EMMANativeAdInterface;
@@ -460,13 +461,6 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             customerId = null;
         }
 
-        String currencyCode;
-        try {
-            currencyCode = args.getString(ORDER_CURRENCY_CODE);
-        } catch (JSONException e) {
-            currencyCode = null;
-        }
-
         String coupon;
         try {
             coupon = args.getString(ORDER_COUPON);
@@ -486,8 +480,7 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             }
         }
 
-        EMMA.getInstance().startOrder(orderId,
-                customerId, totalPrice, currencyCode, coupon, extrasMap);
+        EMMA.getInstance().startOrder(orderId, customerId, totalPrice, coupon, extrasMap);
         callbackContext.success();
         return true;
     }
@@ -843,7 +836,7 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                EMMAPushNotificationsManager.refreshToken(context, token);
+                EMMAPushNotificationsManager.refreshToken(context, token, EMMAPushType.FCM);
                 callbackContext.success();
             }
         });

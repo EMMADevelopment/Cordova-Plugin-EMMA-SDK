@@ -43,7 +43,6 @@
 #define orderIdArg @"orderId"
 #define orderTotalPriceArg @"totalPrice"
 #define orderCustomerIdArg @"customerId"
-#define orderCurrencyCodeArg @"currencyCode"
 #define orderCouponArg @"coupon"
 
 #define orderProductPriceArg @"price"

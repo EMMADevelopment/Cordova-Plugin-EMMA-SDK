@@ -68,7 +68,6 @@ public class EMMAPluginConstants {
     static final String ORDER_ID = "orderId";
     static final String ORDER_TOTAL_PRICE = "totalPrice";
     static final String ORDER_CUSTOMER_ID = "customerId";
-    static final String ORDER_CURRENCY_CODE = "currencyCode";
     static final String ORDER_COUPON = "coupon";
 
     static final String ORDER_PRODUCT_PRICE = "price";

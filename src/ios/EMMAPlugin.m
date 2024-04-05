@@ -220,13 +220,6 @@ enum ActionTypes {
 
     float totalPrice = [_totalPrice floatValue];
 
-    id _currencyCode = [startOrderMsg objectForKey:orderCurrencyCodeArg];
-    if (_currencyCode) {
-        [EMMALegacy setCurrencyCode:_currencyCode];
-    } else {
-        [EMMALegacy setCurrencyCode:@"EUR"];
-    }
-
     NSString* coupon = [startOrderMsg objectForKey:orderCouponArg];
     NSString* customerId = [startOrderMsg objectForKey:orderCustomerIdArg];
 
