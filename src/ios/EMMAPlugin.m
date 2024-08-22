@@ -466,39 +466,63 @@ enum ActionTypes {
     }
 }
 
-- (void)sendInAppImpressionOrClick:(CDVInvokedUrlCommand *)command isImpression:(bool) isImpression {
-    NSDictionary* inAppEvent = [command argumentAtIndex:0 withDefault: nil];
-    NSString * type = [inAppEvent objectForKey:inAppTypeArg];
+- (NSDictionary *)validateAndExtractInAppEvent:(CDVInvokedUrlCommand *)command {
+    NSDictionary* inAppEvent = [command argumentAtIndex:0 withDefault:nil];
+    NSString *type = [inAppEvent objectForKey:inAppTypeArg];
     if (!type || [type isEqualToString:@""]) {
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                                    messageAsString: CONCAT(inAppTypeArg, mandatoryNotEmpty)];
+                                                    messageAsString:CONCAT(inAppTypeArg, mandatoryNotEmpty)];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-        return;
+        return nil;
     }
 
-    NSNumber *requestType = [self.inAppTypes objectForKey: type];
+    NSNumber *requestType = [self.inAppTypes objectForKey:type];
     NSNumber *campaignId = [NSNumber numberWithInt:[[inAppEvent objectForKey:inAppCampaignId] intValue]];
 
     if (!campaignId || campaignId <= 0) {
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                                    messageAsString: CONCAT(inAppCampaignId, mandatoryNotEmpty)];
+                                                    messageAsString:CONCAT(inAppCampaignId, mandatoryNotEmpty)];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-        return;
+        return nil;
     }
 
-    if (isImpression) {
-        [EMMALegacy sendImpression:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
-    } else {
-        [EMMALegacy sendClick:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
-    }
+    return @{@"type": requestType, @"campaignId": campaignId};
 }
 
 - (void)sendInAppImpression:(CDVInvokedUrlCommand *)command {
-    [self sendInAppImpressionOrClick:command isImpression:true];
+    NSDictionary *validatedEvent = [self validateAndExtractInAppEvent:command];
+    if (!validatedEvent) {
+        return;
+    }
+
+    NSNumber *requestType = validatedEvent[@"type"];
+    NSNumber *campaignId = validatedEvent[@"campaignId"];
+
+    [EMMALegacy sendImpression:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
 }
 
 - (void)sendInAppClick:(CDVInvokedUrlCommand *)command {
-    [self sendInAppImpressionOrClick:command isImpression:false];
+     NSDictionary *validatedEvent = [self validateAndExtractInAppEvent:command];
+    if (!validatedEvent) {
+        return;
+    }
+
+    NSNumber *requestType = validatedEvent[@"type"];
+    NSNumber *campaignId = validatedEvent[@"campaignId"];
+
+    [EMMALegacy sendClick:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
+}
+
+- (void)sendInAppDismissedClick:(CDVInvokedUrlCommand *)command {
+    NSDictionary *validatedEvent = [self validateAndExtractInAppEvent:command];
+    if (!validatedEvent) {
+        return;
+    }
+
+    NSNumber *requestType = validatedEvent[@"type"];
+    NSNumber *campaignId = validatedEvent[@"campaignId"];
+
+    [EMMALegacy sendDismissedClick:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
 }
 
 - (void)openNativeAd:(CDVInvokedUrlCommand *)command {

@@ -106,6 +106,7 @@
 - (void)requestTrackingWithIdfa:(CDVInvokedUrlCommand *)command;
 - (void)sendInAppImpression:(CDVInvokedUrlCommand *)command;
 - (void)sendInAppClick:(CDVInvokedUrlCommand *)command;
+- (void)sendInAppDismissedClick:(CDVInvokedUrlCommand *)command;
 - (void)openNativeAd:(CDVInvokedUrlCommand *)command;
 - (void)handleLink:(CDVInvokedUrlCommand *)command;
 - (void)areNotificationsEnabled:(CDVInvokedUrlCommand *)command;

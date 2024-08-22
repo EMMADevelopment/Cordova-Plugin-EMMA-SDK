@@ -358,6 +358,7 @@ SWIFT_CLASS("_TtC8EMMA_iOS19EMMAInAppPluginImpl")
 @interface EMMAInAppPluginImpl : NSObject
 + (void)sendImpressionWithCampaign:(EMMACampaign * _Nonnull)campaign;
 + (void)sendClickWithCampaign:(EMMACampaign * _Nonnull)campaign;
++ (void)sendDismissedClickWithCampaign:(EMMACampaign * _Nonnull)campaign;
 + (void)invokeShownDelegatesWithCampaign:(EMMACampaign * _Nonnull)campaign;
 + (void)invokeHideDelegatesWithCampaign:(EMMACampaign * _Nonnull)campaign;
 + (void)invokeCloseDelegatesWithCampaign:(EMMACampaign * _Nonnull)campaign;
@@ -505,6 +506,7 @@ SWIFT_CLASS("_TtC8EMMA_iOS13EMMAViewUtils")
 + (CGRect)getStatusBarFrame SWIFT_WARN_UNUSED_RESULT;
 + (UIStatusBarStyle)getStatusBarSyle SWIFT_WARN_UNUSED_RESULT;
 + (UIInterfaceOrientation)getDeviceOrientation SWIFT_WARN_UNUSED_RESULT;
++ (BOOL)isOrientationChangeRelevant:(NSArray<NSNumber *> * _Nonnull)invalidOrientations SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

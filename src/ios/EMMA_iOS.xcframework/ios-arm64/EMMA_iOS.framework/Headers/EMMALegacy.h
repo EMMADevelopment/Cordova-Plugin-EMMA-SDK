@@ -276,6 +276,14 @@
 +(void)sendClick:(EMMACampaignType) campaignType withId:(NSString*) campaignId;
 
 /**
+ * Method sends dimissed click event for specific campaign
+ *
+ * @param campaignType The type of campaign
+ * @param campaignId The campaign identifier
+ */
++(void)sendDismissedClick:(EMMACampaignType) campaignType withId:(NSString*) campaignId;
+
+/**
  Sets the current startView options
  
  Options:

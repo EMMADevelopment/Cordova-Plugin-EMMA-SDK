@@ -275,6 +275,44 @@
             "funcSelfKind": "NonMutating"
           },
           {
+            "kind": "Function",
+            "name": "isOrientationChangeRelevant",
+            "printedName": "isOrientationChangeRelevant(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Swift.Int]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAViewUtils(cm)isOrientationChangeRelevant:",
+            "mangledName": "$s8EMMA_iOS13EMMAViewUtilsC27isOrientationChangeRelevantySbSaySiGFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init()",
@@ -3591,6 +3629,34 @@
           },
           {
             "kind": "Function",
+            "name": "sendDismissedClick",
+            "printedName": "sendDismissedClick(campaign:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "EMMACampaign",
+                "printedName": "EMMA_iOS.EMMACampaign",
+                "usr": "c:objc(cs)EMMACampaign"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAInAppPluginImpl(cm)sendDismissedClickWithCampaign:",
+            "mangledName": "$s8EMMA_iOS19EMMAInAppPluginImplC18sendDismissedClick8campaignySo12EMMACampaignC_tFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "invokeShownDelegates",
             "printedName": "invokeShownDelegates(campaign:)",
             "children": [
@@ -6559,6 +6625,41 @@
             "declKind": "Func",
             "usr": "s:8EMMA_iOS0A0C9sendClick12campaignType6withIdySo012EMMACampaignF0V_SStFZ",
             "mangledName": "$s8EMMA_iOS0A0C9sendClick12campaignType6withIdySo012EMMACampaignF0V_SStFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "sendDismissedClick",
+            "printedName": "sendDismissedClick(campaignType:withId:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "EMMACampaignType",
+                "printedName": "EMMA_iOS.EMMACampaignType",
+                "usr": "c:@E@EMMACampaignType"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8EMMA_iOS0A0C18sendDismissedClick12campaignType6withIdySo012EMMACampaignG0V_SStFZ",
+            "mangledName": "$s8EMMA_iOS0A0C18sendDismissedClick12campaignType6withIdySo012EMMACampaignG0V_SStFZ",
             "moduleName": "EMMA_iOS",
             "static": true,
             "declAttributes": [

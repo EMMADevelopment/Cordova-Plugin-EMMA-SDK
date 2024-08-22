@@ -22,6 +22,7 @@ import _SwiftConcurrencyShims
   @objc public static func getStatusBarFrame() -> CoreFoundation.CGRect
   @objc public static func getStatusBarSyle() -> UIKit.UIStatusBarStyle
   @objc public static func getDeviceOrientation() -> UIKit.UIInterfaceOrientation
+  @objc public static func isOrientationChangeRelevant(_ invalidOrientations: [Swift.Int]) -> Swift.Bool
   @objc override dynamic public init()
   @objc deinit
 }
@@ -94,6 +95,7 @@ import _SwiftConcurrencyShims
 @objc @_inheritsConvenienceInitializers @objcMembers open class EMMAInAppPluginImpl : ObjectiveC.NSObject {
   @objc public class func sendImpression(campaign: EMMA_iOS.EMMACampaign)
   @objc public class func sendClick(campaign: EMMA_iOS.EMMACampaign)
+  @objc public class func sendDismissedClick(campaign: EMMA_iOS.EMMACampaign)
   @objc public class func invokeShownDelegates(campaign: EMMA_iOS.EMMACampaign)
   @objc public class func invokeHideDelegates(campaign: EMMA_iOS.EMMACampaign)
   @objc public class func invokeCloseDelegates(campaign: EMMA_iOS.EMMACampaign)
@@ -178,6 +180,7 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   public static func openNativeAd(campaignId: Swift.String)
   public static func sendImpression(campaignType: EMMA_iOS.EMMACampaignType, withId campaignId: Swift.String)
   public static func sendClick(campaignType: EMMA_iOS.EMMACampaignType, withId campaignId: Swift.String)
+  public static func sendDismissedClick(campaignType: EMMA_iOS.EMMACampaignType, withId campaignId: Swift.String)
   public static func setStartViewOptions(options: EMMA_iOS.EMMAStartViewOptions)
   public static func setStartViewDelegate(delegate: any EMMA_iOS.EMMAStartViewDelegate)
   public static func isAdBallShowing() -> Swift.Bool

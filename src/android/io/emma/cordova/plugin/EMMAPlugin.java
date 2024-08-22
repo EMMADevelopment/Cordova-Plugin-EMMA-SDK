@@ -169,11 +169,15 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             }
         } else if (action.equals("sendInAppImpression")) {
             if (args.length() == 1) {
-                return sendInAppImpressionOrClick(true, args.getJSONObject(0), callbackContext);
+                return sendInAppImpression(args.getJSONObject(0), callbackContext);
             }
         } else if (action.equals("sendInAppClick")) {
             if (args.length() == 1) {
-                return sendInAppImpressionOrClick(false, args.getJSONObject(0), callbackContext);
+                return sendInAppClick(false, args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("sendInAppDismissedClick")) {
+            if (args.length() == 1) {
+                return sendInAppClick(true, args.getJSONObject(0), callbackContext);
             }
         } else if (action.equals("openNativeAd")) {
             if (args.length() == 1) {
@@ -918,7 +922,35 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         }
     }
 
-    private boolean sendInAppImpressionOrClick(boolean isInAppImpression, JSONObject args,
+    private boolean sendInAppImpression(JSONObject args, final CallbackContext callbackContext) {
+        String type = args.optString(INAPP_TYPE);
+        int campaignId = args.optInt(INAPP_CAMPAIGN_ID);
+
+        if (type.isEmpty() || campaignId == 0) {
+            callbackContext.success();
+            EMMALog.w("inApp type or campaign id cannot be null");
+            return false;
+        }
+
+        EMMACampaign.Type campaignType = inAppTypeFromString(type);
+        CommunicationTypes communicationType = inappTypeToCommType(campaignType);
+
+        if (campaignType == null || communicationType == null) {
+            callbackContext.success();
+            EMMALog.w("Invalid inapp type or campaign id");
+            return false;
+        }
+
+        EMMACampaign campaign = new EMMACampaign(campaignType);
+        campaign.setCampaignID(campaignId);
+
+        EMMA.getInstance().sendInAppImpression(communicationType, campaign);
+
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean sendInAppClick(boolean isDismissed, JSONObject args,
                                             final CallbackContext callbackContext) {
         String type = args.optString(INAPP_TYPE);
         int campaignId = args.optInt(INAPP_CAMPAIGN_ID);
@@ -941,8 +973,8 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         EMMACampaign campaign = new EMMACampaign(campaignType);
         campaign.setCampaignID(campaignId);
 
-        if (isInAppImpression) {
-            EMMA.getInstance().sendInAppImpression(communicationType, campaign);
+        if (isDismissed) {
+            EMMA.getInstance().sendInAppDismissedClick(communicationType, campaign);
         } else {
             EMMA.getInstance().sendInAppClick(communicationType, campaign);
         }
