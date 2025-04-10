@@ -103,6 +103,7 @@
 - (void)inAppMessage:(CDVInvokedUrlCommand *)command;
 - (void)onDeviceReady:(CDVInvokedUrlCommand *)command;
 - (void)setCustomerId:(CDVInvokedUrlCommand *)command;
+- (void)setUserLanguage:(CDVInvokedUrlCommand *)command;
 - (void)requestTrackingWithIdfa:(CDVInvokedUrlCommand *)command;
 - (void)sendInAppImpression:(CDVInvokedUrlCommand *)command;
 - (void)sendInAppClick:(CDVInvokedUrlCommand *)command;

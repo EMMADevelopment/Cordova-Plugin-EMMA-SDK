@@ -13,6 +13,8 @@
 
 @property int id;
 @property NSString *name;
+@property NSString *channel;
 @property EMMAInstallAttributionProvider *provider;
+@property NSDictionary *params;
 
 @end

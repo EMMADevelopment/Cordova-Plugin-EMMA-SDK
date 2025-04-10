@@ -1,3 +1,6 @@
+## 1.9.0
+- Update native sdk dependencies: added new setUserLanguage method that allows users to manually set the language instead of relying on auto-detection.
+
 ## 1.2.1
 
 - Added new methods sendInAppImpression and sendInAppClick to send impression or/and click for nativeAd

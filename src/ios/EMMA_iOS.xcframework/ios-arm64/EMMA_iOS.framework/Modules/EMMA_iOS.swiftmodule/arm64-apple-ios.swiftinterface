@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name EMMA_iOS
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
 import DeveloperToolsSupport
 @_exported import EMMA_iOS
 import Foundation
@@ -225,6 +226,8 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   public static func updatePostbackConversionValue(_ fineValue: Swift.Int, coarseValue: Swift.String, lockWindow: Swift.Bool, completionHandler completion: (((any Swift.Error)?) -> Swift.Void)? = nil)
   public static func updateConversionValue(_ conversionValue: Swift.Int)
   public static func setBannerParams(_ params: EMMA_iOS.EMMABannerParams?)
+  public static func lastRetargetingClickKey() -> Swift.String
+  public static func setUserLanguage(_ language: Swift.String)
   @objc deinit
 }
 @objc @objcMembers public class EMMAPushPayload : ObjectiveC.NSObject {
@@ -237,8 +240,10 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   @objc public var plugins: [Swift.String : any EMMA_iOS.EMMAInAppPluginProtocol] {
     get
   }
+  @objc public var temporaryPluginStorage: EMMA_iOS.EMMANativeAd?
   @objc public func addPlugins(_ addedPlugins: Swift.Array<any EMMA_iOS.EMMAInAppPluginProtocol>)
   @objc public func isAvailablePlugin(_ type: Swift.String) -> Swift.Bool
+  @objc public func showPlugin(_ nativeAd: EMMA_iOS.EMMANativeAd)
   @objc override dynamic public init()
   @objc deinit
 }

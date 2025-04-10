@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "EMMA_iOS",
+    "printedName": "EMMA_iOS",
     "children": [
       {
         "kind": "Import",
@@ -356,6 +356,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -532,6 +546,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -855,6 +883,20 @@
         ],
         "enumRawTypeName": "Int",
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -1193,6 +1235,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -1485,6 +1541,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -1954,6 +2024,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -2089,6 +2173,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -2709,6 +2807,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -3411,6 +3523,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -3564,6 +3690,22 @@
         "declAttributes": [
           "AccessControl",
           "ObjC"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -3782,6 +3924,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -4076,6 +4232,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -4860,6 +5030,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -5089,6 +5273,20 @@
         ],
         "enumRawTypeName": "Int",
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -5649,6 +5847,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -8226,6 +8438,58 @@
               "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "lastRetargetingClickKey",
+            "printedName": "lastRetargetingClickKey()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8EMMA_iOS0A0C23lastRetargetingClickKeySSyFZ",
+            "mangledName": "$s8EMMA_iOS0A0C23lastRetargetingClickKeySSyFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setUserLanguage",
+            "printedName": "setUserLanguage(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8EMMA_iOS0A0C15setUserLanguageyySSFZ",
+            "mangledName": "$s8EMMA_iOS0A0C15setUserLanguageyySSFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Class",
@@ -8236,7 +8500,23 @@
           "AccessControl",
           "RawDocComment"
         ],
-        "hasMissingDesignatedInitializers": true
+        "hasMissingDesignatedInitializers": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -8439,6 +8719,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -8581,6 +8875,123 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "temporaryPluginStorage",
+            "printedName": "temporaryPluginStorage",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "EMMA_iOS.EMMANativeAd?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "EMMANativeAd",
+                    "printedName": "EMMA_iOS.EMMANativeAd",
+                    "usr": "c:objc(cs)EMMANativeAd"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAInAppPluginController(py)temporaryPluginStorage",
+            "mangledName": "$s8EMMA_iOS25EMMAInAppPluginControllerC09temporaryE7StorageSo12EMMANativeAdCSgvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "EMMA_iOS.EMMANativeAd?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "EMMANativeAd",
+                        "printedName": "EMMA_iOS.EMMANativeAd",
+                        "usr": "c:objc(cs)EMMANativeAd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAInAppPluginController(im)temporaryPluginStorage",
+                "mangledName": "$s8EMMA_iOS25EMMAInAppPluginControllerC09temporaryE7StorageSo12EMMANativeAdCSgvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "EMMA_iOS.EMMANativeAd?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "EMMANativeAd",
+                        "printedName": "EMMA_iOS.EMMANativeAd",
+                        "usr": "c:objc(cs)EMMANativeAd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAInAppPluginController(im)setTemporaryPluginStorage:",
+                "mangledName": "$s8EMMA_iOS25EMMAInAppPluginControllerC09temporaryE7StorageSo12EMMANativeAdCSgvs",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8EMMA_iOS25EMMAInAppPluginControllerC09temporaryE7StorageSo12EMMANativeAdCSgvM",
+                "mangledName": "$s8EMMA_iOS25EMMAInAppPluginControllerC09temporaryE7StorageSo12EMMANativeAdCSgvM",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
             "kind": "Function",
             "name": "addPlugins",
             "printedName": "addPlugins(_:)",
@@ -8644,6 +9055,33 @@
             "funcSelfKind": "NonMutating"
           },
           {
+            "kind": "Function",
+            "name": "showPlugin",
+            "printedName": "showPlugin(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "EMMANativeAd",
+                "printedName": "EMMA_iOS.EMMANativeAd",
+                "usr": "c:objc(cs)EMMANativeAd"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAInAppPluginController(im)showPlugin:",
+            "mangledName": "$s8EMMA_iOS25EMMAInAppPluginControllerC04showE0yySo12EMMANativeAdCF",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init()",
@@ -8685,6 +9123,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -8968,6 +9420,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -9050,462 +9516,392 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMANotificationServiceController.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMANotificationServiceController.swift",
       "kind": "StringLiteral",
       "offset": 351,
       "length": 17,
       "value": "\"EMMAPushService\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMANotificationServiceController.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMANotificationServiceController.swift",
       "kind": "StringLiteral",
       "offset": 415,
       "length": 16,
       "value": "\"emma_category_\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMANotificationServiceController.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMANotificationServiceController.swift",
       "kind": "IntegerLiteral",
       "offset": 483,
       "length": 2,
       "value": "50"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMAUserDefaults.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMAUserDefaults.swift",
       "kind": "StringLiteral",
       "offset": 240,
       "length": 23,
       "value": "\"emma_push_badge_count\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMAUserDefaults.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMAUserDefaults.swift",
       "kind": "StringLiteral",
       "offset": 309,
       "length": 30,
       "value": "\"emma_notification_categories\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
       "kind": "IntegerLiteral",
       "offset": 220,
       "length": 8,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
       "kind": "IntegerLiteral",
       "offset": 238,
       "length": 9,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
       "kind": "IntegerLiteral",
       "offset": 257,
       "length": 9,
       "value": "3"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
-      "kind": "IntegerLiteral",
-      "offset": 220,
-      "length": 8,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
-      "kind": "IntegerLiteral",
-      "offset": 238,
-      "length": 9,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
-      "kind": "IntegerLiteral",
-      "offset": 257,
-      "length": 9,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
       "kind": "StringLiteral",
       "offset": 718,
       "length": 6,
       "value": "\"type\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAClickMode.swift",
       "kind": "StringLiteral",
       "offset": 753,
       "length": 8,
       "value": "\"ctaUrl\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushOptions.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushOptions.swift",
       "kind": "BooleanLiteral",
       "offset": 253,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushOptions.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushOptions.swift",
       "kind": "BooleanLiteral",
       "offset": 296,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
       "kind": "StringLiteral",
       "offset": 277,
       "length": 11,
       "value": "\"clickMode\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
       "kind": "StringLiteral",
       "offset": 324,
       "length": 6,
       "value": "\"type\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
       "kind": "StringLiteral",
       "offset": 368,
       "length": 8,
       "value": "\"ctaUrl\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
       "kind": "StringLiteral",
       "offset": 417,
       "length": 21,
       "value": "\"horizontal_location\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
       "kind": "StringLiteral",
       "offset": 477,
       "length": 19,
       "value": "\"vertical_location\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
       "kind": "IntegerLiteral",
       "offset": 602,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
       "kind": "IntegerLiteral",
       "offset": 638,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAAdBallCampaign.swift",
-      "kind": "StringLiteral",
-      "offset": 189,
-      "length": 18,
-      "value": "\"EMMA_iOS.EMMAAdBallCampaign\""
-    },
-    {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPush.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPush.swift",
       "kind": "BooleanLiteral",
       "offset": 319,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPush.swift",
-      "kind": "StringLiteral",
-      "offset": 181,
-      "length": 8,
-      "value": "\"EMMA_iOS.EMMAPush\""
-    },
-    {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPush.swift",
-      "kind": "StringLiteral",
-      "offset": 181,
-      "length": 8,
-      "value": "\"EMMA_iOS.EMMAPush\""
-    },
-    {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMANativeAdField.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMANativeAdField.swift",
       "kind": "StringLiteral",
       "offset": 251,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMANativeAdField.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMANativeAdField.swift",
       "kind": "StringLiteral",
       "offset": 284,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMANativeAdField.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMANativeAdField.swift",
       "kind": "StringLiteral",
       "offset": 320,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMANativeAdField.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMANativeAdField.swift",
       "kind": "StringLiteral",
       "offset": 354,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMABannerParams.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMABannerParams.swift",
       "kind": "IntegerLiteral",
       "offset": 248,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMABannerParams.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMABannerParams.swift",
       "kind": "IntegerLiteral",
       "offset": 288,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
       "kind": "IntegerLiteral",
       "offset": 229,
       "length": 6,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
-      "kind": "IntegerLiteral",
-      "offset": 229,
-      "length": 6,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
       "kind": "StringLiteral",
       "offset": 344,
       "length": 4,
       "value": "\"id\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
       "kind": "StringLiteral",
       "offset": 375,
       "length": 6,
       "value": "\"text\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
       "kind": "StringLiteral",
       "offset": 410,
       "length": 5,
       "value": "\"act\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
       "kind": "StringLiteral",
       "offset": 442,
       "length": 4,
       "value": "\"ic\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
       "kind": "StringLiteral",
       "offset": 477,
       "length": 9,
       "value": "\"ic_type\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushActionButton.swift",
-      "kind": "StringLiteral",
-      "offset": 265,
-      "length": 20,
-      "value": "\"EMMA_iOS.EMMAPushActionButton\""
-    },
-    {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 269,
       "length": 4,
       "value": "\"id\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 304,
       "length": 6,
       "value": "\"eMMa\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 338,
       "length": 18,
       "value": "\"media-attachment\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 385,
       "length": 5,
       "value": "\"url\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 416,
       "length": 5,
       "value": "\"aps\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 449,
       "length": 7,
       "value": "\"sound\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 483,
       "length": 7,
       "value": "\"alert\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 518,
       "length": 7,
       "value": "\"badge\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 562,
       "length": 17,
       "value": "\"mutable-content\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 609,
       "length": 9,
       "value": "\"buttons\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 647,
       "length": 8,
       "value": "\"params\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 681,
       "length": 11,
       "value": "\"productId\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 720,
       "length": 7,
       "value": "\"title\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "StringLiteral",
       "offset": 779,
       "length": 9,
       "value": "\"default\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "IntegerLiteral",
       "offset": 832,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "BooleanLiteral",
       "offset": 861,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "BooleanLiteral",
       "offset": 906,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "Dictionary",
       "offset": 1006,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
       "kind": "Array",
       "offset": 1090,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAPushPayload.swift",
-      "kind": "StringLiteral",
-      "offset": 195,
-      "length": 15,
-      "value": "\"EMMA_iOS.EMMAPushPayload\""
-    },
-    {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMAInAppPluginController.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Controllers\/EMMAInAppPluginController.swift",
       "kind": "Dictionary",
       "offset": 313,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAStartViewCampaign.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAStartViewCampaign.swift",
       "kind": "StringLiteral",
       "offset": 284,
       "length": 11,
       "value": "\"clickMode\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAStartViewCampaign.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAStartViewCampaign.swift",
       "kind": "StringLiteral",
       "offset": 331,
       "length": 6,
       "value": "\"type\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAStartViewCampaign.swift",
+      "filePath": "\/Users\/adrian.carrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAStartViewCampaign.swift",
       "kind": "StringLiteral",
       "offset": 375,
       "length": 8,
       "value": "\"ctaUrl\""
     },
     {
-      "filePath": "\/Users\/acarrera\/Documents\/devel\/emma-sdk-ios\/EMMA\/EMMASwift\/Utils\/Model\/EMMAStartViewCampaign.swift",
-      "kind": "StringLiteral",
-      "offset": 193,
-      "length": 21,
-      "value": "\"EMMA_iOS.EMMAStartViewCampaign\""
-    },
-    {
-      "filePath": "\/Users\/acarrera\/Library\/Developer\/Xcode\/DerivedData\/EMMA-gmrfldzkbcjmgpctichlcjxtzjxo\/Build\/Intermediates.noindex\/ArchiveIntermediates\/EMMA_iOS\/IntermediateBuildFilesPath\/EMMA.build\/Release-iphoneos\/EMMA_iOS.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/adrian.carrera\/Library\/Developer\/Xcode\/DerivedData\/EMMA-dbzqppgfuyfjrjghsthbbaolahex\/Build\/Intermediates.noindex\/ArchiveIntermediates\/EMMA_iOS\/IntermediateBuildFilesPath\/EMMA.build\/Release-iphoneos\/EMMA_iOS.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 742,
       "length": 17,

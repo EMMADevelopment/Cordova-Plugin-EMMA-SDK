@@ -225,6 +225,16 @@ exports.setCustomerId = function (customerId) {
 };
 
 /**
+ * This method allows to manually set the language instead of relying on auto-detection.
+ * 
+ * @param language
+ */
+exports.setUserLanguage = function (language) {
+  argscheck.checkArgs('S', 'EMMAPlugin.setUserLanguage', arguments);
+  exec(null, null, 'EMMAPlugin', 'setUserLanguage', [language]);
+};
+
+/**
  * ONLY IOS.
  *
  * This method allows request permissions to obtain idfa identifier

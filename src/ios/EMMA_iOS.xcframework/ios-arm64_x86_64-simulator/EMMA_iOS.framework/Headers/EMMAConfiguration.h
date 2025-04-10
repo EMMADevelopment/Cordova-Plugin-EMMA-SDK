@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSArray<NSString*>* shortPowlinkDomains;
 @property (nonatomic, assign) id<EMMAPushDelegate> pushDelegate;
 @property (nonatomic, assign) id<UNUserNotificationCenterDelegate> pushNotificationsDelegate;
+@property (nonatomic, assign) id<EMMAInstallAttributionDelegate> installAttributionDelegate;
 @property BOOL trackScreenEvents;
 /** Enable or disable Apple Ads attribution. If Apple Ads attribution is disable the attribution is made with match by fingerprint.
     Default YES.
@@ -35,6 +36,7 @@
     Default NO.
  */
 @property BOOL skanCustomManagementAttribution;
+@property int waitForAttributionInfo;
 
 -(id) initWithSessionKey:(NSString*) sessionKey;
 

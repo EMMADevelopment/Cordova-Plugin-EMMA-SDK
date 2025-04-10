@@ -648,6 +648,20 @@
 +(void)setWebSDKDomain:(NSString*) domain;
 
 ///---------------------------------------------------------------------------------------
+/// @name Language Configuration
+///---------------------------------------------------------------------------------------
+
+/**
+ *  Sets the user preferred language manually
+ *
+ *  This method allows to override the device's default language
+ *  and set a custom language for all requests.
+ *
+ *  @param language The language code following the ISO 639-1 standard (e.g., "en", "es", "fr, "zh-Hant", "zh-Hans").
+ */
++(void)setUserLanguage:(NSString*) language;
+
+///---------------------------------------------------------------------------------------
 /// @name Deprecated Methods
 ///---------------------------------------------------------------------------------------
 
@@ -690,6 +704,8 @@
 +(void)closeInAppWithType:(InAppType) type;
 
 +(void) setBannerParams: (EMMABannerParams*) bannerParams;
+
++(NSString*) lastRetargetingClickKey;
 
 #pragma clang diagnostic pop
 @end

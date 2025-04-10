@@ -7,7 +7,7 @@
     "url": "https://github.com/EMMADevelopment/Cordova-Plugin-EMMA-SDK/blob/master/LICENSE"
   },
   "name": "cordova-plugin-emma-sdk",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Cordova plugin for EMMA SDK",
   "repository": {
     "type": "git",
