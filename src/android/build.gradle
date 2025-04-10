@@ -13,5 +13,5 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.emma:eMMaSDK:4.14.+'
+    implementation 'io.emma:eMMaSDK:4.15.+'
 }

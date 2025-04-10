@@ -167,6 +167,10 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             if (args.length() == 1) {
                 return setCustomerId(args.getString(0), callbackContext);
             }
+        } else if (action.equals("setUserLanguage")) {
+            if (args.length() == 1) {
+                return setUserLanguage(args.getString(0), callbackContext);
+            }
         } else if (action.equals("sendInAppImpression")) {
             if (args.length() == 1) {
                 return sendInAppImpression(args.getJSONObject(0), callbackContext);
@@ -897,6 +901,17 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             @Override
             public void run() {
                 EMMA.getInstance().setCustomerId(customerId);
+                callbackContext.success();
+            }
+        });
+        return true;
+    }
+
+    private boolean setUserLanguage(String language, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().setUserLanguage(language);
                 callbackContext.success();
             }
         });

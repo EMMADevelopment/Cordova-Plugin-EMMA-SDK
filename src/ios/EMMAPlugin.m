@@ -460,6 +460,14 @@ enum ActionTypes {
    }];
 }
 
+- (void)setUserLanguage:(CDVInvokedUrlCommand *)command  {
+   NSString* language = [command argumentAtIndex:0 withDefault: nil];
+   if (language)
+   [self.commandDelegate runInBackground:^{
+       [EMMALegacy setUserLanguage:language];
+   }];
+}
+
 - (void)requestTrackingWithIdfa:(CDVInvokedUrlCommand *)command {
     if (@available(iOS 14.0, *)) {
         [EMMALegacy requestTrackingWithIdfa];
