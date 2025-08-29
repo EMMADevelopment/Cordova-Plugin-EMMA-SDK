@@ -1,3 +1,8 @@
+# Changelog
+
+## 1.9.1
+- Update the native iOS SDK dependency: iOS 26 update.
+
 ## 1.9.0
 - Update native sdk dependencies: added new setUserLanguage method that allows users to manually set the language instead of relying on auto-detection.
 
