@@ -1,3 +1,8 @@
+# Changelog
+
+## 1.9.1
+- Update iOS SDK dependency to version 4.15.5.
+
 ## 1.9.0
 - Update native sdk dependencies: added new setUserLanguage method that allows users to manually set the language instead of relying on auto-detection.
 
