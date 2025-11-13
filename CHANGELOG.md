@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.9.2
+- Update native SDK dependencies: 4.15.7 for Android and 4.15.6 for iOS.
+
 ## 1.9.1
 - Update iOS SDK dependency to version 4.15.5.
 
