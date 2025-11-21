@@ -78,6 +78,8 @@ enum ActionTypes {
     id skanAttribution = [configurationArgs objectForKey:skanAttributionArg];
     if (skanAttribution) {
         configuration.skanAttribution = [skanAttribution boolValue];
+    } else {
+        configuration.skanAttribution = YES;
     }
     
     id skanCustomManagementAttribution = [configurationArgs objectForKey:skanCustomManagementAttributionArg];
