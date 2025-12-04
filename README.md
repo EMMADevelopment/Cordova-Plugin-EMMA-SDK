@@ -23,8 +23,8 @@ Developer Documentation: https://developer.emma.io <br />
 
 ### <a id="native-sdk-equivalences"> Native SDK equivalences
 
-- iOS SDK **v4.15.5**
-- Android SDK **v4.15.5**
+- iOS SDK **v4.15.6**
+- Android SDK **v4.15.7**
 
 ## <a id="installation">📲Installation
 
