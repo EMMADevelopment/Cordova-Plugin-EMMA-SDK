@@ -13,6 +13,7 @@
 @class UIButton;
 @class EMMAPushOptions;
 @class EMMABannerParams;
+@class EMMAPurchaseRequest;
 @protocol EMMAInAppPluginProtocol;
 
 @import UserNotifications;
@@ -163,6 +164,20 @@
   @param customerId The customer Id
  */
 +(void)setCustomerId: (NSString*) customerId;
+
+/**
+ This method sets the user email.
+  @param email The user email
+ */
++(void)setEmail: (NSString*) email;
+
+/**
+ This method sets the user profile with customer ID, email and user tags in a single call.
+  @param customerId The customer Id (required)
+  @param email The user email (optional)
+  @param tags User tags as key-value pairs for segmentation (optional)
+ */
++(void)setUserProfile: (NSString*) customerId email: (NSString* _Nullable) email tags: (NSDictionary* _Nullable) tags;
 
 ///---------------------------------------------------------------------------------------
 /// @name Aquisition
@@ -418,6 +433,19 @@
 +(void)registerUser:(NSString*)userId forMail:(NSString*)mail;
 
 /**
+ This method updates or adds user tags for the current user to improve segmentation.
+ Tags are key-value pairs that can be used to segment users.
+
+ Example of usage:
+
+    NSDictionary *tags = @{ @"AGE" : @"40", @"BIRTHDAY" : @"1985-05-17" };
+    [EMMA trackUserTags: tags];
+
+ @param tags Dictionary with key-value pairs representing user tags for segmentation
+ */
++(void)trackUserTags:(NSDictionary*)tags;
+
+/**
  This method update or add extra parameters for current logged user in order to have a better segmentation data. It can be used anywhere.
  
     Example of usage:
@@ -426,15 +454,45 @@
     [EMMA trackExtraUserInfo: extras];
  
  @param info This method sends key/value information to track on the user
+ @deprecated Use trackUserTags: instead
  */
-+(void)trackExtraUserInfo:(NSDictionary*)info;
++(void)trackExtraUserInfo:(NSDictionary*)info __attribute__((deprecated("Use trackUserTags: instead")));
 
 ///---------------------------------------------------------------------------------------
 /// @name Purchases
 ///---------------------------------------------------------------------------------------
 
 /**
+ Tracks a complete purchase transaction with multiple products.
+
+ Example usage:
+ @code
+ NSArray *products = @[
+     [[EMMAProduct alloc] initWithId:@"001" name:@"Jeans" price:29.99 qty:1 extras:nil],
+     [[EMMAProduct alloc] initWithId:@"002" name:@"T-Shirt" price:19.99 qty:2 extras:nil]
+ ];
+
+ EMMAPurchaseRequest *request = [[EMMAPurchaseRequest alloc] initWithId:@"12345"
+                                                                 totalPrice:69.97
+                                                                 products:products
+                                                                 customerId:nil
+                                                                 coupon:nil
+                                                                 extras:nil];
+ request.coupon = @"SUMMER10";
+ request.extras = @{@"payment_method": @"card", @"store_id": @"online"};
+
+ [EMMALegacy trackPurchase:request];
+ @endcode
+
+ @param request The purchase request containing all order information
+ @see EMMAPurchaseRequest
+ */
++(void)trackPurchase:(EMMAPurchaseRequest*)request;
+
+/**
  Starts an order for adding products
+ 
+ @deprecated Use trackPurchase: instead
  
  @param orderId your order id
  @param customerId your Customer ID. If not passed, EMMA will use the logged one (if exists).
@@ -442,15 +500,19 @@
  @param coupon your coupon if needed.
  @param extras extra parameters to track (category, etc...)
  */
-+(void)startOrder:(NSString*)orderId customerId:(NSString*)customerId totalPrice:(float)totalPrice coupon:(NSString*)coupon extras:(NSDictionary*)extras;
++(void)startOrder:(NSString*)orderId customerId:(NSString*)customerId totalPrice:(float)totalPrice coupon:(NSString*)coupon extras:(NSDictionary*)extras __attribute__((deprecated("Use trackPurchase: instead")));
 
 /**
  Conveinence method without extras. See startOrder:customerId:totalPrice:coupon:extras
+ 
+ @deprecated Use trackPurchase: instead
  */
-+(void)startOrder:(NSString*)orderId customerId:(NSString*)customerId totalPrice:(float)totalPrice coupon:(NSString*)coupon;
++(void)startOrder:(NSString*)orderId customerId:(NSString*)customerId totalPrice:(float)totalPrice coupon:(NSString*)coupon __attribute__((deprecated("Use trackPurchase: instead")));
 
 /**
  Adds products to your current started order. Always startOrder should be called before.
+ 
+ @deprecated Use trackPurchase: instead
  
  @param productId your product id.
  @param name your product name
@@ -458,24 +520,23 @@
  @param price product price
  @param extras extra parameters to track
  */
-+(void)addProduct:(NSString*)productId name:(NSString*)name qty:(float)qty price:(float)price extras:(NSDictionary*)extras;
++(void)addProduct:(NSString*)productId name:(NSString*)name qty:(float)qty price:(float)price extras:(NSDictionary*)extras __attribute__((deprecated("Use trackPurchase: instead")));
 
 /**
  Convinence method without extras. See: addProduct:productId:name:qty:price:extras:
+ 
+ @deprecated Use trackPurchase: instead
  */
-+(void)addProduct:(NSString*)productId name:(NSString*)name qty:(float)qty price:(float)price;
++(void)addProduct:(NSString*)productId name:(NSString*)name qty:(float)qty price:(float)price __attribute__((deprecated("Use trackPurchase: instead")));
 
 /**
  Track the current order. It should be called after startOrder and after being all cart products added.
  
+ @deprecated Use trackPurchase: instead
+ 
  The sequence of tracking order in EMMA is always startOrder>addProduct(*distinct products)>trackOrder
  */
-+(void)trackOrder;
-
-/**
- Cancel the order referenced by an order id. If your e-commerce allows canceling orders this method updates the purchases data with the cancelled orders.
- */
-+(void)cancelOrder:(NSString*)orderId;
++(void)trackOrder __attribute__((deprecated("Use trackPurchase: instead")));
 
 ///---------------------------------------------------------------------------------------
 /// @name EMMA Rate Alert
@@ -613,6 +674,12 @@
  @param deviceToken The token received from Apple Servers.
  */
 +(void)registerToken:(NSData*)deviceToken;
+
+/**
+ * This method unregisters the device from push notifications,
+ * removing the push token from EMMA servers.
+ */
++(void)unregisterPushSystem;
 
 /**
  * This method returns if push notification is from EMMA.

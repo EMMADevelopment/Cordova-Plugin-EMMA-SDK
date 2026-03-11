@@ -70,6 +70,25 @@
 #define skadLockWindow @"lockWindow"
 #define conversionModelArg @"conversionModel"
 
+/* USER PROFILE */
+#define userProfileCustomerIdArg @"customerId"
+#define userProfileEmailArg @"email"
+#define userProfileTagsArg @"tags"
+
+/* PURCHASE */
+#define purchaseIdArg @"id"
+#define purchaseTotalPriceArg @"totalPrice"
+#define purchaseCustomerIdArg @"customerId"
+#define purchaseCouponArg @"coupon"
+#define purchaseProductsArg @"products"
+#define purchaseExtrasArg @"extras"
+
+#define productIdArg @"id"
+#define productNameArg @"name"
+#define productPriceArg @"price"
+#define productQtyArg @"qty"
+#define productExtrasArg @"extras"
+
 #define CONCAT(a, b) \
     [NSString stringWithFormat:@"%@%@", a, b]
 
@@ -96,7 +115,6 @@
 - (void)startOrder:(CDVInvokedUrlCommand *)command;
 - (void)addProduct:(CDVInvokedUrlCommand *)command;
 - (void)trackOrder:(CDVInvokedUrlCommand *)command;
-- (void)cancelOrder:(CDVInvokedUrlCommand *)command;
 - (void)enableUserTracking:(CDVInvokedUrlCommand *)command;
 - (void)disableUserTracking:(CDVInvokedUrlCommand *)command;
 - (void)isUserTrackingEnabled:(CDVInvokedUrlCommand *)command;
@@ -104,6 +122,11 @@
 - (void)onDeviceReady:(CDVInvokedUrlCommand *)command;
 - (void)setCustomerId:(CDVInvokedUrlCommand *)command;
 - (void)setUserLanguage:(CDVInvokedUrlCommand *)command;
+- (void)setEmail:(CDVInvokedUrlCommand *)command;
+- (void)setUserProfile:(CDVInvokedUrlCommand *)command;
+- (void)trackUserTags:(CDVInvokedUrlCommand *)command;
+- (void)trackPurchase:(CDVInvokedUrlCommand *)command;
+- (void)unregisterPushSystem:(CDVInvokedUrlCommand *)command;
 - (void)requestTrackingWithIdfa:(CDVInvokedUrlCommand *)command;
 - (void)sendInAppImpression:(CDVInvokedUrlCommand *)command;
 - (void)sendInAppClick:(CDVInvokedUrlCommand *)command;
