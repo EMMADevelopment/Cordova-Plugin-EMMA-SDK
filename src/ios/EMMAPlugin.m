@@ -475,7 +475,15 @@ enum ActionTypes {
         return;
     }
 
-    NSString *customerId = [userProfileMsg objectForKey:userProfileCustomerIdArg];
+    id rawCustomerId = [userProfileMsg objectForKey:userProfileCustomerIdArg];
+    if (![rawCustomerId isKindOfClass:[NSString class]] || [(NSString *)rawCustomerId length] == 0) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString: CONCAT(userProfileCustomerIdArg, mandatoryNotEmpty)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+
+    NSString *customerId = (NSString *)rawCustomerId;
     NSString *email = [userProfileMsg objectForKey:userProfileEmailArg];
     NSDictionary *tags = [userProfileMsg objectForKey:userProfileTagsArg];
 
@@ -540,24 +548,77 @@ enum ActionTypes {
     }
 
     NSMutableArray *products = [NSMutableArray new];
-    for (NSDictionary *productDict in productsArray) {
+    for (NSUInteger i = 0; i < [productsArray count]; i++) {
+        id rawProduct = [productsArray objectAtIndex:i];
+
+        if (![rawProduct isKindOfClass:[NSDictionary class]]) {
+            NSString *msg = [NSString stringWithFormat:@"%@ - product at index %lu is not a valid object", purchaseProductsArg, (unsigned long)i];
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                        messageAsString:msg];
+            [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+            return;
+        }
+
+        NSDictionary *productDict = (NSDictionary *)rawProduct;
         NSString *productId = [productDict objectForKey:productIdArg];
         NSString *productName = [productDict objectForKey:productNameArg];
         id _price = [productDict objectForKey:productPriceArg];
         id _qty = [productDict objectForKey:productQtyArg];
-        NSDictionary *extras = [productDict objectForKey:productExtrasArg];
+        id _extras = [productDict objectForKey:productExtrasArg];
 
-        if (productId && productName && _price && _qty) {
-            float price = [_price floatValue];
-            float qty = [_qty floatValue];
-
-            EMMAProduct *product = [[EMMAProduct alloc] initWithId:productId
-                                                              name:productName
-                                                             price:price
-                                                               qty:qty
-                                                            extras:extras];
-            [products addObject:product];
+        if (![productId isKindOfClass:[NSString class]] || [productId length] == 0) {
+            NSString *msg = [NSString stringWithFormat:@"%@ - product at index %lu: %@%@", purchaseProductsArg, (unsigned long)i, productIdArg, mandatoryNotEmpty];
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                        messageAsString:msg];
+            [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+            return;
         }
+
+        if (![productName isKindOfClass:[NSString class]] || [productName length] == 0) {
+            NSString *msg = [NSString stringWithFormat:@"%@ - product at index %lu: %@%@", purchaseProductsArg, (unsigned long)i, productNameArg, mandatoryNotEmpty];
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                        messageAsString:msg];
+            [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+            return;
+        }
+
+        if (!_price) {
+            NSString *msg = [NSString stringWithFormat:@"%@ - product at index %lu: %@%@", purchaseProductsArg, (unsigned long)i, productPriceArg, mandatoryNotZero];
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                        messageAsString:msg];
+            [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+            return;
+        }
+
+        if (!_qty) {
+            NSString *msg = [NSString stringWithFormat:@"%@ - product at index %lu: %@%@", purchaseProductsArg, (unsigned long)i, productQtyArg, mandatoryNotZero];
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                        messageAsString:msg];
+            [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+            return;
+        }
+
+        NSDictionary *extras = nil;
+        if (_extras) {
+            if (![_extras isKindOfClass:[NSDictionary class]]) {
+                NSString *msg = [NSString stringWithFormat:@"%@ - product at index %lu: %@%@", purchaseProductsArg, (unsigned long)i, productExtrasArg, keyValueMappingError];
+                CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                            messageAsString:msg];
+                [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+                return;
+            }
+            extras = (NSDictionary *)_extras;
+        }
+
+        float price = [_price floatValue];
+        float qty = [_qty floatValue];
+
+        EMMAProduct *product = [[EMMAProduct alloc] initWithId:productId
+                                                          name:productName
+                                                         price:price
+                                                           qty:qty
+                                                        extras:extras];
+        [products addObject:product];
     }
 
     NSString *customerId = [purchaseMsg objectForKey:purchaseCustomerIdArg];

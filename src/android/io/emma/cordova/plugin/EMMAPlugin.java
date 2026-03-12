@@ -935,6 +935,13 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
 
     private boolean setUserProfile(JSONObject args, final CallbackContext callbackContext) {
         String customerId = args.optString(USER_PROFILE_CUSTOMER_ID);
+        if (customerId == null || customerId.trim().isEmpty()) {
+            String msg = USER_PROFILE_CUSTOMER_ID + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
         String email = args.optString(USER_PROFILE_EMAIL, null);
         JSONObject tagsJSON = args.optJSONObject(USER_PROFILE_TAGS);
 
@@ -972,6 +979,11 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
                         callbackContext.success();
                     }
                 });
+            } else {
+                String msg = "User tags" + MANDATORY_NOT_EMPTY;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
             }
             return true;
         } catch (JSONException ex) {
@@ -1015,30 +1027,78 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
 
         List<EMMAProduct> products = new ArrayList<>();
         for (int i = 0; i < productsArray.length(); i++) {
+            JSONObject productJSON;
             try {
-                JSONObject productJSON = productsArray.getJSONObject(i);
-                String productId = productJSON.optString(PRODUCT_ID);
-                String productName = productJSON.optString(PRODUCT_NAME);
-                float price = (float) productJSON.getDouble(PRODUCT_PRICE);
-                float qty = (float) productJSON.getDouble(PRODUCT_QTY);
-
-                Map<String, String> extras = null;
-                JSONObject extrasJSON = productJSON.optJSONObject(PRODUCT_EXTRAS);
-                if (extrasJSON != null) {
-                    try {
-                        extras = objectToMap(extrasJSON);
-                    } catch (JSONException e) {
-                        EMMALog.e(KEY_VALUE_MAPPING_ERROR);
-                    } catch (IllegalArgumentException ex) {
-                        EMMALog.e(ex.getMessage());
-                    }
-                }
-
-                EMMAProduct product = new EMMAProduct(productId, productName, price, qty, extras);
-                products.add(product);
+                productJSON = productsArray.getJSONObject(i);
             } catch (JSONException e) {
-                EMMALog.e("Error parsing product at index " + i);
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + " is not a valid object";
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
             }
+
+            String productId = productJSON.optString(PRODUCT_ID);
+            if (productId == null || productId.trim().isEmpty()) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_ID + MANDATORY_NOT_EMPTY;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            String productName = productJSON.optString(PRODUCT_NAME);
+            if (productName == null || productName.trim().isEmpty()) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_NAME + MANDATORY_NOT_EMPTY;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            if (!productJSON.has(PRODUCT_PRICE)) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_PRICE + MANDATORY_NOT_ZERO;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            if (!productJSON.has(PRODUCT_QTY)) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_QTY + MANDATORY_NOT_ZERO;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            float price;
+            float qty;
+            try {
+                price = (float) productJSON.getDouble(PRODUCT_PRICE);
+                qty = (float) productJSON.getDouble(PRODUCT_QTY);
+            } catch (JSONException e) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": invalid numeric value for price or qty";
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            Map<String, String> extras = null;
+            JSONObject extrasJSON = productJSON.optJSONObject(PRODUCT_EXTRAS);
+            if (extrasJSON != null) {
+                try {
+                    extras = objectToMap(extrasJSON);
+                } catch (JSONException e) {
+                    String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_EXTRAS + KEY_VALUE_MAPPING_ERROR;
+                    EMMALog.e(msg);
+                    callbackContext.error(msg);
+                    return false;
+                } catch (IllegalArgumentException ex) {
+                    String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_EXTRAS + " " + ex.getMessage();
+                    EMMALog.e(msg);
+                    callbackContext.error(msg);
+                    return false;
+                }
+            }
+
+            EMMAProduct product = new EMMAProduct(productId, productName, price, qty, extras);
+            products.add(product);
         }
 
         String customerId = args.optString(PURCHASE_CUSTOMER_ID, null);
