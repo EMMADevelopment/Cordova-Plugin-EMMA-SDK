@@ -75,6 +75,7 @@ exports.trackEvent = function (eventRequest) {
 /**
  * Method to track user tags
  * @param extras key-value object with user extras.
+ * @deprecated Use trackUserTags instead.
  */
 
 exports.trackUserExtraInfo = function (extras) {
@@ -105,6 +106,7 @@ exports.registerUser = function (register) {
 /**
  * Method to start order.
  * @param order Object with register params userId and/or email.
+ * @deprecated Use trackPurchase instead.
  */
 
 exports.startOrder = function (order) {
@@ -115,6 +117,7 @@ exports.startOrder = function (order) {
 /**
  * Method to add products to the order.
  * @param product Object product to add to the order.
+ * @deprecated Use trackPurchase instead.
  */
 
 exports.addProduct = function (product) {
@@ -124,20 +127,11 @@ exports.addProduct = function (product) {
 
 /**
  * Method to send the order.
+ * @deprecated Use trackPurchase instead.
  */
 
 exports.trackOrder = function () {
   exec(null, null, 'EMMAPlugin', 'trackOrder', []);
-};
-
-/**
- * Method to cancel order.
- * @param orderId of order to cancel.
- */
-
-exports.cancelOrder = function (orderId) {
-  argscheck.checkArgs('S', 'EMMAPlugin.cancelOrder', arguments);
-  exec(null, null, 'EMMAPlugin', 'cancelOrder', [orderId]);
 };
 
 /**
@@ -232,6 +226,61 @@ exports.setCustomerId = function (customerId) {
 exports.setUserLanguage = function (language) {
   argscheck.checkArgs('S', 'EMMAPlugin.setUserLanguage', arguments);
   exec(null, null, 'EMMAPlugin', 'setUserLanguage', [language]);
+};
+
+/**
+ * This method allows to set user email.
+ *
+ * @param email User email
+ */
+exports.setEmail = function (email) {
+  argscheck.checkArgs('S', 'EMMAPlugin.setEmail', arguments);
+  exec(null, null, 'EMMAPlugin', 'setEmail', [email]);
+};
+
+/**
+ * This method allows to set user profile with optional email and tags.
+ *
+ * @param customerId Customer identifier
+ * @param email User email (optional)
+ * @param tags Key-value object with user tags (optional)
+ */
+exports.setUserProfile = function (customerId, email, tags) {
+  argscheck.checkArgs('S**', 'EMMAPlugin.setUserProfile', arguments);
+  exec(null, null, 'EMMAPlugin', 'setUserProfile', [{ customerId, email, tags }]);
+};
+
+/**
+ * Method to track user tags.
+ *
+ * @param tags Key-value object with user tags
+ */
+exports.trackUserTags = function (tags) {
+  argscheck.checkArgs('O', 'EMMAPlugin.trackUserTags', arguments);
+  exec(null, null, 'EMMAPlugin', 'trackUserTags', [tags]);
+};
+
+/**
+ * Method to track purchases.
+ *
+ * @param purchaseRequest Object with purchase data:
+ *   - id: purchase identifier (required)
+ *   - totalPrice: total price (required)
+ *   - products: array of products (required)
+ *   - customerId: customer identifier (optional)
+ *   - coupon: coupon code (optional)
+ *   - extras: key-value object with additional data (optional)
+ */
+exports.trackPurchase = function (purchaseRequest) {
+  argscheck.checkArgs('O', 'EMMAPlugin.trackPurchase', arguments);
+  exec(null, null, 'EMMAPlugin', 'trackPurchase', [purchaseRequest]);
+};
+
+/**
+ * Method to unregister from push notifications system.
+ */
+exports.unregisterPushSystem = function () {
+  exec(null, null, 'EMMAPlugin', 'unregisterPushSystem', []);
 };
 
 /**

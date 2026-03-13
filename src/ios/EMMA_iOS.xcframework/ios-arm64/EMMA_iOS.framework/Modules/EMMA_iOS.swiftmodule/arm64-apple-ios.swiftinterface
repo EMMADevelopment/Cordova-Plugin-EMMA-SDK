@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.19.9 clang-1700.3.19.1)
+// swift-compiler-version: Apple Swift version 6.2.3 effective-5.10 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name EMMA_iOS
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.3
 import DeveloperToolsSupport
 @_exported import EMMA_iOS
 import Foundation
@@ -80,6 +80,18 @@ import _SwiftConcurrencyShims
   @objc override dynamic public init()
   @objc deinit
 }
+@objc @objcMembers public class EMMAProduct : ObjectiveC.NSObject {
+  @objc final public let id: Swift.String
+  @objc final public let name: Swift.String
+  @objc final public let price: Swift.Float
+  @objc final public let qty: Swift.Float
+  @objc final public let extras: [Swift.String : Any]?
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public init(id: Swift.String, name: Swift.String, price: Swift.Float, qty: Swift.Float, extras: [Swift.String : Any]? = nil)
+  #endif
+  @objc public func toDictionary() -> [Swift.String : Any]
+  @objc deinit
+}
 @objc @objcMembers public class EMMAPush : EMMA_iOS.EMMACampaign {
   @objc public var message: Swift.String?
   @objc public var tag: Swift.String?
@@ -118,6 +130,18 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   @objc public var offsetTop: Swift.Double
   @objc public var offsetBottom: Swift.Double
   @objc override dynamic public init()
+  @objc deinit
+}
+@objc @objcMembers public class EMMAPurchaseRequest : ObjectiveC.NSObject {
+  @objc final public let id: Swift.String
+  @objc public var customerId: Swift.String?
+  @objc final public let totalPrice: Swift.Float
+  @objc public var coupon: Swift.String?
+  @objc final public let products: [EMMA_iOS.EMMAProduct]
+  @objc public var extras: [Swift.String : Any]?
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public init(id: Swift.String, totalPrice: Swift.Float, products: [EMMA_iOS.EMMAProduct], customerId: Swift.String? = nil, coupon: Swift.String? = nil, extras: [Swift.String : Any]? = nil)
+  #endif
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @objcMembers public class EMMAUtils : ObjectiveC.NSObject {
@@ -208,6 +232,10 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   @available(iOS 14.0, *)
   public static func requestTrackingWithIdfa()
   public static func setCustomerId(customerId: Swift.String)
+  public static func setEmail(email: Swift.String)
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func setUserProfile(customerId: Swift.String, email: Swift.String? = nil, tags: [Swift.String : Swift.String]? = nil)
+  #endif
   public static func handleLink(url: Foundation.URL)
   public static func setPowlinkDomains(customDomains: [Swift.String])
   public static func setShortPowlinkDomains(customDomains: [Swift.String])
@@ -243,15 +271,20 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   #if compiler(>=5.3) && $NonescapableTypes
   public static func registerUser(userId: Swift.String, forMail mail: Swift.String?, andExtras extras: Swift.Dictionary<Swift.String, Swift.String>?)
   #endif
+  public static func trackUserTags(tags: [Swift.String : Swift.String])
+  @available(*, deprecated, message: "Use trackUserTags(tags:) instead")
   public static func trackExtraUserInfo(info: Swift.Dictionary<Swift.String, Swift.String>)
+  public static func trackPurchase(request: EMMA_iOS.EMMAPurchaseRequest)
   #if compiler(>=5.3) && $NonescapableTypes
+  @available(*, deprecated, message: "Use trackPurchase(request:) instead")
   public static func startOrder(orderId: Swift.String, andCustomer customerId: Swift.String, withTotalPrice totalPrice: Swift.Float, withExtras extras: Swift.Dictionary<Swift.String, Swift.String>?, assignCoupon coupon: Swift.String?)
   #endif
   #if compiler(>=5.3) && $NonescapableTypes
+  @available(*, deprecated, message: "Use trackPurchase(request:) instead")
   public static func addProduct(productId: Swift.String, andName name: Swift.String, withQty qty: Swift.Float, andPrice price: Swift.Float, withExtras extras: Swift.Dictionary<Swift.String, Swift.String>?)
   #endif
+  @available(*, deprecated, message: "Use trackPurchase(request:) instead")
   public static func trackOrder()
-  public static func cancelOrder(orderId: Swift.String)
   public static func startPushSystem()
   public static func startPushSystem(with options: EMMA_iOS.EMMAPushOptions)
   @available(*, deprecated)
@@ -262,6 +295,7 @@ public typealias EMMAInAppPlugin = EMMA_iOS.EMMAInAppPluginImpl & EMMA_iOS.EMMAI
   public static func handlePush(userInfo: Swift.Dictionary<Swift.AnyHashable, Any>)
   public static func handlePush(userInfo: Swift.Dictionary<Swift.AnyHashable, Any>, actionIdentifier: Swift.String)
   public static func registerToken(_ token: Foundation.Data)
+  public static func unregisterPushSystem()
   @available(iOS 10.0, *)
   public static func isEMMAPushNotification(content: UserNotifications.UNNotificationContent) -> Swift.Bool
   #if compiler(>=5.3) && $NonescapableTypes

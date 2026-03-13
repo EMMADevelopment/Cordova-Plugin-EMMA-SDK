@@ -75,6 +75,25 @@ public class EMMAPluginConstants {
     static final String ORDER_PRODUCT_NAME = "productName";
     static final String ORDER_PRODUCT_QUANTITY = "quantity";
 
+    /* PURCHASE */
+    static final String PURCHASE_ID = "id";
+    static final String PURCHASE_TOTAL_PRICE = "totalPrice";
+    static final String PURCHASE_CUSTOMER_ID = "customerId";
+    static final String PURCHASE_COUPON = "coupon";
+    static final String PURCHASE_PRODUCTS = "products";
+    static final String PURCHASE_EXTRAS = "extras";
+
+    static final String PRODUCT_ID = "id";
+    static final String PRODUCT_NAME = "name";
+    static final String PRODUCT_PRICE = "price";
+    static final String PRODUCT_QTY = "qty";
+    static final String PRODUCT_EXTRAS = "extras";
+
+    /* USER PROFILE */
+    static final String USER_PROFILE_CUSTOMER_ID = "customerId";
+    static final String USER_PROFILE_EMAIL = "email";
+    static final String USER_PROFILE_TAGS = "tags";
+
     /* INAPP */
     static final String INAPP_TYPE = "type";
     static final String INAPP_TEMPLATE_ID = "templateId";

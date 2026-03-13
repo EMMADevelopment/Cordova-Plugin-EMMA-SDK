@@ -2250,6 +2250,529 @@
       },
       {
         "kind": "TypeDecl",
+        "name": "EMMAProduct",
+        "printedName": "EMMAProduct",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "id",
+            "printedName": "id",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(py)id",
+            "mangledName": "$s8EMMA_iOS11EMMAProductC2idSSvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(im)id",
+                "mangledName": "$s8EMMA_iOS11EMMAProductC2idSSvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "name",
+            "printedName": "name",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(py)name",
+            "mangledName": "$s8EMMA_iOS11EMMAProductC4nameSSvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(im)name",
+                "mangledName": "$s8EMMA_iOS11EMMAProductC4nameSSvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "price",
+            "printedName": "price",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Float",
+                "printedName": "Swift.Float",
+                "usr": "s:Sf"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(py)price",
+            "mangledName": "$s8EMMA_iOS11EMMAProductC5priceSfvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Float",
+                    "printedName": "Swift.Float",
+                    "usr": "s:Sf"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(im)price",
+                "mangledName": "$s8EMMA_iOS11EMMAProductC5priceSfvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "qty",
+            "printedName": "qty",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Float",
+                "printedName": "Swift.Float",
+                "usr": "s:Sf"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(py)qty",
+            "mangledName": "$s8EMMA_iOS11EMMAProductC3qtySfvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Float",
+                    "printedName": "Swift.Float",
+                    "usr": "s:Sf"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(im)qty",
+                "mangledName": "$s8EMMA_iOS11EMMAProductC3qtySfvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "extras",
+            "printedName": "extras",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(py)extras",
+            "mangledName": "$s8EMMA_iOS11EMMAProductC6extrasSDySSypGSgvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "[Swift.String : Any]?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Dictionary",
+                        "printedName": "[Swift.String : Any]",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ],
+                        "usr": "s:SD"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(im)extras",
+                "mangledName": "$s8EMMA_iOS11EMMAProductC6extrasSDySSypGSgvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(id:name:price:qty:extras:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "EMMAProduct",
+                "printedName": "EMMA_iOS.EMMAProduct",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Float",
+                "printedName": "Swift.Float",
+                "usr": "s:Sf"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Float",
+                "printedName": "Swift.Float",
+                "usr": "s:Sf"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(im)initWithId:name:price:qty:extras:",
+            "mangledName": "$s8EMMA_iOS11EMMAProductC2id4name5price3qty6extrasACSS_SSS2fSDySSypGSgtcfc",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "toDictionary",
+            "printedName": "toDictionary()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(im)toDictionary",
+            "mangledName": "$s8EMMA_iOS11EMMAProductC12toDictionarySDySSypGyF",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "EMMAProduct",
+                "printedName": "EMMA_iOS.EMMAProduct",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct(im)init",
+            "mangledName": "$s8EMMA_iOS11EMMAProductCACycfc",
+            "moduleName": "EMMA_iOS",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct",
+        "mangledName": "$s8EMMA_iOS11EMMAProductC",
+        "moduleName": "EMMA_iOS",
+        "declAttributes": [
+          "AccessControl",
+          "ObjCMembers",
+          "RawDocComment",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "EMMA_iOS",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
         "name": "EMMAPush",
         "printedName": "EMMAPush",
         "children": [
@@ -4228,6 +4751,790 @@
         ],
         "superclassUsr": "c:objc(cs)NSObject",
         "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "EMMA_iOS",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "EMMAPurchaseRequest",
+        "printedName": "EMMAPurchaseRequest",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "id",
+            "printedName": "id",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(py)id",
+            "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC2idSSvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)id",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC2idSSvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "customerId",
+            "printedName": "customerId",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(py)customerId",
+            "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC10customerIdSSSgvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)customerId",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC10customerIdSSSgvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)setCustomerId:",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC10customerIdSSSgvs",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8EMMA_iOS19EMMAPurchaseRequestC10customerIdSSSgvM",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC10customerIdSSSgvM",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "totalPrice",
+            "printedName": "totalPrice",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Float",
+                "printedName": "Swift.Float",
+                "usr": "s:Sf"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(py)totalPrice",
+            "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC10totalPriceSfvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Float",
+                    "printedName": "Swift.Float",
+                    "usr": "s:Sf"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)totalPrice",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC10totalPriceSfvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "coupon",
+            "printedName": "coupon",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(py)coupon",
+            "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC6couponSSSgvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)coupon",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC6couponSSSgvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)setCoupon:",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC6couponSSSgvs",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8EMMA_iOS19EMMAPurchaseRequestC6couponSSSgvM",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC6couponSSSgvM",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "products",
+            "printedName": "products",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[EMMA_iOS.EMMAProduct]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "EMMAProduct",
+                    "printedName": "EMMA_iOS.EMMAProduct",
+                    "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(py)products",
+            "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC8productsSayAA11EMMAProductCGvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[EMMA_iOS.EMMAProduct]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "EMMAProduct",
+                        "printedName": "EMMA_iOS.EMMAProduct",
+                        "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)products",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC8productsSayAA11EMMAProductCGvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "extras",
+            "printedName": "extras",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(py)extras",
+            "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC6extrasSDySSypGSgvp",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "[Swift.String : Any]?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Dictionary",
+                        "printedName": "[Swift.String : Any]",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ],
+                        "usr": "s:SD"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)extras",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC6extrasSDySSypGSgvg",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "[Swift.String : Any]?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Dictionary",
+                        "printedName": "[Swift.String : Any]",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ProtocolComposition",
+                            "printedName": "Any"
+                          }
+                        ],
+                        "usr": "s:SD"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)setExtras:",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC6extrasSDySSypGSgvs",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:8EMMA_iOS19EMMAPurchaseRequestC6extrasSDySSypGSgvM",
+                "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC6extrasSDySSypGSgvM",
+                "moduleName": "EMMA_iOS",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(id:totalPrice:products:customerId:coupon:extras:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "EMMAPurchaseRequest",
+                "printedName": "EMMA_iOS.EMMAPurchaseRequest",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Float",
+                "printedName": "Swift.Float",
+                "usr": "s:Sf"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[EMMA_iOS.EMMAProduct]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "EMMAProduct",
+                    "printedName": "EMMA_iOS.EMMAProduct",
+                    "usr": "c:@M@EMMA_iOS@objc(cs)EMMAProduct"
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)initWithId:totalPrice:products:customerId:coupon:extras:",
+            "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC2id10totalPrice8products10customerId6coupon6extrasACSS_SfSayAA11EMMAProductCGSSSgAMSDySSypGSgtcfc",
+            "moduleName": "EMMA_iOS",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "EMMAPurchaseRequest",
+                "printedName": "EMMA_iOS.EMMAPurchaseRequest",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest(im)init",
+            "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestCACycfc",
+            "moduleName": "EMMA_iOS",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest",
+        "mangledName": "$s8EMMA_iOS19EMMAPurchaseRequestC",
+        "moduleName": "EMMA_iOS",
+        "declAttributes": [
+          "AccessControl",
+          "ObjCMembers",
+          "RawDocComment",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
         "superclassNames": [
           "ObjectiveC.NSObject"
         ],
@@ -6486,6 +7793,108 @@
           },
           {
             "kind": "Function",
+            "name": "setEmail",
+            "printedName": "setEmail(email:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8EMMA_iOS0A0C8setEmail5emailySS_tFZ",
+            "mangledName": "$s8EMMA_iOS0A0C8setEmail5emailySS_tFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setUserProfile",
+            "printedName": "setUserProfile(customerId:email:tags:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Swift.String]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Swift.String]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8EMMA_iOS0A0C14setUserProfile10customerId5email4tagsySS_SSSgSDyS2SGSgtFZ",
+            "mangledName": "$s8EMMA_iOS0A0C14setUserProfile10customerId5email4tagsySS_SSSgSDyS2SGSgtFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "handleLink",
             "printedName": "handleLink(url:)",
             "children": [
@@ -7410,6 +8819,49 @@
           },
           {
             "kind": "Function",
+            "name": "trackUserTags",
+            "printedName": "trackUserTags(tags:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8EMMA_iOS0A0C13trackUserTags4tagsySDyS2SG_tFZ",
+            "mangledName": "$s8EMMA_iOS0A0C13trackUserTags4tagsySDyS2SG_tFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "trackExtraUserInfo",
             "printedName": "trackExtraUserInfo(info:)",
             "children": [
@@ -7442,6 +8894,37 @@
             "declKind": "Func",
             "usr": "s:8EMMA_iOS0A0C18trackExtraUserInfo4infoySDyS2SG_tFZ",
             "mangledName": "$s8EMMA_iOS0A0C18trackExtraUserInfo4infoySDyS2SG_tFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "deprecated": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "Available",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "trackPurchase",
+            "printedName": "trackPurchase(request:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "EMMAPurchaseRequest",
+                "printedName": "EMMA_iOS.EMMAPurchaseRequest",
+                "usr": "c:@M@EMMA_iOS@objc(cs)EMMAPurchaseRequest"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8EMMA_iOS0A0C13trackPurchase7requestyAA19EMMAPurchaseRequestC_tFZ",
+            "mangledName": "$s8EMMA_iOS0A0C13trackPurchase7requestyAA19EMMAPurchaseRequestC_tFZ",
             "moduleName": "EMMA_iOS",
             "static": true,
             "declAttributes": [
@@ -7527,9 +9010,11 @@
             "mangledName": "$s8EMMA_iOS0A0C10startOrder7orderId11andCustomer14withTotalPrice0I6Extras12assignCouponySS_SSSfSDyS2SGSgSSSgtFZ",
             "moduleName": "EMMA_iOS",
             "static": true,
+            "deprecated": true,
             "declAttributes": [
               "Final",
               "AccessControl",
+              "Available",
               "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
@@ -7602,9 +9087,11 @@
             "mangledName": "$s8EMMA_iOS0A0C10addProduct9productId7andName7withQty0G5Price0I6ExtrasySS_SSS2fSDyS2SGSgtFZ",
             "moduleName": "EMMA_iOS",
             "static": true,
+            "deprecated": true,
             "declAttributes": [
               "Final",
               "AccessControl",
+              "Available",
               "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
@@ -7625,38 +9112,11 @@
             "mangledName": "$s8EMMA_iOS0A0C10trackOrderyyFZ",
             "moduleName": "EMMA_iOS",
             "static": true,
+            "deprecated": true,
             "declAttributes": [
               "Final",
               "AccessControl",
-              "RawDocComment"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "cancelOrder",
-            "printedName": "cancelOrder(orderId:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:8EMMA_iOS0A0C11cancelOrder7orderIdySS_tFZ",
-            "mangledName": "$s8EMMA_iOS0A0C11cancelOrder7orderIdySS_tFZ",
-            "moduleName": "EMMA_iOS",
-            "static": true,
-            "declAttributes": [
-              "Final",
-              "AccessControl",
+              "Available",
               "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
@@ -7914,6 +9374,29 @@
             "declKind": "Func",
             "usr": "s:8EMMA_iOS0A0C13registerTokenyy10Foundation4DataVFZ",
             "mangledName": "$s8EMMA_iOS0A0C13registerTokenyy10Foundation4DataVFZ",
+            "moduleName": "EMMA_iOS",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "unregisterPushSystem",
+            "printedName": "unregisterPushSystem()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:8EMMA_iOS0A0C20unregisterPushSystemyyFZ",
+            "mangledName": "$s8EMMA_iOS0A0C20unregisterPushSystemyyFZ",
             "moduleName": "EMMA_iOS",
             "static": true,
             "declAttributes": [

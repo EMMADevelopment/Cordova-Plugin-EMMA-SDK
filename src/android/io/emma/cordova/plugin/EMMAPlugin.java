@@ -38,6 +38,8 @@ import io.emma.android.model.EMMAInAppRequest;
 import io.emma.android.model.EMMANativeAd;
 import io.emma.android.model.EMMANativeAdField;
 import io.emma.android.model.EMMANativeAdRequest;
+import io.emma.android.model.EMMAProduct;
+import io.emma.android.model.EMMAPurchaseRequest;
 import io.emma.android.model.EMMAPushOptions;
 import io.emma.android.push.EMMAPushNotificationsManager;
 import io.emma.android.utils.EMMALog;
@@ -135,8 +137,6 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             }
         } else if (action.equals("trackOrder")) {
             return trackOrder(callbackContext);
-        } else if (action.equals("cancelOrder")) {
-            return cancelOrder(args, callbackContext);
         } else if (action.equals("inAppMessage")) {
             if (args.length() == 1) {
                 return inAppMessage(args.getJSONObject(0), callbackContext);
@@ -171,6 +171,24 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             if (args.length() == 1) {
                 return setUserLanguage(args.getString(0), callbackContext);
             }
+        } else if (action.equals("setEmail")) {
+            if (args.length() == 1) {
+                return setEmail(args.getString(0), callbackContext);
+            }
+        } else if (action.equals("setUserProfile")) {
+            if (args.length() == 1) {
+                return setUserProfile(args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("trackUserTags")) {
+            if (args.length() == 1) {
+                return trackUserTags(args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("trackPurchase")) {
+            if (args.length() == 1) {
+                return trackPurchase(args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("unregisterPushSystem")) {
+            return unregisterPushSystem(callbackContext);
         } else if (action.equals("sendInAppImpression")) {
             if (args.length() == 1) {
                 return sendInAppImpression(args.getJSONObject(0), callbackContext);
@@ -556,20 +574,6 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         return true;
     }
 
-    private boolean cancelOrder(JSONArray array, CallbackContext callbackContext) {
-        String orderId = array.optString(0);
-        if (orderId.trim().equals("")) {
-            String msg = ORDER_ID + MANDATORY_NOT_EMPTY;
-            EMMALog.e(msg);
-            callbackContext.error(msg);
-            return false;
-        }
-
-        EMMA.getInstance().cancelOrder(orderId);
-        callbackContext.success();
-        return true;
-    }
-
     private boolean inAppMessage(JSONObject args, CallbackContext callbackContext) {
 
         String inAppType = args.optString(INAPP_TYPE);
@@ -912,6 +916,223 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             @Override
             public void run() {
                 EMMA.getInstance().setUserLanguage(language);
+                callbackContext.success();
+            }
+        });
+        return true;
+    }
+
+    private boolean setEmail(String email, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().setEmail(email);
+                callbackContext.success();
+            }
+        });
+        return true;
+    }
+
+    private boolean setUserProfile(JSONObject args, final CallbackContext callbackContext) {
+        String customerId = args.optString(USER_PROFILE_CUSTOMER_ID);
+        if (customerId == null || customerId.trim().isEmpty()) {
+            String msg = USER_PROFILE_CUSTOMER_ID + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        String email = args.optString(USER_PROFILE_EMAIL, null);
+        JSONObject tagsJSON = args.optJSONObject(USER_PROFILE_TAGS);
+
+        Map<String, String> tags = null;
+        if (tagsJSON != null) {
+            try {
+                tags = objectToMap(tagsJSON);
+            } catch (JSONException e) {
+                EMMALog.e(KEY_VALUE_MAPPING_ERROR);
+            } catch (IllegalArgumentException ex) {
+                EMMALog.e(ex.getMessage());
+            }
+        }
+
+        final Map<String, String> finalTags = tags;
+        final String finalEmail = email;
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().setUserProfile(customerId, finalEmail, finalTags);
+                callbackContext.success();
+            }
+        });
+        return true;
+    }
+
+    private boolean trackUserTags(JSONObject tagsJSON, final CallbackContext callbackContext) {
+        try {
+            final Map<String, String> tags = objectToMap(tagsJSON);
+            if (tags.size() > 0) {
+                cordova.getThreadPool().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        EMMA.getInstance().trackUserTags(tags);
+                        callbackContext.success();
+                    }
+                });
+            } else {
+                String msg = "User tags" + MANDATORY_NOT_EMPTY;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+            return true;
+        } catch (JSONException ex) {
+            String msg = KEY_VALUE_MAPPING_ERROR;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        } catch (IllegalArgumentException ex) {
+            EMMALog.e(ex.getMessage());
+            callbackContext.error(ex.getMessage());
+            return false;
+        }
+    }
+
+    private boolean trackPurchase(JSONObject args, final CallbackContext callbackContext) {
+        String id = args.optString(PURCHASE_ID);
+        if (id.trim().equals("")) {
+            String msg = PURCHASE_ID + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        float totalPrice;
+        try {
+            totalPrice = (float) args.getDouble(PURCHASE_TOTAL_PRICE);
+        } catch (JSONException e) {
+            String msg = PURCHASE_TOTAL_PRICE + MANDATORY_NOT_ZERO;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        JSONArray productsArray = args.optJSONArray(PURCHASE_PRODUCTS);
+        if (productsArray == null || productsArray.length() == 0) {
+            String msg = PURCHASE_PRODUCTS + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        List<EMMAProduct> products = new ArrayList<>();
+        for (int i = 0; i < productsArray.length(); i++) {
+            JSONObject productJSON;
+            try {
+                productJSON = productsArray.getJSONObject(i);
+            } catch (JSONException e) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + " is not a valid object";
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            String productId = productJSON.optString(PRODUCT_ID);
+            if (productId == null || productId.trim().isEmpty()) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_ID + MANDATORY_NOT_EMPTY;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            String productName = productJSON.optString(PRODUCT_NAME);
+            if (productName == null || productName.trim().isEmpty()) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_NAME + MANDATORY_NOT_EMPTY;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            if (!productJSON.has(PRODUCT_PRICE)) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_PRICE + MANDATORY_NOT_ZERO;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            if (!productJSON.has(PRODUCT_QTY)) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_QTY + MANDATORY_NOT_ZERO;
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            float price;
+            float qty;
+            try {
+                price = (float) productJSON.getDouble(PRODUCT_PRICE);
+                qty = (float) productJSON.getDouble(PRODUCT_QTY);
+            } catch (JSONException e) {
+                String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": invalid numeric value for price or qty";
+                EMMALog.e(msg);
+                callbackContext.error(msg);
+                return false;
+            }
+
+            Map<String, String> extras = null;
+            JSONObject extrasJSON = productJSON.optJSONObject(PRODUCT_EXTRAS);
+            if (extrasJSON != null) {
+                try {
+                    extras = objectToMap(extrasJSON);
+                } catch (JSONException e) {
+                    String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_EXTRAS + KEY_VALUE_MAPPING_ERROR;
+                    EMMALog.e(msg);
+                    callbackContext.error(msg);
+                    return false;
+                } catch (IllegalArgumentException ex) {
+                    String msg = PURCHASE_PRODUCTS + " - product at index " + i + ": " + PRODUCT_EXTRAS + " " + ex.getMessage();
+                    EMMALog.e(msg);
+                    callbackContext.error(msg);
+                    return false;
+                }
+            }
+
+            EMMAProduct product = new EMMAProduct(productId, productName, price, qty, extras);
+            products.add(product);
+        }
+
+        String customerId = args.optString(PURCHASE_CUSTOMER_ID, null);
+        String coupon = args.optString(PURCHASE_COUPON, null);
+
+        Map<String, String> extras = null;
+        JSONObject extrasJSON = args.optJSONObject(PURCHASE_EXTRAS);
+        if (extrasJSON != null) {
+            try {
+                extras = objectToMap(extrasJSON);
+            } catch (JSONException e) {
+                EMMALog.e(KEY_VALUE_MAPPING_ERROR);
+            } catch (IllegalArgumentException ex) {
+                EMMALog.e(ex.getMessage());
+            }
+        }
+
+        EMMAPurchaseRequest request = new EMMAPurchaseRequest(id, totalPrice, products, customerId, coupon, extras);
+
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().trackPurchase(request);
+                callbackContext.success();
+            }
+        });
+        return true;
+    }
+
+    private boolean unregisterPushSystem(final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().unregisterPushSystem();
                 callbackContext.success();
             }
         });
