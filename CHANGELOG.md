@@ -1,6 +1,7 @@
 # Changelog
 
-## 2.0.0
+## 1.10.0
+
 - Update native SDK dependencies: 4.16.0 for iOS and 4.16.+ for Android.
 - Add new method setEmail to set user email.
 - Add new method setUserProfile to set customerId, email and tags in a single call.
@@ -12,12 +13,15 @@
 - Remove cancelOrder method.
 
 ## 1.9.2
+
 - Update native SDK dependencies: 4.15.7 for Android and 4.15.6 for iOS.
 
 ## 1.9.1
+
 - Update iOS SDK dependency to version 4.15.5.
 
 ## 1.9.0
+
 - Update native sdk dependencies: added new setUserLanguage method that allows users to manually set the language instead of relying on auto-detection.
 
 ## 1.2.1
