@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.11.0
+
+- Add new method getInstallAttributionInfo to retrieve install attribution data for iOS and Android.
+
 ## 1.10.0
 
 - Update native SDK dependencies: 4.16.0 for iOS and 4.16.+ for Android.
