@@ -46,6 +46,11 @@ import io.emma.android.utils.EMMALog;
 import io.emma.android.utils.ManifestInfo;
 import io.emma.android.utils.EMMAUtils;
 import io.emma.android.interfaces.EMMAPermissionInterface;
+import io.emma.android.interfaces.EMMAInstallAttributionInterface;
+import io.emma.android.model.EMMAInstallAttribution;
+import io.emma.android.model.EMMAInstallAttributionCampaign;
+import io.emma.android.model.EMMAInstallAttributionSource;
+import io.emma.android.model.EMMAInstallAttributionProvider;
 
 import static io.emma.cordova.plugin.EMMAPluginConstants.*;
 
@@ -213,6 +218,8 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             return areNotificationsEnabled(callbackContext);
         } else if (action.equals("requestNotificationsPermission")) {
             return requestNotificationsPermission(callbackContext);
+        } else if (action.equals("getInstallAttributionInfo")) {
+            return getInstallAttributionInfo(callbackContext);
         }
 
         EMMALog.w(INVALID_METHOD_OR_ARGUMENTS);
@@ -1319,5 +1326,72 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             }
         });
         return true;
+    }
+
+    private boolean getInstallAttributionInfo(final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                EMMA.getInstance().getInstallAttributionInfo(new EMMAInstallAttributionInterface() {
+                    @Override
+                    public void onAttributionReceived(EMMAInstallAttribution attribution) {
+                        if (attribution == null) {
+                            callbackContext.error("Attribution info unavailable");
+                            return;
+                        }
+                        try {
+                            callbackContext.success(installAttributionToJSON(attribution));
+                        } catch (JSONException e) {
+                            EMMALog.e("Error parsing install attribution", e);
+                            callbackContext.error("Error parsing install attribution");
+                        }
+                    }
+                });
+            }
+        });
+        return true;
+    }
+
+    private JSONObject installAttributionToJSON(EMMAInstallAttribution attribution) throws JSONException {
+        JSONObject result = new JSONObject();
+        result.put("status", attribution.getStatus());
+
+        if (attribution.getCampaign() == null) {
+            result.put("campaign", JSONObject.NULL);
+            return result;
+        }
+
+        EMMAInstallAttributionCampaign campaign = attribution.getCampaign();
+        JSONObject campaignJSON = new JSONObject();
+        campaignJSON.put("id", campaign.getId());
+        campaignJSON.put("name", campaign.getName());
+        campaignJSON.put("clickParams", campaign.getClickParams() != null
+                ? new JSONObject(campaign.getClickParams()) : JSONObject.NULL);
+
+        if (campaign.getSource() == null) {
+            campaignJSON.put("source", JSONObject.NULL);
+        } else {
+            EMMAInstallAttributionSource source = campaign.getSource();
+            JSONObject sourceJSON = new JSONObject();
+            sourceJSON.put("id", source.getId());
+            sourceJSON.put("name", source.getName());
+            sourceJSON.put("channel", source.getChannel());
+            sourceJSON.put("params", source.getParams() != null
+                    ? new JSONObject(source.getParams()) : JSONObject.NULL);
+
+            if (source.getProvider() == null) {
+                sourceJSON.put("provider", JSONObject.NULL);
+            } else {
+                EMMAInstallAttributionProvider provider = source.getProvider();
+                JSONObject providerJSON = new JSONObject();
+                providerJSON.put("id", provider.getId());
+                providerJSON.put("name", provider.getName());
+                sourceJSON.put("provider", providerJSON);
+            }
+            campaignJSON.put("source", sourceJSON);
+        }
+
+        result.put("campaign", campaignJSON);
+        return result;
     }
 }

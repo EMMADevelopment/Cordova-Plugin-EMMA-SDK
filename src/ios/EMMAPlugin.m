@@ -5,6 +5,7 @@
 @interface EMMAPlugin()
 @property (nonatomic, strong) NSDictionary* inAppTypes;
 @property (nonatomic, copy) NSString *nativeAdCallbackId;
+@property (nonatomic, copy) NSString *installAttributionCallbackId;
 @property (nonatomic, strong) NSURL *pendingDeepLink;
 @property BOOL deviceReady;
 @end
@@ -12,6 +13,7 @@
 @implementation EMMAPlugin
 
 @synthesize nativeAdCallbackId;
+@synthesize installAttributionCallbackId;
 
 enum ActionTypes {
     Login, Register
@@ -813,5 +815,57 @@ enum ActionTypes {
     }];
 }
 
+- (void)getInstallAttributionInfo:(CDVInvokedUrlCommand *)command {
+    self.installAttributionCallbackId = command.callbackId;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [EMMALegacy installAttributionInfo:self];
+    });
+}
+
+- (void)onAttributionReceived:(EMMAInstallAttribution *)attribution {
+    NSDictionary *result = [self installAttributionToDic:attribution];
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                  messageAsDictionary:result];
+    [self.commandDelegate sendPluginResult:pluginResult
+                                callbackId:self.installAttributionCallbackId];
+}
+
+- (NSDictionary *)installAttributionToDic:(EMMAInstallAttribution *)attribution {
+    NSMutableDictionary *result = [NSMutableDictionary new];
+    result[@"status"] = attribution.status ?: [NSNull null];
+
+    if (!attribution.campaign) {
+        result[@"campaign"] = [NSNull null];
+        return result;
+    }
+
+    NSMutableDictionary *campaign = [NSMutableDictionary new];
+    campaign[@"id"]          = @(attribution.campaign.id);
+    campaign[@"name"]        = attribution.campaign.name ?: [NSNull null];
+    campaign[@"clickParams"] = attribution.campaign.clickParams ?: [NSNull null];
+
+    if (!attribution.campaign.source) {
+        campaign[@"source"] = [NSNull null];
+    } else {
+        NSMutableDictionary *source = [NSMutableDictionary new];
+        source[@"id"]      = @(attribution.campaign.source.id);
+        source[@"name"]    = attribution.campaign.source.name ?: [NSNull null];
+        source[@"channel"] = attribution.campaign.source.channel ?: [NSNull null];
+        source[@"params"]  = attribution.campaign.source.params ?: [NSNull null];
+
+        if (!attribution.campaign.source.provider) {
+            source[@"provider"] = [NSNull null];
+        } else {
+            source[@"provider"] = @{
+                @"id":   @(attribution.campaign.source.provider.id),
+                @"name": attribution.campaign.source.provider.name ?: [NSNull null]
+            };
+        }
+        campaign[@"source"] = source;
+    }
+
+    result[@"campaign"] = campaign;
+    return result;
+}
 
 @end

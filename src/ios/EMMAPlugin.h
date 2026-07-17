@@ -99,7 +99,7 @@
 @import UserNotifications;
 #endif
 
-@interface EMMAPlugin : CDVPlugin<EMMAInAppMessageDelegate>
+@interface EMMAPlugin : CDVPlugin<EMMAInAppMessageDelegate, EMMAInstallAttributionDelegate>
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0 && PUSH_ENABLED == 1
 @property (nonatomic, strong) id<UNUserNotificationCenterDelegate> pushDelegate;
 #endif
@@ -138,4 +138,5 @@
 - (void)sendPushToken:(CDVInvokedUrlCommand *)command;
 - (void)updatePostbackConversionValue:(CDVInvokedUrlCommand *)command;
 - (void)updatePostbackConversionValueSkad4:(CDVInvokedUrlCommand *)command;
+- (void)getInstallAttributionInfo:(CDVInvokedUrlCommand *)command;
 @end

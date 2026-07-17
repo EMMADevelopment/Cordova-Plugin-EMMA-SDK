@@ -417,3 +417,14 @@ exports.updatePostbackConversionValueSkad4 = function(conversionModel) {
   argscheck.checkArgs('O', 'EMMAPlugin.updatePostbackConversionValueSkad4', arguments);
   exec(null, null, 'EMMAPlugin', 'updatePostbackConversionValueSkad4', [conversionModel]);
 }
+
+/**
+ * Returns install attribution information.
+ * Callback receives: { status: "pending"|"organic"|"campaign", campaign: {...}|null }
+ *
+ * @param {Function} cb - Success callback receiving the attribution object
+ */
+exports.getInstallAttributionInfo = function (cb) {
+  argscheck.checkArgs('F', 'EMMAPlugin.getInstallAttributionInfo', arguments);
+  exec(cb, null, 'EMMAPlugin', 'getInstallAttributionInfo', []);
+};
