@@ -1364,7 +1364,7 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         EMMAInstallAttributionCampaign campaign = attribution.getCampaign();
         JSONObject campaignJSON = new JSONObject();
         campaignJSON.put("id", campaign.getId());
-        campaignJSON.put("name", campaign.getName());
+        campaignJSON.put("name", campaign.getName() != null ? campaign.getName() : JSONObject.NULL);
         campaignJSON.put("clickParams", campaign.getClickParams() != null
                 ? new JSONObject(campaign.getClickParams()) : JSONObject.NULL);
 
@@ -1374,8 +1374,8 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             EMMAInstallAttributionSource source = campaign.getSource();
             JSONObject sourceJSON = new JSONObject();
             sourceJSON.put("id", source.getId());
-            sourceJSON.put("name", source.getName());
-            sourceJSON.put("channel", source.getChannel());
+            sourceJSON.put("name", source.getName() != null ? source.getName() : JSONObject.NULL);
+            sourceJSON.put("channel", source.getChannel() != null ? source.getChannel() : JSONObject.NULL);
             sourceJSON.put("params", source.getParams() != null
                     ? new JSONObject(source.getParams()) : JSONObject.NULL);
 
@@ -1385,7 +1385,7 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
                 EMMAInstallAttributionProvider provider = source.getProvider();
                 JSONObject providerJSON = new JSONObject();
                 providerJSON.put("id", provider.getId());
-                providerJSON.put("name", provider.getName());
+                providerJSON.put("name", provider.getName() != null ? provider.getName() : JSONObject.NULL);
                 sourceJSON.put("provider", providerJSON);
             }
             campaignJSON.put("source", sourceJSON);
