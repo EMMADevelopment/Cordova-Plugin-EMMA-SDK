@@ -176,6 +176,30 @@ enum ActionTypes {
     [self loginRegisterWithType:command withType:Register];
 }
 
+- (void)login:(CDVInvokedUrlCommand *)command {
+    [EMMALegacy login];
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
+- (void)loginDefault:(CDVInvokedUrlCommand *)command {
+    [EMMALegacy loginDefault];
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
+- (void)register:(CDVInvokedUrlCommand *)command {
+    [EMMALegacy register];
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
+- (void)getSdkVersion:(CDVInvokedUrlCommand *)command {
+    NSString* version = [EMMALegacy getSDKVersion];
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:version];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
 - (void)loginRegisterWithType:(CDVInvokedUrlCommand *)command withType: (enum ActionTypes) type {
     NSDictionary* loginRegisterMessage = [command argumentAtIndex:0 withDefault: nil];
 
@@ -707,6 +731,30 @@ enum ActionTypes {
     NSNumber *campaignId = validatedEvent[@"campaignId"];
 
     [EMMALegacy sendDismissedClick:[requestType integerValue] withId:[NSString stringWithFormat:@"%@", campaignId]];
+}
+
+- (void)closeInApp:(CDVInvokedUrlCommand *)command {
+    NSDictionary *args = [command argumentAtIndex:0 withDefault:nil];
+    NSString *type = [args objectForKey:inAppTypeArg];
+    if (!type || [type isEqualToString:@""]) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString:CONCAT(inAppTypeArg, mandatoryNotEmpty)];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+
+    NSNumber *requestType = [self.inAppTypes objectForKey:type];
+    if (!requestType) {
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                    messageAsString:CONCAT(inAppTypeArg, @" Invalid in-app type. Types are referred in JS class InAppTypes")];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+
+    [EMMALegacy closeInAppWithType:(InAppType)[requestType integerValue]];
+
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
 - (void)openNativeAd:(CDVInvokedUrlCommand *)command {

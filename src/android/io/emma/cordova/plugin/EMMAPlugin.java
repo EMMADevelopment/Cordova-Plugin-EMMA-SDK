@@ -124,6 +124,14 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             if (args.length() == 1) {
                 return trackUserExtras(args.getJSONObject(0), callbackContext);
             }
+        } else if (action.equals("login")) {
+            return login(callbackContext);
+        } else if (action.equals("loginDefault")) {
+            return loginDefault(callbackContext);
+        } else if (action.equals("register")) {
+            return register(callbackContext);
+        } else if (action.equals("getSdkVersion")) {
+            return getSdkVersion(callbackContext);
         } else if (action.equals("loginUser")) {
             if (args.length() == 1) {
                 return loginUser(args.getJSONObject(0), callbackContext);
@@ -205,6 +213,10 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
         } else if (action.equals("sendInAppDismissedClick")) {
             if (args.length() == 1) {
                 return sendInAppClick(true, args.getJSONObject(0), callbackContext);
+            }
+        } else if (action.equals("closeInApp")) {
+            if (args.length() == 1) {
+                return closeInApp(args.getJSONObject(0), callbackContext);
             }
         } else if (action.equals("openNativeAd")) {
             if (args.length() == 1) {
@@ -419,6 +431,29 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             callbackContext.error(ex.getMessage());
             return false;
         }
+    }
+
+    private boolean login(CallbackContext callbackContext) {
+        EMMA.getInstance().login();
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean loginDefault(CallbackContext callbackContext) {
+        EMMA.getInstance().loginDefault();
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean register(CallbackContext callbackContext) {
+        EMMA.getInstance().register();
+        callbackContext.success();
+        return true;
+    }
+
+    private boolean getSdkVersion(CallbackContext callbackContext) {
+        callbackContext.success(EMMA.getInstance().getSDKVersion());
+        return true;
     }
 
     private boolean loginUser(JSONObject args, CallbackContext callbackContext) {
@@ -1163,6 +1198,28 @@ public class EMMAPlugin extends CordovaPlugin implements EMMADeviceIdListener {
             default:
                 return null;
         }
+    }
+
+    private boolean closeInApp(JSONObject args, CallbackContext callbackContext) {
+        String inAppType = args.optString(INAPP_TYPE);
+        if (inAppType.trim().equals("")) {
+            String msg = INAPP_TYPE + MANDATORY_NOT_EMPTY;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        EMMACampaign.Type type = inAppTypeFromString(inAppType);
+        if (type == null) {
+            String msg = INAPP_TYPE + INAPP_TYPE_INVALID;
+            EMMALog.e(msg);
+            callbackContext.error(msg);
+            return false;
+        }
+
+        EMMA.getInstance().closeInAppMessage(type);
+        callbackContext.success();
+        return true;
     }
 
     private boolean sendInAppImpression(JSONObject args, final CallbackContext callbackContext) {
