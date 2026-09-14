@@ -7,5 +7,4 @@ framework module EMMA_iOS {
 
 module EMMA_iOS.Swift {
   header "EMMA_iOS-Swift.h"
-  requires objc
 }

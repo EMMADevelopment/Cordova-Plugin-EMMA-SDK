@@ -421,6 +421,13 @@
 +(void)loginDefault;
 
 /**
+ Anonymous login: tracks login event without user identification
+
+ This method tracks a login event without associating it with a specific user ID or email.
+ */
++(void)login;
+
+/**
  RegisterUser set a complete registration from device on EMMA database for a user_id (NSString) and email (NSString)
  
  @param userId unique user identifier
@@ -431,6 +438,13 @@
 
 /** Convinence method without extras, see: registerUserID:forMail:andExtras */
 +(void)registerUser:(NSString*)userId forMail:(NSString*)mail;
+
+/**
+ Anonymous registration: tracks registration event without user identification
+
+ This method tracks a registration event without associating it with a specific user ID or email.
+ */
++(void)register;
 
 /**
  This method updates or adds user tags for the current user to improve segmentation.
