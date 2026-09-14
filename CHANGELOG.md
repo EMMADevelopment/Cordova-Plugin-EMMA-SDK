@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.12.0
+
+- Update native SDK dependencies: 4.17.0 for iOS and 4.17.0 for Android.
+- Add new method `login` to register an authenticated user.
+- Add new method `register` to register a new authenticated user.
+- Add new method `loginDefault` to log in as an anonymous user.
+- Add new method `getSdkVersion` to retrieve the native SDK version string.
+- Add new method `closeInApp(inAppType)` to programmatically close an active in-app message by type.
+
 ## 1.11.0
 
 - Add new method getInstallAttributionInfo to retrieve install attribution data for iOS and Android.
