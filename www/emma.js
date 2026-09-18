@@ -1,6 +1,8 @@
 var exec = require('cordova/exec'),
   argscheck = require('cordova/argscheck');
 
+exports.sdkVersion = '1.12.0';
+
 /* Stores the device Id once it has been obtained */
 var deviceId = null;
 
@@ -93,6 +95,14 @@ exports.loginUser = function (login) {
   exec(null, null, 'EMMAPlugin', 'loginUser', [login]);
 };
 
+exports.login = function () {
+  exec(null, null, 'EMMAPlugin', 'login', []);
+};
+
+exports.loginDefault = function () {
+  exec(null, null, 'EMMAPlugin', 'loginDefault', []);
+};
+
 /**
  * Method to track register event.
  * @param login Object with register params userId and/or email.
@@ -101,6 +111,15 @@ exports.loginUser = function (login) {
 exports.registerUser = function (register) {
   argscheck.checkArgs('O', 'EMMAPlugin.registerUser', arguments);
   exec(null, null, 'EMMAPlugin', 'registerUser', [register]);
+};
+
+exports.register = function () {
+  exec(null, null, 'EMMAPlugin', 'register', []);
+};
+
+exports.getSdkVersion = function (cb, errorCb) {
+  argscheck.checkArgs('Ff', 'EMMAPlugin.getSdkVersion', arguments);
+  exec(cb, errorCb, 'EMMAPlugin', 'getSdkVersion', []);
 };
 
 /**
@@ -335,6 +354,15 @@ exports.sendInAppDismissedClick = function (inAppType, campaignId) {
   ]);
 };
 
+/**
+ * Closes an active in-app message by type. Note: banner is only supported on Android.
+ *
+ * @param inAppType The inapp type to close (use inAppTypes constants)
+ */
+exports.closeInApp = function (inAppType) {
+  argscheck.checkArgs('S', 'EMMAPlugin.closeInApp', arguments);
+  exec(null, null, 'EMMAPlugin', 'closeInApp', [{ type: inAppType }]);
+};
 
 /**
  * Opens native ad CTA inapp or outapp. This method track native ad click automatically. It is not necessary call to sendInAppClick method.

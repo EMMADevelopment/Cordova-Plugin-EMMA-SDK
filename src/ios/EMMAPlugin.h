@@ -112,6 +112,9 @@
 - (void)trackUserExtraInfo:(CDVInvokedUrlCommand *)command;
 - (void)loginUser:(CDVInvokedUrlCommand *)command;
 - (void)registerUser:(CDVInvokedUrlCommand *)command;
+- (void)login:(CDVInvokedUrlCommand *)command;
+- (void)register:(CDVInvokedUrlCommand *)command;
+- (void)loginDefault:(CDVInvokedUrlCommand *)command;
 - (void)startOrder:(CDVInvokedUrlCommand *)command;
 - (void)addProduct:(CDVInvokedUrlCommand *)command;
 - (void)trackOrder:(CDVInvokedUrlCommand *)command;
@@ -131,6 +134,7 @@
 - (void)sendInAppImpression:(CDVInvokedUrlCommand *)command;
 - (void)sendInAppClick:(CDVInvokedUrlCommand *)command;
 - (void)sendInAppDismissedClick:(CDVInvokedUrlCommand *)command;
+- (void)closeInApp:(CDVInvokedUrlCommand *)command;
 - (void)openNativeAd:(CDVInvokedUrlCommand *)command;
 - (void)handleLink:(CDVInvokedUrlCommand *)command;
 - (void)areNotificationsEnabled:(CDVInvokedUrlCommand *)command;
@@ -139,4 +143,5 @@
 - (void)updatePostbackConversionValue:(CDVInvokedUrlCommand *)command;
 - (void)updatePostbackConversionValueSkad4:(CDVInvokedUrlCommand *)command;
 - (void)getInstallAttributionInfo:(CDVInvokedUrlCommand *)command;
+- (void)getSdkVersion:(CDVInvokedUrlCommand *)command;
 @end
